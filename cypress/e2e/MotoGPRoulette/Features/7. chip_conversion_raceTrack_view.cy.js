@@ -57,7 +57,7 @@ describe('0.10 chip conversion', () => {
             scene.gameContainer.stakeSelector.raceButtons[20].emit('pointerdown')
 
             cy.window().should((win) => {
-                expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].bet, 'Bet is 0.50').to.equal(0.50);
+                expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].bet, 'Bet is 0.50').to.equal(50);
             })
         })
         })
@@ -78,7 +78,7 @@ describe('0.10 chip conversion', () => {
             scene.gameContainer.stakeSelector.raceButtons[20].emit('pointerdown')
 
             cy.window().should((win) => {
-                expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].bet, 'Bet is 1').to.equal(1);
+                expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].bet, 'Bet is 1').to.equal(100);
             })
         })
         })
@@ -109,8 +109,8 @@ describe('0.10 chip conversion', () => {
             scene.gameContainer.stakeSelector.raceButtons[20].emit('pointerdown')
 
             cy.window().should((win) => {
-                expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].bet, '[0] Bet is 1').to.equal(1);
-                expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[1].bet, '[1] Bet is 1').to.equal(1);
+                expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].bet, '[0] Bet is 1').to.equal(100);
+                expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[1].bet, '[1] Bet is 1').to.equal(100);
             })
         })
         })
@@ -142,7 +142,7 @@ describe('0.10 chip conversion', () => {
             scene.gameContainer.stakeSelector.raceButtons[20].emit('pointerdown')
 
             cy.window().should((win) => {
-                expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].bet, 'Bet is 5').to.equal(5);
+                expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].bet, 'Bet is 5').to.equal(500);
             })
         })
         })
@@ -172,7 +172,7 @@ describe('0.10 chip conversion', () => {
             scene.gameContainer.stakeSelector.raceButtons[20].emit('pointerdown')
 
             cy.window().should((win) => {
-                expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].bet, 'Bet is 10').to.equal(10);
+                expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].bet, 'Bet is 10').to.equal(1000);
             })
         })
         })

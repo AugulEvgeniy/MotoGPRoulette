@@ -58,11 +58,14 @@ jobs:
         run: |
           # Convert commit message to lowercase for case-insensitive matching
           COMMIT_MSG=$(echo "${{ github.event.head_commit.message }}" | tr '[:upper:]' '[:lower:]')
-          
+    
           if [[ $COMMIT_MSG == *"localization"* ]]; then
-            echo "SPEC=gg.translation.cy.js" >> $GITHUB_OUTPUT
+            echo "SPEC=cypress/e2e/gg.translation.cy.js" >> $GITHUB_OUTPUT
+            echo "Running only localization tests"
           else
-            echo "SPEC=cypress/e2e/**/!(*translation*).cy.js" >> $GITHUB_OUTPUT
+            echo "SPEC=cypress/e2e/**/*.cy.js" >> $GITHUB_OUTPUT
+            echo "EXCLUDE=cypress/e2e/gg.translation.cy.js" >> $GITHUB_OUTPUT
+            echo "Running all tests except localization"
           fi
           
       - name: Create reports directory
@@ -70,11 +73,20 @@ jobs:
           
       - name: Cypress run
         run: |
-          npx cypress run \
-            --browser ${{ matrix.browsers }} \
-            --spec "cypress/e2e/MotoGPRoulette/Burger_Menu/${{ steps.test-spec.outputs.SPEC }}" \
-            --reporter mochawesome \
-            --reporter-options "reportDir=cypress/reports/${{ matrix.browsers }},overwrite=false,html=false,json=true"
+          if [[ "${{ github.event.head_commit.message }}" =~ "localization" ]]; then
+            npx cypress run \
+              --browser ${{ matrix.browsers }} \
+              --spec "cypress/e2e/gg.translation.cy.js" \
+              --reporter mochawesome \
+              --reporter-options "reportDir=cypress/reports/${{ matrix.browsers }},overwrite=false,html=false,json=true"
+          else
+            npx cypress run \
+              --browser ${{ matrix.browsers }} \
+              --spec "cypress/e2e/**/*.cy.js" \
+              --exclude "cypress/e2e/gg.translation.cy.js" \
+              --reporter mochawesome \
+              --reporter-options "reportDir=cypress/reports/${{ matrix.browsers }},overwrite=false,html=false,json=true"
+          fi
           
       - name: Merge Mochawesome Reports
         if: always()

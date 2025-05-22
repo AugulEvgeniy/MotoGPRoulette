@@ -52,41 +52,16 @@ jobs:
         with:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
-      
-      - name: Determine test spec
-        id: test-spec
-        run: |
-          # Convert commit message to lowercase for case-insensitive matching
-          COMMIT_MSG=$(echo "${{ github.event.head_commit.message }}" | tr '[:upper:]' '[:lower:]')
-    
-          if [[ $COMMIT_MSG == *"localization"* ]]; then
-            echo "SPEC=cypress/e2e/gg.translation.cy.js" >> $GITHUB_OUTPUT
-            echo "Running only localization tests"
-          else
-            echo "SPEC=cypress/e2e/**/*.cy.js" >> $GITHUB_OUTPUT
-            echo "EXCLUDE=cypress/e2e/gg.translation.cy.js" >> $GITHUB_OUTPUT
-            echo "Running all tests except localization"
-          fi
           
       - name: Create reports directory
         run: mkdir -p cypress/reports/${{ matrix.browsers }}
           
       - name: Cypress run
         run: |
-          if [[ "${{ github.event.head_commit.message }}" =~ "localization" ]]; then
-            npx cypress run \
-              --browser ${{ matrix.browsers }} \
-              --spec "cypress/e2e/gg.translation.cy.js" \
-              --reporter mochawesome \
-              --reporter-options "reportDir=cypress/reports/${{ matrix.browsers }},overwrite=false,html=false,json=true"
-          else
-            npx cypress run \
-              --browser ${{ matrix.browsers }} \
-              --spec "cypress/e2e/**/*.cy.js" \
-              --exclude "cypress/e2e/gg.translation.cy.js" \
-              --reporter mochawesome \
-              --reporter-options "reportDir=cypress/reports/${{ matrix.browsers }},overwrite=false,html=false,json=true"
-          fi
+          npx cypress run \
+            --browser ${{ matrix.browsers }} \
+            --reporter mochawesome \
+            --reporter-options "reportDir=cypress/reports/${{ matrix.browsers }},overwrite=false,html=false,json=true"
           
       - name: Merge Mochawesome Reports
         if: always()
@@ -102,7 +77,6 @@ jobs:
             --inline
           
       - name: Upload HTML Reports
-        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.browsers }}-test-report

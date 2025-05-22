@@ -1,0 +1,30 @@
+{
+    "game": {
+        "stakePence": 0.5,
+        "totalWinPence": 14,
+        "integrationResultData": {
+            "bonusList": [
+                {
+                    "riderNumber": "N",
+                    "riderName": "",
+                    "clipType": "NO WIN",
+                    "externalReference": "vid-mgp-sbdjjc2y9aijdv1"
+                }
+            ],
+            "bonusWin": 9,
+            "bonusStake": 0.5,
+            "stakes": [
+                {
+                    "type": "straight",
+                    "cells": [
+                        1
+                    ],
+                    "buttonId": 1,
+                    "amountsPence": 0.5
+                }
+            ],
+            "winNumber": 0
+        }
+    },
+    "operationResult": 0
+}

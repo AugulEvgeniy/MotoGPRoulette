@@ -1,0 +1,93 @@
+{
+  "state": "COMPLETE",
+  "game": {
+    "gameInstanceId": 999,
+    "stakePence": 1000,
+    "totalWinPence": 2000,
+    "goalsScored": 1,
+    "bonusWinMultiplier": 2,
+    "scratchList": [
+      "MISS",
+      "BONUS",
+      "GOAL",
+      "MISS",
+      "MISS",
+      "MISS"
+    ],
+    "videos": {
+      "videoHost": "https://abeta.olsworth.com/iwvideo/",
+      "sequence": [
+        {
+          "filename": "61010a88-c16a-47ed-b6e8-9b66821cb070",
+          "externalGuid": "ita/vid-ita-iNgSqXEm1TfQHXw",
+          "length": 0,
+          "debugAs": "HOMEGOALRIGHT",
+          "actions": "YELLOW CARD",
+          "attackingTeamCode": "MIL",
+          "attackingTeamAtHome": false,
+          "leftToRight": true,
+          "goalScored": false
+        },
+        null,
+        {
+          "filename": "4f00d39e-713e-4c34-abf6-ac7e29b5ed41",
+          "externalGuid": "ita/vid-ita-j44WOvHwaPGPCQI",
+          "goalTime": 5.5,
+          "length": 0,
+          "debugAs": "HOMEGOALRIGHT",
+          "actions": "GOAL",
+          "attackingTeamCode": "LAZ",
+          "attackingTeamAtHome": false,
+          "leftToRight": true,
+          "goalScored": true
+        },
+        {
+          "filename": "b23b9e66-f454-418e-a67f-d07d0ec7871b",
+          "externalGuid": "ita/vid-ita-tVo2zGPQRKltzwt",
+          "length": 10,
+          "debugAs": "HOMEGOALRIGHT",
+          "actions": "MISS",
+          "attackingTeamCode": "SAM",
+          "attackingTeamAtHome": true,
+          "leftToRight": false,
+          "goalScored": false
+        },
+        {
+          "filename": "3b1f8a34-c70a-4f76-9c3f-e2ea26ed81a8",
+          "externalGuid": "ita/vid-ita-k9blxbLTxJhSAFB",
+          "length": 0,
+          "debugAs": "HOMEGOALRIGHT",
+          "actions": "SAVE",
+          "attackingTeamCode": "FIO",
+          "attackingTeamAtHome": false,
+          "leftToRight": false,
+          "goalScored": false
+        },
+        {
+          "filename": "1980bca7-945b-4d85-b683-2b4ae24b2248",
+          "externalGuid": "ita/vid-ita-1EBtAd7rBt18el1",
+          "length": 0,
+          "debugAs": "HOMEGOALRIGHT",
+          "actions": "YELLOW CARD",
+          "attackingTeamCode": "GEN",
+          "attackingTeamAtHome": false,
+          "leftToRight": false,
+          "goalScored": false
+        }
+      ],
+      "videoSpecs": []
+    }
+  },
+  "wagerNumber": 997174,
+  "operationResult": 0,
+  "upstream": {
+    "txId": "997174",
+    "processedTxId": "M5SkX31FGb",
+    "createdAt": "2025-04-17T12:42:05Z",
+    "balance": 1000,
+    "alreadyProcessed": false,
+    "status": 0,
+    "errDesc": null
+  },
+  "referenceGuid": "45c593b4-4221-443b-9563-cd0060a4d2b6"
+}

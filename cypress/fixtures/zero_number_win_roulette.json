@@ -1,0 +1,23 @@
+{
+    "game": {
+        "stakePence": 0.5,
+        "totalWinPence": 0,
+        "integrationResultData": {
+            "bonusList": [],
+            "bonusWin": 0,
+            "bonusStake": 0,
+            "stakes": [
+                {
+                    "type": "straight",
+                    "cells": [
+                        0
+                    ],
+                    "buttonId": 0,
+                    "amountsPence": 0.5
+                }
+            ],
+            "winNumber": 0
+        }
+    },
+    "operationResult": 0
+}

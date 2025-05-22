@@ -1,0 +1,78 @@
+{
+    "game": {
+        "stakePence": 0.5,
+        "totalWinPence": 14,
+        "integrationResultData": {
+            "bonusList": [
+                {
+                    "riderNumber": "N",
+                    "riderName": "",
+                    "clipType": "NO WIN",
+                    "externalReference": "vid-mgp-sbdjjc2y9aijdv1"
+                },
+                {
+                    "riderNumber": "1",
+                    "riderName": "Francesco Bagnaia",
+                    "clipType": "BONUS WIN",
+                    "externalReference": "vid-mgp-0UAjR0IxGXaepEh"
+                },
+                {
+                    "riderNumber": "E",
+                    "riderName": "",
+                    "clipType": "EXTRA SPINS",
+                    "externalReference": "vid-mgp-DrJvPC37x6Hthtw"
+                },
+                {
+                    "riderNumber": "5",
+                    "riderName": "Colin Edwards",
+                    "clipType": "BONUS WIN",
+                    "externalReference": "vid-mgp-JXOleCtxAVe4KmW"
+                },
+                {
+                    "riderNumber": "7",
+                    "riderName": "Carlos Checa",
+                    "clipType": "BONUS WIN",
+                    "externalReference": "vid-mgp-x96MCwcI6FE7Ng1"
+                },
+                {
+                    "riderNumber": "N",
+                    "riderName": "",
+                    "clipType": "NO WIN",
+                    "externalReference": "vid-mgp-sbdjjc2y9aijdv1"
+                },
+                {
+                    "riderNumber": "4",
+                    "riderName": "Andrea Dovizioso",
+                    "clipType": "BONUS WIN",
+                    "externalReference": "vid-mgp-OvgfVw5WdaEYO80"
+                },
+                {
+                    "riderNumber": "3",
+                    "riderName": "Dani Pedrosa",
+                    "clipType": "BONUS WIN",
+                    "externalReference": "vid-mgp-1lfA4S2bTVQ5p4D"
+                },
+                {
+                    "riderNumber": "2",
+                    "riderName": "Kenny Roberts Jr",
+                    "clipType": "BONUS WIN",
+                    "externalReference": "vid-mgp-Ij3x4mqgaH8eQWf"
+                }
+            ],
+            "bonusWin": 9,
+            "bonusStake": 0.5,
+            "stakes": [
+                {
+                    "type": "straight",
+                    "cells": [
+                        1
+                    ],
+                    "buttonId": 1,
+                    "amountsPence": 0.5
+                }
+            ],
+            "winNumber": 1
+        }
+    },
+    "operationResult": 0
+}

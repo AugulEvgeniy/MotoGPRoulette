@@ -2,7 +2,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
     it('"type": "split", 30 stake objects with every stake value', () =>{
 
         cy.visitTestEnvironment()
-        cy.intercept('start-game').as('startGame')
+        cy.interceptStartGame()
 
 
         cy.window({ timeout: 20000 }).should((win) => {
@@ -195,7 +195,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         cy.wait('@startGame').its('response.body').then((body) => {
             cy.log('startGame response:', body.game);
         
-            const stakes = body.game.integrationResultData.stakes;
+            const stakes = body.integrationResultData.stakes;
             
             cy.window().then((win) => {
             const game = win.game
@@ -208,19 +208,19 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         })
 
             try {
-                expect(body.game.integrationResultData.stakes).to.have.length(30);
+                expect(body.integrationResultData.stakes).to.have.length(30);
             } catch (err) {
              cy.log('Assertion failed:', err.message);
             }
             
 // Verify that all expected split combinations exist with correct amounts
 const expectedSplits = [
-    { cells: [5, 8], amounts: [0.1, 0.5, 1, 5, 10] },
-    { cells: [13, 16], amounts: [0.1, 0.5, 1, 5, 10] },
-    { cells: [27, 30], amounts: [0.1, 0.5, 1, 5, 10] },
-    { cells: [33, 36], amounts: [0.1, 0.5, 1, 5, 10] },
-    { cells: [10, 11], amounts: [0.1, 0.5, 1, 5, 10] },
-    { cells: [23, 24], amounts: [0.1, 0.5, 1, 5, 10] }
+    { cells: [5, 8], amounts: [10, 50, 100, 500, 1000] },
+    { cells: [13, 16], amounts: [10, 50, 100, 500, 1000] },
+    { cells: [27, 30], amounts: [10, 50, 100, 500, 1000] },
+    { cells: [33, 36], amounts: [10, 50, 100, 500, 1000] },
+    { cells: [10, 11], amounts: [10, 50, 100, 500, 1000] },
+    { cells: [23, 24], amounts: [10, 50, 100, 500, 1000] }
 ];
 
 expectedSplits.forEach(expected => {

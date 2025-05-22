@@ -2,7 +2,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
     it('"type": "corner", 115 stake objects with every stake value', () =>{
 
         cy.visitTestEnvironment()
-        cy.intercept('start-game').as('startGame')
+        cy.interceptStartGame()
 
 
         cy.window({ timeout: 20000 }).should((win) => {
@@ -284,7 +284,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         cy.wait('@startGame').its('response.body').then((body) => {
             cy.log('startGame response:', body.game);
         
-            const stakes = body.game.integrationResultData.stakes;
+            const stakes = body.integrationResultData.stakes;
 
             cy.window().then((win) => {
             const game = win.game
@@ -297,7 +297,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         })
 
             try {
-                expect(body.game.integrationResultData.stakes).to.have.length(115);
+                expect(body.integrationResultData.stakes).to.have.length(115);
             } catch (err) {
              cy.log('Assertion failed:', err.message);
             }
@@ -335,7 +335,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             });
         
             // Expected amounts
-            const expectedAmounts = [0.1, 0.5, 1, 5, 10];
+            const expectedAmounts = [10, 50, 100, 500, 1000];
         
             // Verify each split combination has all 5 amounts exactly once
             Object.entries(splitCombinations).forEach(([combo, amounts]) => {

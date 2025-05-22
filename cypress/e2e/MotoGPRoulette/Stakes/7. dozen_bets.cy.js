@@ -2,7 +2,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
     it('"type": "dozen", 15 stake objects with every stake value', () =>{
 
         cy.visitTestEnvironment()
-        cy.intercept('start-game').as('startGame')
+        cy.interceptStartGame()
 
 
         cy.window({ timeout: 20000 }).should((win) => {
@@ -188,7 +188,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             const dozen_3 = [25,26,27,28,29,30,31,32,33,34,35,36]
 
 
-            const stakes = body.game.integrationResultData.stakes;
+            const stakes = body.integrationResultData.stakes;
 
         cy.window().then((win) => {
             const game = win.game
@@ -201,14 +201,14 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         })
              
             try {
-                expect(body.game.integrationResultData.stakes).to.have.length(15);
+                expect(body.integrationResultData.stakes).to.have.length(15);
             } catch (err) {
              cy.log('Assertion failed:', err.message);
             }
         
-            expect(body.game.integrationResultData.stakes[0].cells).to.deep.equal(dozen_1)
-            expect(body.game.integrationResultData.stakes[1].cells).to.deep.equal(dozen_2)
-            expect(body.game.integrationResultData.stakes[2].cells).to.deep.equal(dozen_3)
+            expect(body.integrationResultData.stakes[0].cells).to.deep.equal(dozen_1)
+            expect(body.integrationResultData.stakes[1].cells).to.deep.equal(dozen_2)
+            expect(body.integrationResultData.stakes[2].cells).to.deep.equal(dozen_3)
             
             const splitCombinations = {}; // Track each unique split pair and their amounts
             const cellCoverage = {}; // Track how many times each number appears
@@ -243,7 +243,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             });
         
             // Expected amounts
-            const expectedAmounts = [0.1, 0.5, 1, 5, 10];
+            const expectedAmounts = [10, 50, 100, 500, 1000];
         
             // Verify each split combination has all 5 amounts exactly once
             Object.entries(splitCombinations).forEach(([combo, amounts]) => {

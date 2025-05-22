@@ -2,7 +2,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
     it('"type": "even_or_odd", 10 stake objects with every stake value', () =>{
 
         cy.visitTestEnvironment()
-        cy.intercept('start-game').as('startGame')
+        cy.interceptStartGame()
 
 
         cy.window({ timeout: 20000 }).should((win) => {
@@ -182,7 +182,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             const even = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36]
 
 
-            const stakes = body.game.integrationResultData.stakes;
+            const stakes = body.integrationResultData.stakes;
 
         cy.window().then((win) => {
             const game = win.game
@@ -195,18 +195,18 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         })
            
             try {
-                expect(body.game.integrationResultData.stakes).to.have.length(10);
+                expect(body.integrationResultData.stakes).to.have.length(10);
             } catch (err) {
              cy.log('Assertion failed:', err.message);
             }
         
-            expect(JSON.stringify(body.game.integrationResultData.stakes[0].cells)).to.deep.equal(JSON.stringify(even))
-            expect(JSON.stringify(body.game.integrationResultData.stakes[1].cells)).to.deep.equal(JSON.stringify(odd))
+            expect(JSON.stringify(body.integrationResultData.stakes[0].cells)).to.deep.equal(JSON.stringify(even))
+            expect(JSON.stringify(body.integrationResultData.stakes[1].cells)).to.deep.equal(JSON.stringify(odd))
             
             const splitCombinations = {}; // Track each unique split pair and their amounts
             const cellCoverage = {}; // Track how many times each number appears
         
-            // Initialize coverage for all cells (0-60 or your max number)
+            // Initialize coverage for all cells
             for (let i = 0; i <= 3; i++) {
                 cellCoverage[i] = 0;
             }
@@ -236,7 +236,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             });
         
             // Expected amounts
-            const expectedAmounts = [0.1, 0.5, 1, 5, 10];
+            const expectedAmounts = [10, 50, 100, 500, 1000];
         
             // Verify each split combination has all 5 amounts exactly once
             Object.entries(splitCombinations).forEach(([combo, amounts]) => {

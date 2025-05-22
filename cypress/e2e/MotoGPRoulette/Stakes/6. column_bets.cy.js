@@ -2,7 +2,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
     it('"type": "column", 15 stake objects with every stake value', () =>{
 
         cy.visitTestEnvironment()
-        cy.intercept('start-game').as('startGame')
+        cy.interceptStartGame()
 
 
         cy.window({ timeout: 20000 }).should((win) => {
@@ -197,7 +197,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             const column_3 = [3,6,9,12,15,18,21,24,27,30,33,36]
             
         
-            const stakes = body.game.integrationResultData.stakes;
+            const stakes = body.integrationResultData.stakes;
 
         cy.window().then((win) => {
             const game = win.game
@@ -210,15 +210,15 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         })
             
             try {
-                expect(body.game.integrationResultData.stakes).to.have.length(15);
+                expect(body.integrationResultData.stakes).to.have.length(15);
             } catch (err) {
              cy.log('Assertion failed:', err.message);
             }
 
-            expect(JSON.stringify(body.game.integrationResultData.stakes[0].cells)).to.deep.equal(JSON.stringify(column_1))
-            expect(JSON.stringify(body.game.integrationResultData.stakes[1].cells)).to.deep.equal(JSON.stringify(column_2))
-            expect(JSON.stringify(body.game.integrationResultData.stakes[2].cells)).to.deep.equal(JSON.stringify(column_3))
-            cy.log(body.game.integrationResultData.stakes)
+            expect(JSON.stringify(body.integrationResultData.stakes[0].cells)).to.deep.equal(JSON.stringify(column_1))
+            expect(JSON.stringify(body.integrationResultData.stakes[1].cells)).to.deep.equal(JSON.stringify(column_2))
+            expect(JSON.stringify(body.integrationResultData.stakes[2].cells)).to.deep.equal(JSON.stringify(column_3))
+            cy.log(body.integrationResultData.stakes)
             
             const splitCombinations = {}; // Track each unique split pair and their amounts
             const cellCoverage = {}; // Track how many times each number appears
@@ -253,7 +253,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             });
         
             // Expected amounts
-            const expectedAmounts = [0.1, 0.5, 1, 5, 10];
+            const expectedAmounts = [10, 50, 100, 500, 1000];
         
             // Verify each split combination has all 5 amounts exactly once
             Object.entries(splitCombinations).forEach(([combo, amounts]) => {

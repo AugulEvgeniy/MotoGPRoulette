@@ -3,7 +3,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
         
         cy.visitTestEnvironment()
-        cy.intercept('start-game').as('startGame')
+        cy.interceptStartGame()
 
 
         cy.window({ timeout: 20000 }).should((win) => {
@@ -183,7 +183,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             const black = [2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35]
 
 
-            const stakes = body.game.integrationResultData.stakes;
+            const stakes = body.integrationResultData.stakes;
 
         cy.window().then((win) => {
             const game = win.game
@@ -196,13 +196,13 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         })
             
             try {
-                expect(body.game.integrationResultData.stakes).to.have.length(10);
+                expect(body.integrationResultData.stakes).to.have.length(10);
             } catch (err) {
              cy.log('Assertion failed:', err.message);
             }
 
-            expect(body.game.integrationResultData.stakes[0].cells).to.deep.equal(red)
-            expect(body.game.integrationResultData.stakes[1].cells).to.deep.equal(black)
+            expect(body.integrationResultData.stakes[0].cells).to.deep.equal(red)
+            expect(body.integrationResultData.stakes[1].cells).to.deep.equal(black)
             
             const splitCombinations = {}; // Track each unique split pair and their amounts
             const cellCoverage = {}; // Track how many times each number appears
@@ -237,7 +237,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             });
         
             // Expected amounts
-            const expectedAmounts = [0.1, 0.5, 1, 5, 10];
+            const expectedAmounts = [10, 50, 100, 500, 1000];
         
             // Verify each split combination has all 5 amounts exactly once
             Object.entries(splitCombinations).forEach(([combo, amounts]) => {

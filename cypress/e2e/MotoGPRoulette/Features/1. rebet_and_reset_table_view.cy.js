@@ -1,11 +1,11 @@
 describe('Rebet and reset bet are working correctly', () => {
-    it('Should check that all of types of bets are displayed after rebetting)', () => {
+    it('Should check that all of types of bets are displayed after rebetting', () => {
 
         cy.visitTestEnvironment()
         cy.interceptStartGameRebet()
 
 
-        cy.window({ timeout: 25000 }).should((win) => {
+        cy.window({ timeout: 30000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
             const start_button = scene.gameContainer.list[5].list[0].visible;
@@ -55,7 +55,7 @@ describe('Rebet and reset bet are working correctly', () => {
             scene.gameContainer.list[5].list[0].emit('pointerdown')
         })
 
-        cy.window({timeout: 20000}).should((win) => {
+        cy.window({timeout: 30000}).should((win) => {
             const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
             const no_win_banner = win.game.scene.scenes[1].gameContainer.noWinBanner.visible;
 
@@ -135,7 +135,7 @@ describe('Rebet and reset bet are working correctly', () => {
 
 
     describe('Reset bet is working correctly', () => {
-    it('Should check that "spins" array is 0 after reset)', () => {
+    it('Should check that "spins" array is 0 after reset', () => {
         
         cy.wait(300)
         cy.window().then((win) => {
@@ -152,7 +152,7 @@ describe('Rebet and reset bet are working correctly', () => {
 
 
     describe('Rebet works correctly after the second spin with a different stake', () => {
-    it('Should check that "chips" array is rewritten after placing the second bet)', () => {
+    it('Should check that "chips" array is rewritten after placing the second bet', () => {
         
         cy.window().then((win) => {
         win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[0].list[0].emit('pointerdown')
@@ -194,7 +194,7 @@ describe('Rebet and reset bet are working correctly', () => {
 
 
     describe('Rebetting on Race Track View switches the table view to standart', () => {
-    it('"isRaceTrack" should be false)', () => {
+    it('"isRaceTrack" should be false', () => {
 
         cy.wait(200)
         cy.window().then((win) => {

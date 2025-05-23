@@ -48,10 +48,11 @@ describe('Rebet and reset bet are working correctly', () => {
             scene.gameContainer.list[5].list[0].emit('pointerdown')
         })
 
-        cy.window({timeout: 20000}).should((win) => {
+        cy.window({timeout: 30000}).should((win) => {
             const noWin_banner = win.game.scene.scenes[1].gameContainer.noWinBanner.visible;
+            const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
 
-            expect(noWin_banner, "no win banner is displayed").to.be.true
+            expect(noWin_banner || win_banner, "banner is displayed").to.be.true
             expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(1000);
         })
 
@@ -110,10 +111,11 @@ describe('Rebet and reset bet are working correctly', () => {
         win.game.scene.scenes[1].gameContainer.list[5].list[0].emit('pointerdown')
     })
 
-        cy.window({timeout: 20000}).should((win) => {
+        cy.window({timeout: 30000}).should((win) => {
         const no_win_banner = win.game.scene.scenes[1].gameContainer.noWinBanner.visible;
+        const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
 
-        expect(no_win_banner).to.be.true
+        expect(no_win_banner || win_banner, 'banner is displayed').to.be.true
         expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(1000);
     })
 

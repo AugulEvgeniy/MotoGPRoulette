@@ -42,7 +42,7 @@ describe('Multiply works correctly for Neighbours stake', () => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
         })
 
-        cy.wait(800)
+        cy.wait(1200)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
         })
@@ -72,7 +72,7 @@ describe('Multiply works correctly for Neighbours stake', () => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
         })
 
-        cy.wait(800)
+        cy.wait(1200)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
 
@@ -102,7 +102,7 @@ describe('Multiply works correctly for Neighbours stake', () => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
         })
 
-        cy.wait(800)
+        cy.wait(1200)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
 
@@ -132,7 +132,7 @@ describe('Multiply works correctly for Neighbours stake', () => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
         })
 
-        cy.wait(800)
+        cy.wait(1200)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
 

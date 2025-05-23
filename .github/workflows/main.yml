@@ -43,19 +43,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'  # This handles npm caching automatically
+          cache: 'npm'
       
-      # Remove the manual npm cache step since setup-node handles it
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        id: npm-cache
+        with:
+          path: |
+            ~/.npm
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      
       - name: Install dependencies
-        run: |
-          npm ci --prefer-offline
-          ls -la node_modules/mochawesome || npm install mochawesome mochawesome-merge mochawesome-report-generator
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci  # Installs everything from package-lock.json (including mochawesome)
       
-      - name: Verify Mochawesome Cache
-        run: |
-          ls -la node_modules/mochawesome
-          npm ls mochawesome mochawesome-merge mochawesome-report-generator
-
       - name: Cache Cypress
         uses: actions/cache@v4
         id: cypress-cache
@@ -68,10 +72,11 @@ jobs:
           
       - name: Cypress run
         run: |
-          # Add NODE_PATH to ensure module resolution
-          NODE_PATH=./node_modules npx cypress run \
+          npx cypress run \
             --browser ${{ matrix.browsers }} \
-            --spec "${{ steps.test_folder.outputs.folder }}/**/*.cy.js"
+            --spec "${{ steps.test_folder.outputs.folder }}/**/*.cy.js" \
+            --reporter mochawesome \
+            --reporter-options "reportDir=cypress/reports/${{ matrix.browsers }},overwrite=false,html=false,json=true"
           
       - name: Merge Mochawesome Reports
         if: always()

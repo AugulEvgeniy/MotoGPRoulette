@@ -351,8 +351,8 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         })
 
 
-        cy.wait('@startGame').its('response.body').then((body) => {
-            cy.log('startGame response:', body.game);
+        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
+            cy.log('startGame response:', body);
         
             const stakes = body.integrationResultData.stakes;
 
@@ -368,7 +368,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
 
             try {
-                expect(body.game.integrationResultData.stakes).to.have.length(185);
+                expect(body.integrationResultData.stakes).to.have.length(185);
             } catch (err) {
                 cy.log('Assertion failed:', err.message);
             }

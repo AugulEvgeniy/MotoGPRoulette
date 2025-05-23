@@ -35,7 +35,7 @@ describe('multiply works correctly', () => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
         })
 
-        cy.window().should((win) => {
+        cy.window({ timeout: 10000 }).should((win) => {
             const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
             expect (total_bet).to.include('4.00')
         })

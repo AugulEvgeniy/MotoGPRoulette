@@ -57,10 +57,7 @@ jobs:
             ${{ runner.os }}-node-
       
       - name: Install dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: |
-          npm ci
-          npm install mochawesome mochawesome-merge mochawesome-report-generator
+        run: npm ci
       
       - name: Cache Cypress
         uses: actions/cache@v4

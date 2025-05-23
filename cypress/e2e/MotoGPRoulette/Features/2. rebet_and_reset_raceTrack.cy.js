@@ -81,7 +81,7 @@ describe('Rebet and reset bet are working correctly', () => {
     it('Should check that "spins" array is 0 after reset)', () => {
 
 
-        cy.wait(500)
+        cy.wait(2000)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.startGroupButtons.resetButton.emit('pointerdown');
     })

@@ -25,12 +25,12 @@ describe('multiply works correctly', () => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
         })
 
-        cy.wait(800)
+        cy.wait(1200)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
         })
 
-        cy.wait(800)
+        cy.wait(1200)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
         })

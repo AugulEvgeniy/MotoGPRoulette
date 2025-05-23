@@ -1,19 +1,24 @@
 {
-    "game": {
-        "stakePence": 0.5,
+    "state": "COMPLETE",
+    "gameResult": {
+        "gameInstanceId": 999,
+        "stakePence": 50,
         "totalWinPence": 14,
-        "integrationResultData": {
-            "bonusList": [
-                {
+        "decimalOdds": 0.0
+    },
+    "wagerNumber": 1049804,
+    "integrationResultData": {
+        "bonusList": [
+                            {
                     "riderNumber": "N",
                     "riderName": "",
                     "clipType": "NO WIN",
                     "externalReference": "vid-mgp-sbdjjc2y9aijdv1"
                 }
-            ],
-            "bonusWin": 9,
-            "bonusStake": 0.5,
-            "stakes": [
+        ],
+        "bonusWin": 9,
+        "bonusStake": 50,
+        "stakes": [
                 {
                     "type": "straight",
                     "cells": [
@@ -22,9 +27,18 @@
                     "buttonId": 1,
                     "amountsPence": 0.5
                 }
-            ],
-            "winNumber": 0
-        }
+        ],
+        "winNumber": 1
     },
-    "operationResult": 0
+    "operationResult": 0,
+    "upstream": {
+        "txId": "1049804",
+        "processedTxId": "TVaosns0_X",
+        "createdAt": "2025-05-23T09:19:20Z",
+        "balance": 1000,
+        "alreadyProcessed": false,
+        "status": 0,
+        "errDesc": null
+    },
+    "referenceGuid": "1b0b3692-3ea0-465a-8a7f-8688decd17c7"
 }

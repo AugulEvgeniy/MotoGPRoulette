@@ -1,0 +1,363 @@
+{
+    "state": "COMPLETE",
+    "gameResult": {
+        "gameInstanceId": 999,
+        "stakePence": 50,
+        "totalWinPence": 600,
+        "decimalOdds": 0.0
+    },
+    "wagerNumber": 1049461,
+    "integrationResultData": {
+        "bonusList": [],
+        "bonusWin": 0,
+        "bonusStake": 0,
+        "stakes": [
+            {
+                "type": "dozen",
+                "cells": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12
+                ],
+                "buttonId": 1,
+                "amountsPence": 50
+            },
+            {
+                "type": "dozen",
+                "cells": [
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24
+                ],
+                "buttonId": 2,
+                "amountsPence": 50
+            },
+            {
+                "type": "dozen",
+                "cells": [
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24
+                ],
+                "buttonId": 2,
+                "amountsPence": 50
+            },
+            {
+                "type": "dozen",
+                "cells": [
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36
+                ],
+                "buttonId": 3,
+                "amountsPence": 50
+            },
+            {
+                "type": "even_or_odd",
+                "cells": [
+                    2,
+                    4,
+                    6,
+                    8,
+                    10,
+                    12,
+                    14,
+                    16,
+                    18,
+                    20,
+                    22,
+                    24,
+                    26,
+                    28,
+                    30,
+                    32,
+                    34,
+                    36
+                ],
+                "buttonId": 0,
+                "amountsPence": 50
+            },
+            {
+                "type": "even_or_odd",
+                "cells": [
+                    1,
+                    3,
+                    5,
+                    7,
+                    9,
+                    11,
+                    13,
+                    15,
+                    17,
+                    19,
+                    21,
+                    23,
+                    25,
+                    27,
+                    29,
+                    31,
+                    33,
+                    35
+                ],
+                "buttonId": 1,
+                "amountsPence": 50
+            },
+            {
+                "type": "high_or_low",
+                "cells": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18
+                ],
+                "buttonId": 1,
+                "amountsPence": 50
+            },
+            {
+                "type": "high_or_low",
+                "cells": [
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35,
+                    36
+                ],
+                "buttonId": 0,
+                "amountsPence": 50
+            },
+            {
+                "type": "red_or_black",
+                "cells": [
+                    1,
+                    3,
+                    5,
+                    7,
+                    9,
+                    12,
+                    14,
+                    16,
+                    18,
+                    19,
+                    21,
+                    23,
+                    25,
+                    27,
+                    30,
+                    32,
+                    34,
+                    36
+                ],
+                "buttonId": 0,
+                "amountsPence": 50
+            },
+            {
+                "type": "red_or_black",
+                "cells": [
+                    2,
+                    4,
+                    6,
+                    8,
+                    10,
+                    11,
+                    13,
+                    15,
+                    17,
+                    20,
+                    22,
+                    24,
+                    26,
+                    28,
+                    29,
+                    31,
+                    33,
+                    35
+                ],
+                "buttonId": 1,
+                "amountsPence": 50
+            },
+            {
+                "type": "straight",
+                "cells": [
+                    1
+                ],
+                "buttonId": 1,
+                "amountsPence": 50
+            },
+            {
+                "type": "split",
+                "cells": [
+                    1,
+                    2
+                ],
+                "buttonId": 1,
+                "amountsPence": 50
+            },
+            {
+                "type": "street",
+                "cells": [
+                    4,
+                    5,
+                    6
+                ],
+                "buttonId": 2,
+                "amountsPence": 50
+            },
+            {
+                "type": "corner",
+                "cells": [
+                    5,
+                    6,
+                    8,
+                    9
+                ],
+                "buttonId": 4,
+                "amountsPence": 50
+            },
+            {
+                "type": "six_line",
+                "cells": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6
+                ],
+                "buttonId": 1,
+                "amountsPence": 50
+            },
+            {
+                "type": "column",
+                "cells": [
+                    1,
+                    4,
+                    7,
+                    10,
+                    13,
+                    16,
+                    19,
+                    22,
+                    25,
+                    28,
+                    31,
+                    34
+                ],
+                "buttonId": 1,
+                "amountsPence": 50
+            },
+            {
+                "type": "column",
+                "cells": [
+                    2,
+                    5,
+                    8,
+                    11,
+                    14,
+                    17,
+                    20,
+                    23,
+                    26,
+                    29,
+                    32,
+                    35
+                ],
+                "buttonId": 2,
+                "amountsPence": 50
+            },
+            {
+                "type": "column",
+                "cells": [
+                    3,
+                    6,
+                    9,
+                    12,
+                    15,
+                    18,
+                    21,
+                    24,
+                    27,
+                    30,
+                    33,
+                    36
+                ],
+                "buttonId": 3,
+                "amountsPence": 50
+            }
+        ],
+        "winNumber": 36
+    },
+    "operationResult": 0,
+    "upstream": {
+        "txId": "1049461",
+        "processedTxId": "FAbsqEpIWQ",
+        "createdAt": "2025-05-23T06:39:50Z",
+        "balance": 1000,
+        "alreadyProcessed": false,
+        "status": 0,
+        "errDesc": null
+    },
+    "referenceGuid": "231768e4-179d-4434-a1a1-8b643dc0a913"
+}

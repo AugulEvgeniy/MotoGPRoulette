@@ -7,4 +7,18 @@ Cypress.Commands.add('interceptStartGame', () => {
   cy.intercept('startgame').as('startGame')
 })
 
+Cypress.Commands.add('interceptStartGameRebet', () => {
+  cy.intercept('startgame', { fixture: "request_for_rebet_table_roulette.json" }).as('startGame')
+})
 
+Cypress.Commands.add('interceptStartGameRebetRace', () => {
+  cy.intercept('startgame', { fixture: "request_for_rebet_race_roulette.json" }).as('startGame')
+})
+
+Cypress.Commands.add('interceptStartGameRebetRace_2nd', () => {
+  cy.intercept('startgame', { fixture: "request_for_rebet_race_roulette_2ndSpin.json" }).as('startGame')
+})
+
+Cypress.Commands.add('interceptStartGameLose', () => {
+  cy.intercept('startgame', { fixture: "request_for_lose_spin_roulette.json" }).as('startGame')
+})

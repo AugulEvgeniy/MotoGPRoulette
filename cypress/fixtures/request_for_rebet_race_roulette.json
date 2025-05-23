@@ -1,0 +1,74 @@
+{
+    "state": "COMPLETE",
+    "gameResult": {
+        "gameInstanceId": 999,
+        "stakePence": 50,
+        "totalWinPence": 0,
+        "decimalOdds": 0.0
+    },
+    "wagerNumber": 1049477,
+    "integrationResultData": {
+        "bonusList": [],
+        "bonusWin": 0,
+        "bonusStake": 0,
+        "stakes": [
+            {
+                "type": "straight",
+                "cells": [
+                    14
+                ],
+                "buttonId": 14,
+                "amountsPence": 50,
+                "description": "race_1"
+            },
+            {
+                "type": "straight",
+                "cells": [
+                    20
+                ],
+                "buttonId": 20,
+                "amountsPence": 50,
+                "description": "race_1"
+            },
+            {
+                "type": "straight",
+                "cells": [
+                    1
+                ],
+                "buttonId": 1,
+                "amountsPence": 50,
+                "description": "race_1"
+            },
+            {
+                "type": "straight",
+                "cells": [
+                    33
+                ],
+                "buttonId": 33,
+                "amountsPence": 50,
+                "description": "race_1"
+            },
+            {
+                "type": "straight",
+                "cells": [
+                    16
+                ],
+                "buttonId": 16,
+                "amountsPence": 50,
+                "description": "race_1"
+            }
+        ],
+        "winNumber": 21
+    },
+    "operationResult": 0,
+    "upstream": {
+        "txId": "1049477",
+        "processedTxId": "leTKxlGZYi",
+        "createdAt": "2025-05-23T06:57:38Z",
+        "balance": 1000,
+        "alreadyProcessed": false,
+        "status": 0,
+        "errDesc": null
+    },
+    "referenceGuid": "5eba5a8d-b1d0-49f5-aa2e-4371511d7773"
+}

@@ -2,7 +2,7 @@ describe('Rebet and reset bet are working correctly', () => {
     it('Should check that all of types of bets are displayed after rebetting)', () => {
 
         cy.visitTestEnvironment()
-        cy.intercept('start-game').as('startGame')
+        cy.interceptStartGameRebet()
 
 
         cy.window({ timeout: 25000 }).should((win) => {
@@ -13,11 +13,11 @@ describe('Rebet and reset bet are working correctly', () => {
             expect(start_button, 'Game is loaded').to.be.true
         })
 
-        cy.get('#open_button').click()
-        cy.get('#chip').select(36)
-        cy.get('#open_button').click({force: true})
-        cy.get('#set_state').click()
-        cy.get('#close_button').click()
+        // cy.get('#open_button').click()
+        // cy.get('#chip').select(36)
+        // cy.get('#open_button').click({force: true})
+        // cy.get('#set_state').click()
+        // cy.get('#close_button').click()
 
 
         cy.window().should((win) => {
@@ -59,6 +59,7 @@ describe('Rebet and reset bet are working correctly', () => {
             const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
 
             expect(win_banner).to.be.true
+
             expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(1000);
         })
 
@@ -81,7 +82,7 @@ describe('Rebet and reset bet are working correctly', () => {
 
             expect(chip[1].stakeType).to.include('dozen')
             expect(chip[1].buttonId).to.equal(2)
-            expect(chip[1].bet).to.equal(1)
+            expect(chip[1].bet).to.equal(100)
 
             expect(chip[2].stakeType).to.include('dozen')
             expect(chip[2].buttonId).to.equal(3)
@@ -153,22 +154,26 @@ describe('Rebet and reset bet are working correctly', () => {
     it('Should check that "chips" array is rewritten after placing the second bet)', () => {
         
         cy.window().then((win) => {
-        win.game.scene.scenes[1].gameContainer.list[4].list[1].list[0].emit('pointerdown') // straight
-        cy.wait(50)
+        win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[0].list[0].emit('pointerdown')
+    })
+
+        cy.wait(500)
+
+        cy.window().then((win) => {
         win.game.scene.scenes[1].gameContainer.list[5].list[0].emit('pointerdown')
     })
 
         cy.window({timeout: 20000}).should((win) => {
         const no_win_banner = win.game.scene.scenes[1].gameContainer.noWinBanner.visible;
 
-        expect(no_win_banner).to.be.true
+        expect(no_win_banner, 'no win banner is displayed').to.be.true
         expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(1000);
     })
 
     cy.wait(3000)
     cy.window().should((win) => {
         const rebet = win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.list[2].visible;
-        expect(rebet).to.be.true;
+        expect(rebet, 'rebet button is visible').to.be.true;
     })
 
     cy.window().then((win) => {
@@ -178,7 +183,7 @@ describe('Rebet and reset bet are working correctly', () => {
     cy.window().should((win) => {
         const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;
 
-        expect(chip[0].stakeType).to.include('straight')
+        expect(chip[0].stakeType).to.include('dozen')
         expect(chip[0].buttonId).to.equal(1)
  })
 
@@ -201,9 +206,9 @@ describe('Rebet and reset bet are working correctly', () => {
         cy.window().should((win) => {
         const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;
 
-        expect(chip[0].stakeType).to.include('straight')
+        expect(chip[0].stakeType).to.include('dozen')
         expect(chip[0].buttonId).to.equal(1)
-        expect(win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable).to.be.false
+        expect(win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable, 'isRaceTable is false').to.be.false
     })
 
     })

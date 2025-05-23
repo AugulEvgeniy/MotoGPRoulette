@@ -2,7 +2,7 @@ describe('Losing spin is played without issues', () => {
     it('Should check that the win banner is displayed, balance is updated, response data is correct)', () => {
 
         cy.visitTestEnvironment()
-        cy.intercept('start-game').as('startGame')
+        cy.interceptStartGameLose()
 
 
         cy.window({ timeout: 25000 }).should((win) => {
@@ -13,11 +13,11 @@ describe('Losing spin is played without issues', () => {
             expect(start_button, 'Game is loaded').to.be.true
         })
 
-        cy.get('#open_button').click()
-        cy.get('#chip').select(2)
-        cy.get('#open_button').click({force: true})
-        cy.get('#set_state').click()
-        cy.get('#close_button').click()
+        // cy.get('#open_button').click()
+        // cy.get('#chip').select(2)
+        // cy.get('#open_button').click({force: true})
+        // cy.get('#set_state').click()
+        // cy.get('#close_button').click()
 
         cy.window().should((win) => {
             const game = win.game
@@ -38,10 +38,9 @@ describe('Losing spin is played without issues', () => {
         })
 
         cy.wait('@startGame').its('response.body').then((body) => {
-            const stakes = body.game;
             try {
-                expect(stakes.totalWinPence).to.equal(0);
-                expect(stakes.stakePence).to.equal(0.5);
+                expect(body.gameResult.totalWinPence).to.equal(0);
+                expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
                 cy.log('Assertion failed:', err.message);
             }   
@@ -50,10 +49,10 @@ describe('Losing spin is played without issues', () => {
         cy.window({timeout: 20000}).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const win_banner = scene.gameContainer.noWinBanner.visible;
+            const no_win_banner = scene.gameContainer.noWinBanner.visible;
 
-            expect(win_banner).to.be.true
-            expect(scene.gameContainer.topPanel.balance).to.equal(999.50);
+            expect(no_win_banner).to.be.true
+            expect(scene.gameContainer.topPanel.balance).to.equal(99950);
         })
 
         cy.wait(3000)

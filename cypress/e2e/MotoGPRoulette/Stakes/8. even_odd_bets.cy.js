@@ -188,7 +188,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             const game = win.game
             const scene = game.scene.scenes[1]
             try {
-                expect(scene.gameContainer.topPanel.balance).to.not.equal(1000);
+                expect(scene.gameContainer.topPanel.balance).to.not.equal(100000);
             } catch (err) {
                 cy.log('Assertion failed:', err.message);
             }   

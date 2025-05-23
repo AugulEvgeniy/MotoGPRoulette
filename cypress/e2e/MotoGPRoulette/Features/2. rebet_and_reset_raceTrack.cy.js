@@ -2,7 +2,7 @@ describe('Rebet and reset bet are working correctly', () => {
     it('Should check that all of types of bets are displayed after rebetting)', () => {
 
         cy.visitTestEnvironment()
-        cy.intercept('start-game').as('startGame')
+        cy.interceptStartGameRebetRace()
 
 
         cy.window({ timeout: 25000 }).should((win) => {
@@ -21,11 +21,11 @@ describe('Rebet and reset bet are working correctly', () => {
             scene.gameContainer.tapBar.raceButton.emit('pointerdown')
         })
 
-        cy.get('#open_button').click()
-        cy.get('#chip').select(10)
-        cy.get('#open_button').click({force: true})
-        cy.get('#set_state').click()
-        cy.get('#close_button').click()
+        // cy.get('#open_button').click()
+        // cy.get('#chip').select(10)
+        // cy.get('#open_button').click({force: true})
+        // cy.get('#set_state').click()
+        // cy.get('#close_button').click()
 
         cy.wait(100)
 
@@ -34,7 +34,7 @@ describe('Rebet and reset bet are working correctly', () => {
             const scene = game.scene.scenes[1]
             const race_track = scene.gameContainer.stakeSelector.isRaceTable;
 
-            expect(race_track).to.be.true;
+            expect(race_track, "Switched to Race Track").to.be.true;
         })
 
         cy.wait(500)
@@ -51,7 +51,7 @@ describe('Rebet and reset bet are working correctly', () => {
         cy.window({timeout: 20000}).should((win) => {
             const noWin_banner = win.game.scene.scenes[1].gameContainer.noWinBanner.visible;
 
-            expect(noWin_banner).to.be.true
+            expect(noWin_banner, "no win banner is displayed").to.be.true
             expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(1000);
         })
 
@@ -59,7 +59,7 @@ describe('Rebet and reset bet are working correctly', () => {
         cy.window().should((win) => {
             const rebet = win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.list[2].visible;
 
-            expect(rebet).to.be.true;
+            expect(rebet, 'rebet button is visible').to.be.true;
         })
 
         cy.window().then((win) => {
@@ -78,7 +78,8 @@ describe('Rebet and reset bet are working correctly', () => {
 
     describe('Reset bet is working correctly', () => {
     it('Should check that "spins" array is 0 after reset)', () => {
-        
+
+
         cy.wait(300)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.startGroupButtons.resetButton.emit('pointerdown');
@@ -95,10 +96,17 @@ describe('Rebet and reset bet are working correctly', () => {
 
     describe('Rebet works correctly after the second spin with a different stake', () => {
     it('Should check that "chips" array is rewritten after placing the second bet)', () => {
+
+        cy.interceptStartGameRebetRace_2nd()
         
         cy.window().then((win) => {
         win.game.scene.scenes[1].gameContainer.stakeSelector.raceButtons[2].emit('pointerdown')
         cy.wait(50)
+        win.game.scene.scenes[1].gameContainer.list[5].list[0].emit('pointerdown')
+    })
+
+        cy.wait(500)
+        cy.window().then((win) => {
         win.game.scene.scenes[1].gameContainer.list[5].list[0].emit('pointerdown')
     })
 

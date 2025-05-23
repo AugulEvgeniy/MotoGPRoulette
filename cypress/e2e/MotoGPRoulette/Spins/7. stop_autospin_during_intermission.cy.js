@@ -46,7 +46,7 @@ describe('Autospin is played without issues', () => {
         cy.wait(150)
         cy.window().then((win) => {
             try {
-                expect(win.game.scene.scenes[1].gameContainer.roulette.list[1].list[2].text, 'Spin count is 9').to.equal('9');
+                expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 9').to.equal('9');
                 expect(win.game.scene.scenes[1].gameContainer.roulette.list[1].visible, 'Stop auto button is visible').to.be.true;
             } catch (err) {
                 cy.log('Assertion failed:', err.message);

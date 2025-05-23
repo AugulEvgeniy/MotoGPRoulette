@@ -1,8 +1,8 @@
 describe('Autospin is played without issues', () => {
     it('Should check that spin counter updates correctly, and autospin stops after all spins)', () => {
 
-        cy.visitTestEnvironment()
-        cy.intercept('start-game').as('startGame')
+        cy.visitTestEnvironment();
+        cy.interceptStartGame();
 
 
         cy.window({ timeout: 25000 }).should((win) => {
@@ -37,7 +37,7 @@ describe('Autospin is played without issues', () => {
         cy.wait('@startGame').its('response.body').then((body) => {
             const stakes = body.game;
             try {
-                expect(stakes.stakePence).to.equal(0.5);
+                expect(stakes.stakePence).to.equal(50);
             } catch (err) {
                 cy.log('Assertion failed:', err.message);
             }   
@@ -46,7 +46,7 @@ describe('Autospin is played without issues', () => {
         cy.wait(150)
         cy.window().then((win) => {
             try {
-                expect(win.game.scene.scenes[1].gameContainer.roulette.list[1].list[2].text, 'Spin count is 9').to.equal('9');
+                expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 9').to.equal('9');
                 expect(win.game.scene.scenes[1].gameContainer.roulette.list[1].visible, 'Stop auto button is visible').to.be.true;
                 win.game.scene.scenes[1].gameContainer.roulette.list[1].emit('pointerdown');
             } catch (err) {
@@ -54,7 +54,11 @@ describe('Autospin is played without issues', () => {
             }   
         })
 
-        cy.wait(700)
+        cy.window().then((win) => {
+            win.game.scene.scenes[1].gameContainer.roulette.list[2].emit('pointerdown');
+        })
+
+        cy.wait(800)
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].visible, 'Stop auto button is visible').to.be.false;

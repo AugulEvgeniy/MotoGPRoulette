@@ -11,7 +11,7 @@ jobs:
       fail-fast: false
       matrix:
         browsers: [chrome, firefox, edge]
-    
+
     env:
       NODE_VERSION: 22
       CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
@@ -19,11 +19,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Get commit message
         id: commit_message
         run: echo "message=$(git log -1 --pretty=%B | head -n 1)" >> $GITHUB_OUTPUT
-      
+
       - name: Determine test folder
         id: test_folder
         run: |
@@ -38,59 +38,62 @@ jobs:
           else
             echo "folder=cypress/e2e" >> $GITHUB_OUTPUT
           fi
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-      
-      - name: Cache npm dependencies
+
+      - name: Cache node_modules and .npm
         uses: actions/cache@v4
         id: npm-cache
         with:
           path: |
             ~/.npm
             node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-
-      
-      - name: Install dependencies
+            ${{ runner.os }}-node-modules-
+
+      - name: Install dependencies (if needed)
         if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm ci  # Installs everything from package-lock.json (including mochawesome)
-      
-      - name: Cache Cypress
+        run: npm ci
+
+      - name: Install mochawesome tools globally
+        run: npm install -g mochawesome mochawesome-merge marge
+
+      - name: Cache Cypress binary
         uses: actions/cache@v4
         id: cypress-cache
         with:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
-          
+
       - name: Create reports directory
         run: mkdir -p cypress/reports/${{ matrix.browsers }}
-          
-      - name: Cypress run
+
+      - name: Run Cypress tests
         run: |
           npx cypress run \
             --browser ${{ matrix.browsers }} \
             --spec "${{ steps.test_folder.outputs.folder }}/**/*.cy.js" \
             --reporter mochawesome \
             --reporter-options "reportDir=cypress/reports/${{ matrix.browsers }},overwrite=false,html=false,json=true"
-          
-      - name: Merge Mochawesome Reports
+
+      - name: Merge Mochawesome reports
         if: always()
         run: |
-          npx mochawesome-merge cypress/reports/${{ matrix.browsers }}/*.json > cypress/reports/${{ matrix.browsers }}/merged-report.json
-          
-      - name: Generate HTML Reports
+          mochawesome-merge cypress/reports/${{ matrix.browsers }}/*.json > cypress/reports/${{ matrix.browsers }}/merged-report.json
+
+      - name: Generate HTML reports
         if: always()
         run: |
-          npx marge cypress/reports/${{ matrix.browsers }}/merged-report.json \
+          marge cypress/reports/${{ matrix.browsers }}/merged-report.json \
             --reportDir cypress/reports/${{ matrix.browsers }} \
             --reportFilename ${{ matrix.browsers }}-report.html \
             --inline
-          
+
       - name: Upload HTML Reports
         uses: actions/upload-artifact@v4
         with:

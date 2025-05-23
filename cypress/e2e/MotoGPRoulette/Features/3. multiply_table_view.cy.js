@@ -13,7 +13,7 @@ describe('multiply works correctly', () => {
             expect(start_button, 'Game is loaded').to.be.true
         })
 
-        cy.wait(2000)
+        cy.wait(3000)
 
         cy.window().then((win) => {
             

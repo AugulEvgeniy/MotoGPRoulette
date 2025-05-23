@@ -60,7 +60,7 @@ describe('Rebet and reset bet are working correctly', () => {
 
             expect(win_banner).to.be.true
 
-            expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(1000);
+            expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(100000);
         })
 
         cy.wait(3000)
@@ -167,10 +167,10 @@ describe('Rebet and reset bet are working correctly', () => {
         const no_win_banner = win.game.scene.scenes[1].gameContainer.noWinBanner.visible;
 
         expect(no_win_banner, 'no win banner is displayed').to.be.true
-        expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(1000);
+        expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(100000);
     })
 
-    cy.wait(3000)
+    cy.wait(3300)
     cy.window().should((win) => {
         const rebet = win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.list[2].visible;
         expect(rebet, 'rebet button is visible').to.be.true;

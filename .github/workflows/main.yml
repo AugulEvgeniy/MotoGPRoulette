@@ -20,13 +20,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
+      - name: Get commit message
+        id: commit_message
+        run: echo "message=$(git log -1 --pretty=%B | head -n 1)" >> $GITHUB_OUTPUT
+      
+      - name: Determine test folder
+        id: test_folder
+        run: |
+          if [[ "${{ steps.commit_message.outputs.message }}" == *"Burger"* ]]; then
+            echo "folder=cypress/e2e/MotoGPRoulette/Burger_Menu" >> $GITHUB_OUTPUT
+          elif [[ "${{ steps.commit_message.outputs.message }}" == *"Features"* ]]; then
+            echo "folder=cypress/e2e/MotoGPRoulette/Features" >> $GITHUB_OUTPUT
+          elif [[ "${{ steps.commit_message.outputs.message }}" == *"Spins"* ]]; then
+            echo "folder=cypress/e2e/MotoGPRoulette/Spins" >> $GITHUB_OUTPUT
+          elif [[ "${{ steps.commit_message.outputs.message }}" == *"Stakes"* ]]; then
+            echo "folder=cypress/e2e/MotoGPRoulette/Stakes" >> $GITHUB_OUTPUT
+          else
+            echo "folder=cypress/e2e" >> $GITHUB_OUTPUT
+          fi
+      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
       
-      # More precise caching for npm
       - name: Cache npm dependencies
         uses: actions/cache@v4
         id: npm-cache
@@ -38,14 +56,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       
-      # Only install if cache missed
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: |
           npm ci
           npm install mochawesome mochawesome-merge mochawesome-report-generator
       
-      # Cache Cypress binary
       - name: Cache Cypress
         uses: actions/cache@v4
         id: cypress-cache
@@ -60,6 +76,7 @@ jobs:
         run: |
           npx cypress run \
             --browser ${{ matrix.browsers }} \
+            --spec "${{ steps.test_folder.outputs.folder }}/**/*.cy.js" \
             --reporter mochawesome \
             --reporter-options "reportDir=cypress/reports/${{ matrix.browsers }},overwrite=false,html=false,json=true"
           

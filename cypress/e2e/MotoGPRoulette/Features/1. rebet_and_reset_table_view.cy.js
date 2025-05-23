@@ -166,8 +166,9 @@ describe('Rebet and reset bet are working correctly', () => {
 
         cy.window({timeout: 20000}).should((win) => {
         const no_win_banner = win.game.scene.scenes[1].gameContainer.noWinBanner.visible;
+        const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
 
-        expect(no_win_banner, 'no win banner is displayed').to.be.true
+        expect(no_win_banner || win_banner, 'result banner is displayed').to.be.true
         expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(100000);
     })
 

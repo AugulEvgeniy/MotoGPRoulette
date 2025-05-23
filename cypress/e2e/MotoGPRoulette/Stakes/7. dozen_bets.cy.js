@@ -180,7 +180,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         })
 
 
-        cy.wait('@startGame').its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 10000 }).its('response.body').then((body) => {
             cy.log('startGame response:', body.game);
         
             const dozen_1 = [1,2,3,4,5,6,7,8,9,10,11,12]

@@ -2,7 +2,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
     it('"type": "red_or_black", 10 stake objects with every stake value', () =>{
 
         
-        // cy.visitTestEnvironment()
+        cy.visitTestEnvironment()
         cy.interceptStartGame()
 
 

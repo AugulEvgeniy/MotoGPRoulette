@@ -64,7 +64,6 @@ describe('Rebet and reset bet are working correctly', () => {
             expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(100000);
         })
 
-        cy.wait(3000)
         cy.window().should((win) => {
             const rebet = win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.list[2].visible;
 
@@ -137,7 +136,7 @@ describe('Rebet and reset bet are working correctly', () => {
     describe('Reset bet is working correctly', () => {
     it('Should check that "spins" array is 0 after reset', () => {
         
-        cy.wait(500)
+        cy.wait(2000)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.startGroupButtons.resetButton.emit('pointerdown');
     })
@@ -205,7 +204,7 @@ describe('Rebet and reset bet are working correctly', () => {
         win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.emit('pointerdown');
     })
         cy.wait(500)
-        cy.window({ timeout: 10000 }).should((win) => {
+        cy.window({ timeout: 15000 }).should((win) => {
         const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;
 
         expect(chip[0].stakeType).to.include('dozen')

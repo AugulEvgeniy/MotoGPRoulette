@@ -46,15 +46,15 @@ jobs:
           cache: 'npm'  # This handles npm caching automatically
       
       # Remove the manual npm cache step since setup-node handles it
+      - name: Install dependencies
+        run: |
+          npm ci --prefer-offline
+          ls -la node_modules/mochawesome || npm install mochawesome mochawesome-merge mochawesome-report-generator
       
       - name: Verify Mochawesome Cache
         run: |
           ls -la node_modules/mochawesome
           npm ls mochawesome mochawesome-merge mochawesome-report-generator
-
-      - name: Install dependencies
-        run: |
-          npm ci --no-audit --prefer-offline
 
       - name: Cache Cypress
         uses: actions/cache@v4

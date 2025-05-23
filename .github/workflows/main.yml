@@ -57,7 +57,8 @@ jobs:
             ${{ runner.os }}-node-
       
       - name: Install dependencies
-        run: npm ci
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci  # Installs everything from package-lock.json (including mochawesome)
       
       - name: Cache Cypress
         uses: actions/cache@v4

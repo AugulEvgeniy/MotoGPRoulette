@@ -8,7 +8,7 @@ Cypress.Commands.add('interceptStartGame', () => {
 })
 
 Cypress.Commands.add('interceptStartGameRebet', () => {
-  cy.intercept('startgame', { fixture: "request_for_rebet_table_roulette.json" }).as('startGame')
+  cy.intercept('startgame', { fixture: "request_for_rebet_roulette.json" }).as('startGame')
 })
 
 Cypress.Commands.add('interceptStartGameRebetRace', () => {

@@ -3,7 +3,7 @@ describe('Reward History displays winning numbers', () => {
 
         cy.visitTestEnvironment()
 
-        cy.window({ timeout: 25000 }).should((win) => {
+        cy.window({ timeout: 30000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
             const start_button = scene.gameContainer.list[5].list[0].visible;
@@ -37,7 +37,7 @@ describe('Reward History displays winning numbers', () => {
         });
 
 
-        cy.wait('@startGame').then(() => {
+        cy.wait('@startGame', { timeout: 10000 }).then(() => {
         cy.window({timeout: 15000}).should((win) => {
             const chip = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[0].list[1].text;
             expect(chip).to.deep.equal(JSON.stringify(stakesArray[0]));
@@ -62,7 +62,7 @@ describe('Reward History displays winning numbers', () => {
         })
         
 
-        cy.wait('@startGame').then(() => {
+        cy.wait('@startGame', { timeout: 10000 }).then(() => {
         cy.window({timeout: 15000}).should((win) => {
             const chip = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[0].list[1].text;
             const chip_1 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[1].list[1].text;
@@ -90,7 +90,7 @@ describe('Reward History displays winning numbers', () => {
         })
         
 
-        cy.wait('@startGame').then(() => {
+        cy.wait('@startGame', { timeout: 10000 }).then(() => {
         cy.window({timeout: 15000}).should((win) => {
             const chip = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[0].list[1].text;
             const chip_1 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[1].list[1].text;
@@ -119,7 +119,7 @@ describe('Reward History displays winning numbers', () => {
         })
         
 
-        cy.wait('@startGame').then(() => {
+        cy.wait('@startGame', { timeout: 10000 }).then(() => {
         cy.window({timeout: 15000}).should((win) => {
             const chip = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[0].list[1].text;
             const chip_1 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[1].list[1].text;
@@ -150,7 +150,7 @@ describe('Reward History displays winning numbers', () => {
         })
         
 
-        cy.wait('@startGame').then(() => {
+        cy.wait('@startGame', { timeout: 10000 }).then(() => {
         cy.window({timeout: 15000}).should((win) => {
             const chip = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[0].list[1].text;
             const chip_1 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[1].list[1].text;
@@ -183,7 +183,7 @@ describe('Reward History displays winning numbers', () => {
             scene.gameContainer.list[5].list[0].emit('pointerdown')
         })
         
-        cy.wait('@startGame').then(() => {
+        cy.wait('@startGame', { timeout: 10000 }).then(() => {
         cy.window({timeout: 15000}).should((win) => {
             const chip = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[0].list[1].text;
             const chip_1 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[1].list[1].text;

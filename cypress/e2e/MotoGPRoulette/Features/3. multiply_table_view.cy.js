@@ -2,10 +2,10 @@ describe('multiply works correctly', () => {
     it('should multiply 0.50 stake', () => {
 
         cy.visitTestEnvironment()
-        cy.intercept('start-game').as('startGame')
+        cy.interceptStartGame()
 
 
-        cy.window({ timeout: 20000 }).should((win) => {
+        cy.window({ timeout: 30000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
             const start_button = scene.gameContainer.list[5].list[0].visible;

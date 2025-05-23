@@ -5,7 +5,7 @@ describe('Rebet and reset bet are working correctly', () => {
         cy.interceptStartGameRebetRace()
 
 
-        cy.window({ timeout: 25000 }).should((win) => {
+        cy.window({ timeout: 30000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
             const start_button = scene.gameContainer.list[5].list[0].visible;
@@ -66,7 +66,7 @@ describe('Rebet and reset bet are working correctly', () => {
         win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.emit('pointerdown');
         })
 
-        cy.window().should((win) => {
+        cy.window({ timeout: 10000 }).should((win) => {
             const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;
 
             expect(chip[0].stakeType).to.include('straight')

@@ -1,7 +1,7 @@
 describe('All stake objects are sent and validated. Total Bet value and Balance updates correctly in UI', () => {
     it('"type": "split" and "straight", 25 stake objects with every stake value', () =>{
 
-        cy.visitTestEnvironment()
+        // cy.visitTestEnvironment()
         cy.interceptStartGame()
 
 

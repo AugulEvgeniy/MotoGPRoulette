@@ -178,7 +178,7 @@ describe('Rebet and reset bet are working correctly', () => {
     })
 
     cy.window().then((win) => {
-        win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.emit('pointerdown')
+        win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.emit('pointerdown');
     })
 
     cy.window({ timeout: 10000 }).should((win) => {

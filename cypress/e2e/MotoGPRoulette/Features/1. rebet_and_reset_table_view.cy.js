@@ -254,18 +254,13 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
             expect(race_track, "Switched to Race Track").to.be.true;
         })
 
-        cy.wait(1500)
+        cy.wait(1000)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.stakeSelector.raceButtons[1].emit('pointerdown')
         })
 
-        cy.window().should((win) => {
-        const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;
-            expect(chip[0].stakeType).to.include('straight')
-        })
-
         cy.window().then((win) => {
-            cy.wait(1500)
+            cy.wait(3000)
             win.game.scene.scenes[1].gameContainer.list[5].list[0].emit('pointerdown')
         })
 

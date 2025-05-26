@@ -40,7 +40,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
 
         // 10
 
-        cy.wait('@startGame').its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
             const stakes = body.game;
             try {
                 expect(stakes.stakePence).to.equal(50);

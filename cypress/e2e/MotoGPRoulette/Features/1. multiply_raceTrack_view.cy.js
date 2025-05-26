@@ -72,6 +72,11 @@ describe('Multiply works correctly for Neighbours stake', () => {
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.stakeSelector.tiersButton.emit('pointerdown')
         })
+
+        cy.window({timeout: 10000}).should((win) => {
+            const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
+            expect (total_bet).to.include('3.00')
+        })
         
         cy.wait(800)
         cy.window().then((win) => {
@@ -143,6 +148,11 @@ describe('Multiply works correctly for Neighbours stake', () => {
         cy.wait(500)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.stakeSelector.voisinsButton.emit('pointerdown')
+        })
+
+        cy.window({timeout: 10000}).should((win) => {
+            const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
+            expect (total_bet).to.include('4.50')
         })
         
         cy.wait(800)

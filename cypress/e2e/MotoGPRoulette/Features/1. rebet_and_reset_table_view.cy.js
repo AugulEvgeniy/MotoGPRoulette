@@ -261,11 +261,11 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
 
             scene.gameContainer.stakeSelector.raceButtons[1].emit('pointerdown')
 
-            cy.wait(150)
+            cy.wait(500)
             scene.gameContainer.list[5].list[0].emit('pointerdown')
         })
 
-        cy.window({timeout: 40000}).should((win) => {
+        cy.window({timeout: 30000}).should((win) => {
             const noWin_banner = win.game.scene.scenes[1].gameContainer.noWinBanner.visible;
             const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
 

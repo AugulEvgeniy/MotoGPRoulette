@@ -27,6 +27,8 @@ describe('Multiply works correctly for Neighbours stake', () => {
             expect(win.game.scene.scenes[1].gameContainer.stakeSelector.tiersButton.visible).to.be.true;
         })
 
+        cy.wait(1500)
+
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.stakeSelector.raceButtons[0].emit('pointerdown')
         })

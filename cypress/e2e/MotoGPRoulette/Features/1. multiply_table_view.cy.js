@@ -20,14 +20,25 @@ describe('multiply works correctly', () => {
             win.game.scene.scenes[1].gameContainer.list[4].list[0].list[0].emit('pointerdown')
         })
 
+
         cy.wait(800)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
         })
 
+        cy.window({ timeout: 10000 }).should((win) => {
+            const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
+            expect (total_bet).to.include('1.00')
+        })
+
         cy.wait(2000)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
+        })
+
+        cy.window({ timeout: 10000 }).should((win) => {
+            const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
+            expect (total_bet).to.include('2.00')
         })
 
         cy.wait(2000)

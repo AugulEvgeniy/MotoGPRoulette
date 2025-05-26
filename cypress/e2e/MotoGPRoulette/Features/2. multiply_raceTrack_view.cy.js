@@ -42,6 +42,12 @@ describe('Multiply works correctly for Neighbours stake', () => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
         })
 
+        cy.window().should((win) => {
+            const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
+            expect (total_bet).to.include('5.00')
+        })
+
+
         cy.wait(1200)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
@@ -71,6 +77,12 @@ describe('Multiply works correctly for Neighbours stake', () => {
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
         })
+
+        cy.window().should((win) => {
+            const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
+            expect (total_bet).to.include('6.00')
+        })
+
 
         cy.wait(1200)
         cy.window().then((win) => {
@@ -102,6 +114,12 @@ describe('Multiply works correctly for Neighbours stake', () => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
         })
 
+        cy.window().should((win) => {
+            const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
+            expect (total_bet).to.include('5.00')
+        })
+
+
         cy.wait(1200)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
@@ -131,6 +149,12 @@ describe('Multiply works correctly for Neighbours stake', () => {
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
         })
+
+        cy.window().should((win) => {
+            const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
+            expect (total_bet).to.include('9.00')
+        })
+
 
         cy.wait(1200)
         cy.window().then((win) => {

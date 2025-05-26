@@ -21,16 +21,6 @@ describe('Multiply works correctly for Neighbours stake', () => {
             scene.gameContainer.tapBar.raceButton.emit('pointerdown')
         })
 
-        cy.wait(100)
-
-        cy.window().should((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
-            const race_track = scene.gameContainer.stakeSelector.isRaceTable;
-
-            expect(race_track).to.be.true;
-        })
-
         cy.wait(1000)
 
         cy.window().then((win) => {

@@ -24,10 +24,14 @@ describe('Multiply works correctly for Neighbours stake', () => {
         cy.wait(100)
 
         cy.window().should((win) => {
-            expect(win.game.scene.scenes[1].gameContainer.stakeSelector.tiersButton.visible).to.be.true;
+            expect(win.game.scene.scenes[1].gameContainer.stakeSelector.isSwitching, 'Switched to RaceTable').to.be.false;
         })
 
-        cy.wait(1500)
+        cy.window().should((win) => {
+            expect(win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable, 'Switched to RaceTable').to.be.true;
+        })
+        
+        cy.wait(500)
 
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.stakeSelector.raceButtons[0].emit('pointerdown')

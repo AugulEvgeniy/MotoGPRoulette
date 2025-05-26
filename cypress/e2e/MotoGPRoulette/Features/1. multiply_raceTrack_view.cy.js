@@ -68,7 +68,7 @@ describe('Multiply works correctly for Neighbours stake', () => {
     describe('Multiply works correctly for Tiers stake', () => {
     it('Should multiply Tiers stake', () => {
 
-        cy.wait(500)
+        cy.wait(1000)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.stakeSelector.tiersButton.emit('pointerdown')
         })

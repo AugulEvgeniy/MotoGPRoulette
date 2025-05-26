@@ -8,6 +8,7 @@ module.exports = defineConfig({
     require('mochawesome/addContext')(on);
     },
     testIsolation: false,
-    defaultCommandTimeout: 7000
+    defaultCommandTimeout: 7000,
+    pageLoadTimeout: 30000
   }
 });

@@ -254,14 +254,14 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
             expect(race_track, "Switched to Race Track").to.be.true;
         })
 
-        cy.wait(500)
+        cy.wait(1500)
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
 
             scene.gameContainer.stakeSelector.raceButtons[1].emit('pointerdown')
 
-            cy.wait(50)
+            cy.wait(150)
             scene.gameContainer.list[5].list[0].emit('pointerdown')
         })
 

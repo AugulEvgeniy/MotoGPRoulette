@@ -1,5 +1,5 @@
-describe('Multiply works correctly for Neighbours stake', () => {
-    it('should multiply neighbours stake', () => {
+describe('multiply works correctly', () => {
+    it('should multiply 0.50 stake', () => {
 
         cy.visitTestEnvironment()
         cy.interceptStartGame()
@@ -12,6 +12,51 @@ describe('Multiply works correctly for Neighbours stake', () => {
 
             expect(start_button, 'Game is loaded').to.be.true
         })
+
+        cy.wait(3000)
+
+        cy.window().then((win) => {
+            
+            win.game.scene.scenes[1].gameContainer.list[4].list[0].list[0].emit('pointerdown')
+        })
+
+
+        cy.wait(800)
+        cy.window().then((win) => {
+            win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
+        })
+
+        cy.window({ timeout: 10000 }).should((win) => {
+            const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
+            expect (total_bet).to.include('1.00')
+        })
+
+        cy.wait(2000)
+        cy.window().then((win) => {
+            win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
+        })
+
+        cy.window({ timeout: 10000 }).should((win) => {
+            const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
+            expect (total_bet).to.include('2.00')
+        })
+
+        cy.wait(2000)
+        cy.window().then((win) => {
+            win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.emit('pointerdown')
+        })
+
+        cy.window({ timeout: 10000 }).should((win) => {
+            const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
+            expect (total_bet).to.include('4.00')
+        })
+        
+    })
+})
+
+
+describe('Multiply works correctly for Neighbours stake', () => {
+    it('should multiply neighbours stake', () => {
 
         cy.wait(500)
 

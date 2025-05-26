@@ -256,13 +256,12 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
 
         cy.wait(1500)
         cy.window().then((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
+            win.game.scene.scenes[1].gameContainer.stakeSelector.raceButtons[1].emit('pointerdown')
+        })
 
-            scene.gameContainer.stakeSelector.raceButtons[1].emit('pointerdown')
-
-            cy.wait(1500)
-            scene.gameContainer.list[5].list[0].emit('pointerdown')
+        cy.window().then((win) => {
+            cy.wait(500)
+            win.game.scene.scenes[1].gameContainer.list[5].list[0].emit('pointerdown')
         })
 
         cy.window({timeout: 30000}).should((win) => {

@@ -265,6 +265,11 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
             scene.gameContainer.list[5].list[0].emit('pointerdown')
         })
 
+        cy.window().should((win) => {
+            expect(win.game.scene.scenes[1].gameContainer.roulette.visible, "Spin is played").to.be.true;
+        })
+
+
         cy.window({timeout: 30000}).should((win) => {
             const noWin_banner = win.game.scene.scenes[1].gameContainer.noWinBanner.visible;
             const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;

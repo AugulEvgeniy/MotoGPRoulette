@@ -10,6 +10,7 @@ describe('Autospin is played without issues', () => {
             expect(start_button, 'Game is loaded').to.be.true
         })
 
+        cy.wait(25000)
 
         cy.window().should((win) => {
             const chip = win.game.scene.scenes[1].gameContainer.list[7].activeButton.layout.name;

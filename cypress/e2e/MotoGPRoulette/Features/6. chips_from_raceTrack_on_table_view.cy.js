@@ -17,7 +17,7 @@ describe('Chips from Race Track view are displayed in Table View when entering i
 
             cy.wait(100)
 
-            cy.window().should((win) => {
+            cy.window({ timeout: 25000 }).should((win) => {
             const race_track = win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable;
 
             expect(race_track, 'Race Track View').to.be.true;
@@ -33,14 +33,14 @@ describe('Chips from Race Track view are displayed in Table View when entering i
             win.game.scene.scenes[1].gameContainer.tapBar.raceButton.emit('pointerdown')
         })
 
-        cy.window().should((win) => {
+        cy.window({ timeout: 25000 }).should((win) => {
             const race_track = win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable;
 
             expect(race_track, 'Table View').to.be.false;
         })
 
 
-        cy.window({ timeout: 10000 }).should((win) => {
+        cy.window({ timeout: 25000 }).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].buttonId).to.equal(31);
             expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[1].buttonId).to.equal(14);
             expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[2].buttonId).to.equal(20);

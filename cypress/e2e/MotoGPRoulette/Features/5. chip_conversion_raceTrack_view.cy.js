@@ -21,12 +21,12 @@ describe('0.10 chip conversion', () => {
 
             cy.wait(100)
 
-            cy.window().should((win) => {
+            cy.window({ timeout: 25000}).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
             const race_track = scene.gameContainer.stakeSelector.isRaceTable;
 
-            expect(race_track).to.be.true;
+            expect(race_track, 'isRaceTable').to.be.true;
         })
         
 

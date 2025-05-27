@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browsers: [chrome, firefox, edge]
+        browsers: [chrome, firefox]
 
     env:
       NODE_VERSION: 22

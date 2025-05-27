@@ -156,7 +156,7 @@ describe('Multiply works correctly for Neighbours stake', () => {
     describe('Multiply works correctly for Orphelins stake', () => {
     it('Should multiply Orphelins stake', () => {
 
-        cy.wait(2000)
+        cy.wait(5000)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.stakeSelector.orphelinsButton.emit('pointerdown')
         })

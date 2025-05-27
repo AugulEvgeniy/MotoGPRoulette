@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Cypress Tests (Chrome Only)
 
 on: 
   push:
@@ -7,11 +7,7 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-24.04
-    strategy:
-      fail-fast: false
-      matrix:
-        browsers: [chrome, firefox]
-
+    # Removed the matrix strategy since we only need Chrome
     env:
       NODE_VERSION: 22
       CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
@@ -71,39 +67,39 @@ jobs:
           key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
 
       - name: Create reports directory
-        run: mkdir -p cypress/reports/${{ matrix.browsers }}
+        run: mkdir -p cypress/reports/chrome
 
-      - name: Run Cypress tests
+      - name: Run Cypress tests in Chrome
         run: |
           npx cypress run \
-            --browser ${{ matrix.browsers }} \
+            --browser chrome \
             --spec "${{ steps.test_folder.outputs.folder }}/**/*.cy.js" \
             --reporter mochawesome \
-            --reporter-options "reportDir=cypress/reports/${{ matrix.browsers }},overwrite=false,html=false,json=true" \
+            --reporter-options "reportDir=cypress/reports/chrome,overwrite=false,html=false,json=true" \
             --config video=true
 
       - name: Merge Mochawesome reports
         if: always()
         run: |
-          mochawesome-merge cypress/reports/${{ matrix.browsers }}/*.json > cypress/reports/${{ matrix.browsers }}/merged-report.json
+          mochawesome-merge cypress/reports/chrome/*.json > cypress/reports/chrome/merged-report.json
 
       - name: Generate HTML reports
         if: always()
         run: |
-          marge cypress/reports/${{ matrix.browsers }}/merged-report.json \
-            --reportDir cypress/reports/${{ matrix.browsers }} \
-            --reportFilename ${{ matrix.browsers }}-report.html \
+          marge cypress/reports/chrome/merged-report.json \
+            --reportDir cypress/reports/chrome \
+            --reportFilename chrome-report.html \
             --inline
 
       - name: Upload HTML Reports
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.browsers }}-test-report
-          path: cypress/reports/${{ matrix.browsers }}/${{ matrix.browsers }}-report.html
+          name: chrome-test-report
+          path: cypress/reports/chrome/chrome-report.html
 
       - name: Upload Test Videos
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.browsers }}-test-videos
+          name: chrome-test-videos
           path: cypress/videos

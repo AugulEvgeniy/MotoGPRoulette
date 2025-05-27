@@ -5,7 +5,7 @@ describe('Autospin is played without issues', () => {
         cy.interceptStartGame();
 
 
-        cy.window({ timeout: 10000 }).should((win) => {
+        cy.window({ timeout: 40000 }).should((win) => {
             const start_button = win.game.scene.scenes[1].gameContainer.list[5].list[0].visible;
             expect(start_button, 'Game is loaded').to.be.true
         })

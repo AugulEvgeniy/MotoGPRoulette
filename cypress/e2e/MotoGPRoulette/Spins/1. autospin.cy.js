@@ -5,7 +5,7 @@ describe('Autospin is played without issues', () => {
         cy.interceptStartGame();
 
 
-        cy.window({ timeout: 60000 }).should((win) => {
+        cy.window({ timeout: 10000 }).should((win) => {
             const start_button = win.game.scene.scenes[1].gameContainer.list[5].list[0].visible;
             expect(start_button, 'Game is loaded').to.be.true
         })
@@ -16,25 +16,25 @@ describe('Autospin is played without issues', () => {
             expect(chip).to.include("chip_1")
         })
 
-        cy.window().then((win) => {
-            win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown')
-            cy.wait(50)
-            win.game.scene.scenes[1].gameContainer.startGroupButtons.autoplayButton.emit('pointerdown')
-        })
+        // cy.window().then((win) => {
+        //     win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown')
+        //     cy.wait(50)
+        //     win.game.scene.scenes[1].gameContainer.startGroupButtons.autoplayButton.emit('pointerdown')
+        // })
 
-        cy.wait(500)
+        // cy.wait(500)
 
-        cy.window().then((win) => {
-            win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[2].list[0].emit('pointerdown')
-        })
+        // cy.window().then((win) => {
+        //     win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[2].list[0].emit('pointerdown')
+        // })
 
-        cy.window().then((win) => {
-            win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[7].list[0].emit('pointerdown')
-        })
+        // cy.window().then((win) => {
+        //     win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[7].list[0].emit('pointerdown')
+        // })
 
         // 10
 
-        cy.wait('@startGame', { timeout: 60000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -99,7 +99,7 @@ describe('Autospin is played without issues', () => {
 
         // 9
 
-        cy.wait('@startGame', { timeout: 60000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -165,7 +165,7 @@ describe('Autospin is played without issues', () => {
 
         // 8
 
-        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -230,7 +230,7 @@ describe('Autospin is played without issues', () => {
 
         // 7
 
-        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -296,7 +296,7 @@ describe('Autospin is played without issues', () => {
 
         // 6
 
-        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -360,7 +360,7 @@ describe('Autospin is played without issues', () => {
 
         // 5
 
-        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -425,7 +425,7 @@ describe('Autospin is played without issues', () => {
 
         // 4
 
-        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -491,7 +491,7 @@ describe('Autospin is played without issues', () => {
 
         // 3
 
-        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -555,7 +555,7 @@ describe('Autospin is played without issues', () => {
 
         // 2
 
-        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -619,7 +619,7 @@ describe('Autospin is played without issues', () => {
 
         // 1
 
-        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {

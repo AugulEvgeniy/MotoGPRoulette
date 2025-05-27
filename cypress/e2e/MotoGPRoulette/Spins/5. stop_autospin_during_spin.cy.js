@@ -38,8 +38,11 @@ describe('Autospin is played without issues', () => {
             const stakes = body.game;
             try {
                 expect(stakes.stakePence).to.equal(50);
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: stakePence is 50",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
@@ -49,8 +52,11 @@ describe('Autospin is played without issues', () => {
                 expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 9').to.equal('9');
                 expect(win.game.scene.scenes[1].gameContainer.roulette.list[1].visible, 'Stop auto button is visible').to.be.true;
                 win.game.scene.scenes[1].gameContainer.roulette.list[1].emit('pointerdown');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Spin count is 9",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
@@ -62,8 +68,11 @@ describe('Autospin is played without issues', () => {
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].visible, 'Stop auto button is visible').to.be.false;
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Stop Auto is visible",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
@@ -75,23 +84,32 @@ describe('Autospin is played without issues', () => {
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.active, 'Rebet button is active').to.be.true;
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Rebet button is active",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
-            }
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
+            }   
 
             try {
                 expect(win.game.scene.scenes[1].gameContainer.tapBar.raceButton.active, 'RaceButton button is active').to.be.true;
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: RaceButton is active",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
-            }
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
+            }   
 
             win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown')
 
             try {
                 expect(win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.active, 'Multiply button is active').to.be.true;
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Multiply button is active",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
-            }
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
+            }   
         })
 
         cy.wait(5000)

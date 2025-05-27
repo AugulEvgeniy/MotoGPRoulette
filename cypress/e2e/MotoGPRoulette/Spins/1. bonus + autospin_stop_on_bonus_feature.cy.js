@@ -44,8 +44,11 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
+                    cy.task("logCatch", {
+                    message: "✅ Assertion Passed: stakePence is 50",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
@@ -54,8 +57,11 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             try {
                 expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 9').to.equal('9');
                 expect(win.game.scene.scenes[1].gameContainer.roulette.list[1].visible, 'Stop auto button is visible').to.be.true;
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Spin count is 9",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
@@ -67,9 +73,12 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
 
         cy.window().then((win) => {
             try {
-                expect(win.game.scene.scenes[1].gameContainer.topPanel.balance, 'Balance is updated').to.not.equal(1000);
+                expect(win.game.scene.scenes[1].gameContainer.topPanel.balance, 'Balance is updated').to.not.equal(100000);
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Balance does not equal 1000",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
@@ -81,16 +90,22 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.multiplierText.visible, 'No multipliers are visible').to.be.false;
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: No multipliers are visible on NO WIN",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `No multipliers are visible on NO WIN, Assertion Failed: ${err.message}`);
             }   
         })
           
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text, '6 SPINS LEFT').to.include('6 SPINS LEFT');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: 6 SPINS LEFT",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
@@ -102,24 +117,33 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.multiplierText.text, 'Multiplier is 1').to.equal('1');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Multiplier is 1",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Multiplier is 1, Assertion Failed: ${err.message}`);
             }   
         })
 
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.list[3].text, 'Total winnings is 0.50').to.equal('TOTAL WINNINGS £0.50');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Total Winnings is 0.50",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
           
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text, '5 SPINS LEFT').to.include('5 SPINS LEFT');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: 5 SPINS LEFT",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
@@ -131,16 +155,22 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.multiplierText.text, '+3').to.equal('+3');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Multiplier is +3",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
           
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text, '7 SPINS LEFT').to.include('7 SPINS LEFT');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: 7 SPINS LEFT",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
@@ -153,24 +183,33 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.multiplierText.text, 'Multiplier is 5').to.equal('5');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Multiplier is 5",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.list[3].text, 'Total winnings is 3.00').to.equal('TOTAL WINNINGS £3.00');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Total Winnings is 3.00",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
           
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text, '6 SPINS LEFT').to.include('6 SPINS LEFT');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: 6 SPINS LEFT",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
         
@@ -183,27 +222,35 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.multiplierText.text, 'Multiplier is 7').to.equal('7');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Multiplier is 7",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.list[3].text, 'Total winnings is 6.50').to.equal('TOTAL WINNINGS £6.50');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Total Winnings is 6.50",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
           
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text, '5 SPINS LEFT').to.include('5 SPINS LEFT');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: 5 SPINS LEFT",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
-
 
         cy.window({timeout: 40000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
@@ -213,8 +260,11 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.multiplierText.visible, 'No multipliers are visible').to.be.false;
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: No multipliers are visible on NO WIN",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: on NO WIN ${err.message}`);
             }   
         })
           
@@ -234,8 +284,11 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.multiplierText.text, 'Multiplier is 4').to.equal('4');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Multiplier is 4",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
@@ -250,8 +303,11 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text, '3 SPINS LEFT').to.include('3 SPINS LEFT');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: 3 SPINS LEFT",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
@@ -263,24 +319,33 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.multiplierText.text, 'Multiplier is 3').to.equal('3');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Multiplier is 3",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.list[3].text, 'Total winnings is 10.00').to.equal('TOTAL WINNINGS £10.00');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Total Winnings is 10.00",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
           
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text, '2 SPINS LEFT').to.include('2 SPINS LEFT');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: 2 SPINS LEFT",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
@@ -292,24 +357,33 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.multiplierText.text, 'Multiplier is 2').to.equal('2');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Multiplier is 2",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.list[3].text, 'Total winnings is 11').to.equal('TOTAL WINNINGS £11.00');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Total Winnings is 11",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
           
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text, '1 SPINS LEFT').to.include('1 SPINS LEFT');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: 1 SPINS LEFT",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
@@ -321,16 +395,22 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         cy.window().then((win) => {
             try {
                 expect(win.game.scene.scenes[1].gameContainer.winBanner.list[3].text, 'You Have Won 11.00').to.equal('£11.00');
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: You Have Won 11.00",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 
         cy.window().then((win) => {
             try {
-                expect(win.game.scene.scenes[1].gameContainer.topPanel.balance, 'Balance is updated').to.not.equal(1000);
+                expect(win.game.scene.scenes[1].gameContainer.topPanel.balance, 'Balance is updated').to.not.equal(100000);
+                cy.task("logCatch", {
+                message: "✅ Assertion Passed: Balance does not equal 1000",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
 

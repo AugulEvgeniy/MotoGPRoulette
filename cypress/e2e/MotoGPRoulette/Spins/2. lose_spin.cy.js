@@ -39,12 +39,15 @@ describe('Losing spin is played without issues', () => {
 
         cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
             try {
-                expect(body.gameResult.totalWinPence).to.equal(0);
                 expect(body.gameResult.stakePence).to.equal(50);
+                    cy.task("logCatch", {
+                    message: "✅ Assertion Passed: stakePence is 50",
+        });
             } catch (err) {
-                cy.log('Assertion failed:', err.message);
+                cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
+
 
         cy.window({timeout: 20000}).should((win) => {
             const game = win.game

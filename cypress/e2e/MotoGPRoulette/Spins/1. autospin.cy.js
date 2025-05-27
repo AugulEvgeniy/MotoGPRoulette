@@ -1,5 +1,5 @@
 describe('Autospin is played without issues', () => {
-    it('Should check that spin counter updates correctly, and autospin stops after all spins)', () => {
+    it('Should check that the game is loaded and autospin is triggered', () => {
 
         cy.visitTestEnvironment();
         cy.interceptStartGame();
@@ -31,9 +31,14 @@ describe('Autospin is played without issues', () => {
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[7].list[0].emit('pointerdown')
         })
+    })
+})
 
         // 10
+describe('1st spin', () => {
+    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
 
+        cy.interceptStartGame();
         cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
@@ -95,10 +100,13 @@ describe('Autospin is played without issues', () => {
                 cy.log('Assertion failed:', err.message);
             }
         })
+    })
+})
 
-
+describe('2nd spin', () => {
+    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
         // 9
-
+        cy.interceptStartGame();
         cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
@@ -161,10 +169,14 @@ describe('Autospin is played without issues', () => {
             }
 
         })
+    })
+})
 
+describe('3rd spin', () => {
+    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
 
         // 8
-
+        cy.interceptStartGame();
         cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
@@ -226,10 +238,14 @@ describe('Autospin is played without issues', () => {
                 cy.log('Assertion failed:', err.message);
             }
         })
+    })
+})
 
+describe('4th spin', () => {
+    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
 
         // 7
-
+        cy.interceptStartGame();
         cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
@@ -292,10 +308,14 @@ describe('Autospin is played without issues', () => {
             }
 
         })
+    })
+})
 
 
+describe('5th spin', () => {
+    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
         // 6
-
+        cy.interceptStartGame();
         cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
@@ -357,9 +377,14 @@ describe('Autospin is played without issues', () => {
                 cy.log('Assertion failed:', err.message);
             }
         })
+    })
+})
 
+
+describe('6th spin', () => {
+    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
         // 5
-
+        cy.interceptStartGame();
         cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
@@ -421,10 +446,14 @@ describe('Autospin is played without issues', () => {
                 cy.log('Assertion failed:', err.message);
             }
         })
+    })
+})
 
+describe('7th spin', () => {
+    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
 
         // 4
-
+        cy.interceptStartGame();
         cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
@@ -487,10 +516,14 @@ describe('Autospin is played without issues', () => {
             }
 
         })
+    })
+})
 
+describe('8th spin', () => {
+    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
 
         // 3
-
+        cy.interceptStartGame();
         cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
@@ -552,9 +585,13 @@ describe('Autospin is played without issues', () => {
                 cy.log('Assertion failed:', err.message);
             }
         })
+    })
+})
 
+describe('9th spin', () => {
+    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
         // 2
-
+        cy.interceptStartGame();
         cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
@@ -616,9 +653,13 @@ describe('Autospin is played without issues', () => {
                 cy.log('Assertion failed:', err.message);
             }
         })
+    })
+})
 
+describe('10th spin', () => {
+    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
         // 1
-
+        cy.interceptStartGame();
         cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
@@ -680,8 +721,12 @@ describe('Autospin is played without issues', () => {
                 cy.log('Assertion failed:', err.message);
             }
         })
+    })
+})
 
-        // The game works correctly after autospin
+describe('The game works correctly after autospin', () => {
+    it('Should check that the buttins are active', () => {
+
 
         cy.window({timeout: 20000}).should((win) => {
             const table = win.game.scene.scenes[1].gameContainer.stakeSelector.visible;
@@ -722,3 +767,4 @@ describe('Autospin is played without issues', () => {
 
         })
     }) 
+

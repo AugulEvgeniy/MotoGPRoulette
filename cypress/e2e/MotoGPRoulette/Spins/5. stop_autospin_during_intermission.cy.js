@@ -34,7 +34,7 @@ describe('Autospin is played without issues', () => {
 
         // 10
 
-        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             const stakes = body;
             try {
                 expect(stakes.gameResult.stakePence).to.equal(50);

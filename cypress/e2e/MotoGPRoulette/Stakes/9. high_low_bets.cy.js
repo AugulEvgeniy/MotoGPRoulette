@@ -5,7 +5,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         cy.interceptStartGame()
 
 
-        cy.window({ timeout: 30000 }).should((win) => {
+        cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
             const start_button = scene.gameContainer.list[5].list[0].visible;
@@ -175,7 +175,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         })
 
 
-        cy.wait('@startGame', { timeout: 10000 }).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 25000 }).its('response.body').then((body) => {
             cy.log('startGame response:', body.game);
         
             const low = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]

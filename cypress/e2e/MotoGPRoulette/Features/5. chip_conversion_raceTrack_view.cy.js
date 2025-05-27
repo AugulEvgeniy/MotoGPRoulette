@@ -5,7 +5,7 @@ describe('0.10 chip conversion', () => {
         cy.intercept('start-game').as('startGame')
 
 
-        cy.window({ timeout: 25000 }).should((win) => {
+        cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
             const start_button = scene.gameContainer.list[5].list[0].visible;

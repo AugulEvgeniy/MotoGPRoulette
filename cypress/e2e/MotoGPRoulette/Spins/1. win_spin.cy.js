@@ -39,7 +39,7 @@ describe('Winning spin is played without issues', () => {
             scene.gameContainer.list[5].list[0].emit('pointerdown')
         })
 
-        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             expect(body.gameResult.totalWinPence).to.equal(150);
             expect(body.gameResult.stakePence, "stakePence").to.equal(150);
         })

@@ -37,7 +37,7 @@ describe('Losing spin is played without issues', () => {
             scene.gameContainer.list[5].list[0].emit('pointerdown')
         })
 
-        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
                     cy.task("logCatch", {

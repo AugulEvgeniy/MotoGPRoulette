@@ -1,6 +1,7 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
+  videoCompression: false,
   projectId: 'ch1gds',
   e2e: {
     setupNodeEvents(on, config) {

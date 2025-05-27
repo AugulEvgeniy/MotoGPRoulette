@@ -87,7 +87,7 @@ jobs:
       - name: Generate HTML reports
         if: always()
         run: |
-          npx marge@6.2.0 cypress/reports/chrome/merged-report.json \
+          npx marge cypress/reports/chrome/merged-report.json \
             --reportDir cypress/reports/chrome \
             --reportFilename chrome-report.html \
             --inline

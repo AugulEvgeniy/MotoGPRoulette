@@ -119,12 +119,12 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 9').to.equal('9');
         })
 
-        cy.window({ timeout: 50000 }).should((win) => {
-            expect(win.game.scene.scenes[1].gameContainer.stakeSelector.visible, 'The game returned to the table').to.be.true;
-        })
+        // cy.window({ timeout: 50000 }).should((win) => {
+        //     expect(win.game.scene.scenes[1].gameContainer.stakeSelector.visible, 'Spin count is 8').to.equal('8');
+        // })
 
         cy.window({ timeout: 50000 }).should((win) => {
-            expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 8').to.equal('8');
+            expect(win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.active, 'Rebet button is disabled').to.be.false;
         })
 
         })

@@ -76,12 +76,7 @@ jobs:
             --spec "${{ steps.test_folder.outputs.folder }}/**/*.cy.js" \
             --reporter mochawesome \
             --reporter-options "reportDir=cypress/reports/chrome,overwrite=false,html=false,json=true" \
-            --config video=true,videoCompression=20,pageLoadTimeout=60000,defaultCommandTimeout=10000 \
-            --env CI=true
-
-      - name: Wait for video processing
-        if: always()
-        run: sleep 10  # Extra buffer for video writing
+            --config video=true
 
       - name: Merge Mochawesome reports
         if: always()

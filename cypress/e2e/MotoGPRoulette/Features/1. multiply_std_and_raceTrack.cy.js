@@ -13,10 +13,12 @@ describe('multiply works correctly', () => {
             expect(start_button, 'Game is loaded').to.be.true
         })
 
-        cy.wait(5000)
+        cy.window({ timeout: 30000 }).should((win) => {
+            expect (win.game.scene.scenes[1].gameContainer.stakeSelector.active).to.be.true
+        })
+        cy.wait(1000)
 
         cy.window().then((win) => {
-            
             win.game.scene.scenes[1].gameContainer.list[4].list[0].list[0].emit('pointerdown')
         })
 

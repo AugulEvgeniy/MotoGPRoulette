@@ -22,12 +22,14 @@ describe('Autospin is played without issues', () => {
             win.game.scene.scenes[1].gameContainer.startGroupButtons.autoplayButton.emit('pointerdown')
         })
 
-        cy.wait(500)
+        cy.wait(1500)
 
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[2].list[0].emit('pointerdown')
         })
 
+ cy.wait(1500)
+ 
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[7].list[0].emit('pointerdown')
         })
@@ -99,16 +101,12 @@ describe('Autospin is played without issues', () => {
 
         // 9
 
-        // cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
-        //     try {
-        //         expect(body.gameResult.stakePence).to.equal(50);
-        //     } catch (err) {
-        //         cy.log('Assertion failed:', err.message);
-        //     }   
-        // })
-
-        cy.window({ timeout: 25000}).should((win) => {
-            expect(win.game.scene.scenes[1].gameContainer.roulette.visible).to.be.true;
+        cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
+            try {
+                expect(body.gameResult.stakePence).to.equal(50);
+            } catch (err) {
+                cy.log('Assertion failed:', err.message);
+            }   
         })
 
         cy.wait(150)

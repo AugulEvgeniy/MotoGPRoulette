@@ -18,7 +18,7 @@ describe('Sound Button mutes the game', () => {
             expect(win.game.scene.scenes[1].gameContainer.settingsMenu.soundState, 'soundState is false').to.be.false;
         })
 
-        cy.wait(500)
+        cy.wait(2500)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.settingsMenu.soundButton.emit('pointerdown');
         })

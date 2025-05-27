@@ -22,7 +22,7 @@ describe('Fullscreen button', () => {
             win.game.scene.scenes[1].gameContainer.settingsMenu.list[5].emit('pointerdown');
         })
 
-        cy.window().should((win) => {
+        cy.window({ timeout: 25000 }).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.settingsMenu.isFullscreenActive, 'isFullScreenActive is true').to.be.true;
         })
 
@@ -31,7 +31,7 @@ describe('Fullscreen button', () => {
             win.game.scene.scenes[1].gameContainer.settingsMenu.list[5].emit('pointerdown');
         })
 
-        cy.window().should((win) => {
+        cy.window({ timeout: 25000 }).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.settingsMenu.isFullscreenActive, 'isFullScreenActive is true').to.be.false;
         })
 

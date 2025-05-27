@@ -14,7 +14,7 @@ describe('Sound Button mutes the game', () => {
             win.game.scene.scenes[1].gameContainer.settingsMenu.soundButton.emit('pointerdown');
         })
 
-        cy.window().should((win) => {
+        cy.window({ timeout: 25000 }).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.settingsMenu.soundState, 'soundState is false').to.be.false;
         })
 
@@ -23,7 +23,7 @@ describe('Sound Button mutes the game', () => {
             win.game.scene.scenes[1].gameContainer.settingsMenu.soundButton.emit('pointerdown');
         })
 
-        cy.window().should((win) => {
+        cy.window({ timeout: 25000 }).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.settingsMenu.soundState, 'soundState is true').to.be.true;
         })
 

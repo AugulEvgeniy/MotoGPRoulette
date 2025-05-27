@@ -7,7 +7,6 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-24.04
-    # Removed the matrix strategy since we only need Chrome
     env:
       NODE_VERSION: 22
       CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
@@ -56,8 +55,9 @@ jobs:
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
 
-      - name: Install mochawesome tools globally
-        run: npm install -g mochawesome mochawesome-merge marge
+      # Removed global installation - using local packages instead
+      - name: Verify mochawesome packages
+        run: npm list mochawesome mochawesome-merge mochawesome-report-generator
 
       - name: Cache Cypress binary
         uses: actions/cache@v4
@@ -78,18 +78,25 @@ jobs:
             --reporter-options "reportDir=cypress/reports/chrome,overwrite=false,html=false,json=true" \
             --config video=true
 
+      # Updated report generation steps using npx
       - name: Merge Mochawesome reports
         if: always()
         run: |
-          mochawesome-merge cypress/reports/chrome/*.json > cypress/reports/chrome/merged-report.json
+          npx mochawesome-merge@4.2.2 cypress/reports/chrome/*.json > cypress/reports/chrome/merged-report.json
 
       - name: Generate HTML reports
         if: always()
         run: |
-          marge cypress/reports/chrome/merged-report.json \
+          npx marge@6.2.0 cypress/reports/chrome/merged-report.json \
             --reportDir cypress/reports/chrome \
             --reportFilename chrome-report.html \
             --inline
+
+      - name: Verify reports exist
+        if: always()
+        run: |
+          ls -la cypress/reports/chrome/
+          test -f cypress/reports/chrome/chrome-report.html || echo "HTML report missing"
 
       - name: Upload HTML Reports
         uses: actions/upload-artifact@v4

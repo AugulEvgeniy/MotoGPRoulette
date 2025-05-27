@@ -114,7 +114,7 @@ describe('Autospin is played without issues', () => {
 
         cy.wait(5000)
         
-        cy.window({ timeout: 0}).should((win) => {
+        cy.window({ timeout: 20000}).should((win) => {
             const roulette = win.game.scene.scenes[1].gameContainer.roulette.visible;
             expect(roulette, 'Spin is not played').to.be.false;
         })

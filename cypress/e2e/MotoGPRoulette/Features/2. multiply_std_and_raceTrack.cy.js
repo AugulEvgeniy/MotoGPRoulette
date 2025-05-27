@@ -1,8 +1,8 @@
 describe('multiply works correctly', () => {
     it('should multiply 0.50 stake', () => {
 
-        cy.visitTestEnvironment()
-        cy.interceptStartGame()
+        cy.visitTestEnvironment();
+        cy.interceptStartGame();
 
 
         cy.window({ timeout: 50000 }).should((win) => {

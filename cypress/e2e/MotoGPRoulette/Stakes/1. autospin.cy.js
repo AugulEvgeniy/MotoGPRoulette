@@ -46,58 +46,58 @@ describe('Autospin is played without issues', () => {
         })
 
         cy.wait(150)
-        // cy.window().then((win) => {
-        //     try {
-        //         expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 9').to.equal('9');
-        //         expect(win.game.scene.scenes[1].gameContainer.roulette.list[1].visible, 'Stop auto button is visible').to.be.true;
-        //     } catch (err) {
-        //         cy.log('Assertion failed:', err.message);
-        //     }   
-        // })
+        cy.window().then((win) => {
+            try {
+                expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 9').to.equal('9');
+                expect(win.game.scene.scenes[1].gameContainer.roulette.list[1].visible, 'Stop auto button is visible').to.be.true;
+            } catch (err) {
+                cy.log('Assertion failed:', err.message);
+            }   
+        })
 
         cy.window({timeout: 20000}).should((win) => {
             const table = win.game.scene.scenes[1].gameContainer.stakeSelector.visible;
             expect(table, 'The game returns to the table').to.be.true
         })
 
-        // cy.window().then((win) => {
-        //     try {
-        //         expect(win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.active, 'Rebet button is disabled').to.be.false;
-        //     } catch (err) {
-        //         cy.log('Assertion failed:', err.message);
-        //     }
+        cy.window().then((win) => {
+            try {
+                expect(win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.active, 'Rebet button is disabled').to.be.false;
+            } catch (err) {
+                cy.log('Assertion failed:', err.message);
+            }
 
-        //     try {
-        //         const auto_button = win.game.scene.scenes[1].gameContainer.startGroupButtons.list[1].list[3].text
-        //         expect(auto_button, 'Spin count is 9').to.equal('9')
-        //     } catch (err) {
-        //         cy.log('Assertion failed:', err.message);
-        //     }
+            try {
+                const auto_button = win.game.scene.scenes[1].gameContainer.startGroupButtons.list[1].list[3].text
+                expect(auto_button, 'Spin count is 9').to.equal('9')
+            } catch (err) {
+                cy.log('Assertion failed:', err.message);
+            }
 
-        //     try {
-        //         expect(win.game.scene.scenes[1].gameContainer.tapBar.raceButton.active, 'RaceButton button is disabled').to.be.false;
-        //     } catch (err) {
-        //         cy.log('Assertion failed:', err.message);
-        //     }
+            try {
+                expect(win.game.scene.scenes[1].gameContainer.tapBar.raceButton.active, 'RaceButton button is disabled').to.be.false;
+            } catch (err) {
+                cy.log('Assertion failed:', err.message);
+            }
 
-        //     try {
-        //         expect(win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.active, 'Multiply button is disabled').to.be.false;
-        //     } catch (err) {
-        //         cy.log('Assertion failed:', err.message);
-        //     }
+            try {
+                expect(win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.active, 'Multiply button is disabled').to.be.false;
+            } catch (err) {
+                cy.log('Assertion failed:', err.message);
+            }
 
-        //     try {
-        //         expect(win.game.scene.scenes[1].gameContainer.startGroupButtons.startButton.active, 'Spin button is disabled').to.be.false;
-        //     } catch (err) {
-        //         cy.log('Assertion failed:', err.message);
-        //     }
+            try {
+                expect(win.game.scene.scenes[1].gameContainer.startGroupButtons.startButton.active, 'Spin button is disabled').to.be.false;
+            } catch (err) {
+                cy.log('Assertion failed:', err.message);
+            }
 
-        //     try {
-        //         expect(win.game.scene.scenes[1].gameContainer.startGroupButtons.resetButton.active, 'Reset button is disabled').to.be.false;
-        //     } catch (err) {
-        //         cy.log('Assertion failed:', err.message);
-        //     }
-        // })
+            try {
+                expect(win.game.scene.scenes[1].gameContainer.startGroupButtons.resetButton.active, 'Reset button is disabled').to.be.false;
+            } catch (err) {
+                cy.log('Assertion failed:', err.message);
+            }
+        })
 
 
         // 9

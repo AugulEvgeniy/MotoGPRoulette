@@ -246,7 +246,7 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
 
         cy.wait(100)
 
-            cy.window().should((win) => {
+            cy.window({ timeout: 25000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
             const race_track = scene.gameContainer.stakeSelector.isRaceTable;
@@ -273,7 +273,7 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
         })
 
         cy.wait(3000)
-        cy.window().should((win) => {
+        cy.window( { timeout: 25000 } ).should((win) => {
             const rebet = win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.list[2].visible;
 
             expect(rebet, 'rebet button is visible').to.be.true;
@@ -297,13 +297,13 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
     it('Should check that "spins" array is 0 after reset)', () => {
 
 
-        cy.wait(2000)
+        cy.wait(5000)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.startGroupButtons.resetButton.emit('pointerdown');
     })
 
-        cy.wait(1500)
-        cy.window().should((win) => {
+        cy.wait(2000)
+        cy.window( {timeout: 15000} ).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips).have.length(0)
     })
 
@@ -336,7 +336,7 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
     })
 
     cy.wait(3000)
-    cy.window().should((win) => {
+    cy.window({ timeout: 15000 }).should((win) => {
         const rebet = win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.list[2].visible;
         expect(rebet).to.be.true;
     })

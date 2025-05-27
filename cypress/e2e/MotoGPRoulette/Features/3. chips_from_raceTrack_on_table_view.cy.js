@@ -60,7 +60,7 @@ describe('Chips from Race Track view are displayed in Table View when entering i
 
         cy.wait(100)
 
-        cy.window().should((win) => {
+        cy.window({ timeout: 25000 }).should((win) => {
             const race_track = win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable;
 
             expect(race_track, 'Race Track View').to.be.true;

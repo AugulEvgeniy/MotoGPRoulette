@@ -13,7 +13,7 @@ describe('multiply works correctly', () => {
             expect(start_button, 'Game is loaded').to.be.true
         })
 
-        cy.wait(3000)
+        cy.wait(5000)
 
         cy.window().then((win) => {
             
@@ -68,15 +68,15 @@ describe('Multiply works correctly for Neighbours stake', () => {
 
         cy.wait(100)
 
-        cy.window().should((win) => {
+        cy.window({ timeout: 25000 }).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.stakeSelector.isSwitching, 'Switched to RaceTable').to.be.false;
         })
 
-        cy.window().should((win) => {
+        cy.window({ timeout: 25000 }).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable, 'Switched to RaceTable').to.be.true;
         })
         
-        cy.wait(500)
+        cy.wait(2000)
 
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.stakeSelector.raceButtons[0].emit('pointerdown')

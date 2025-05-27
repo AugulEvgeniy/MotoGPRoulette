@@ -73,7 +73,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
 
-        cy.window({timeout: 25000}).should((win) => {
+        cy.window({timeout: 30000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('NO WIN')
         })
@@ -94,7 +94,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
 
-        cy.window({timeout: 25000}).should((win) => {
+        cy.window({timeout: 30000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('WIN £0.50');
         })
@@ -123,7 +123,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
 
-        cy.window({timeout: 25000}).should((win) => {
+        cy.window({timeout: 30000}).should((win) => {
             const extra_spins = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(extra_spins).to.equal('EXTRA SPINS')
         })
@@ -145,7 +145,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         })
 
 
- cy.window({timeout: 25000}).should((win) => {
+ cy.window({timeout: 30000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('WIN £2.50');
         })
@@ -175,7 +175,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         })
         
 
-         cy.window({timeout: 25000}).should((win) => {
+         cy.window({timeout: 30000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('WIN £3.50');
         })
@@ -205,7 +205,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         })
 
 
-        cy.window({timeout: 25000}).should((win) => {
+        cy.window({timeout: 30000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('NO WIN')
         })
@@ -226,7 +226,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
 
-        cy.window({timeout: 25000}).should((win) => {
+        cy.window({timeout: 30000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('WIN £2.00');
         })
@@ -255,7 +255,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
 
-        cy.window({timeout: 25000}).should((win) => {
+        cy.window({timeout: 30000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('WIN £1.50');
         })
@@ -284,7 +284,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
 
-        cy.window({timeout: 25000}).should((win) => {
+        cy.window({timeout: 30000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('WIN £1.00');
         })

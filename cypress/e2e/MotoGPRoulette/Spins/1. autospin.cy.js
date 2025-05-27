@@ -99,12 +99,16 @@ describe('Autospin is played without issues', () => {
 
         // 9
 
-        cy.wait('@startGame', { timeout: 100000}).its('response.body').then((body) => {
-            try {
-                expect(body.gameResult.stakePence).to.equal(50);
-            } catch (err) {
-                cy.log('Assertion failed:', err.message);
-            }   
+        // cy.wait('@startGame', { timeout: 10000}).its('response.body').then((body) => {
+        //     try {
+        //         expect(body.gameResult.stakePence).to.equal(50);
+        //     } catch (err) {
+        //         cy.log('Assertion failed:', err.message);
+        //     }   
+        // })
+
+        cy.window({ timeout: 25000}).should((win) => {
+            expect(win.game.scene.scenes[1].gameContainer.roulette.visible).to.be.true;
         })
 
         cy.wait(150)

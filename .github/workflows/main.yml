@@ -79,7 +79,8 @@ jobs:
             --browser ${{ matrix.browsers }} \
             --spec "${{ steps.test_folder.outputs.folder }}/**/*.cy.js" \
             --reporter mochawesome \
-            --reporter-options "reportDir=cypress/reports/${{ matrix.browsers }},overwrite=false,html=false,json=true"
+            --reporter-options "reportDir=cypress/reports/${{ matrix.browsers }},overwrite=false,html=false,json=true" \
+            --config video=true
 
       - name: Merge Mochawesome reports
         if: always()
@@ -99,3 +100,10 @@ jobs:
         with:
           name: ${{ matrix.browsers }}-test-report
           path: cypress/reports/${{ matrix.browsers }}/${{ matrix.browsers }}-report.html
+
+      - name: Upload Test Videos
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.browsers }}-test-videos
+          path: cypress/videos

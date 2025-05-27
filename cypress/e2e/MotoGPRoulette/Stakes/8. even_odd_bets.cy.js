@@ -177,6 +177,11 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
         cy.wait('@startGame', { timeout: 25000 }).its('response.body').then((body) => {
             cy.log('startGame response:', body.game);
+
+        if  (body.state == "INVALID") {
+        throw new Error(
+        `API returned INVALID state. Full response: ${JSON.stringify(body)}`
+        )}    
         
             const odd = [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35]
             const even = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36]

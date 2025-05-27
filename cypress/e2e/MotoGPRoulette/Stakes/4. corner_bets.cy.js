@@ -284,7 +284,10 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             cy.log('startGame response:', body.game);
         
-            const stakes = body.integrationResultData.stakes;
+        if  (body.state == "INVALID") {
+        throw new Error(
+        `API returned INVALID state. Full response: ${JSON.stringify(body)}`
+        )}    
 
             cy.window().then((win) => {
             const game = win.game

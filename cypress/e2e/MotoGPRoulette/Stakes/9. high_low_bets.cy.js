@@ -177,6 +177,11 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
         cy.wait('@startGame', { timeout: 25000 }).its('response.body').then((body) => {
             cy.log('startGame response:', body.game);
+
+        if  (body.state == "INVALID") {
+        throw new Error(
+        `API returned INVALID state. Full response: ${JSON.stringify(body)}`
+        )}    
         
             const low = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
             const high = [19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]

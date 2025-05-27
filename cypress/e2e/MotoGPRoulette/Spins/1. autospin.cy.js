@@ -15,16 +15,22 @@ describe('Autospin is played without issues', () => {
             expect(chip).to.include("chip_1")
         })
 
+        cy.wait(2000)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown')
-            cy.wait(50)
+        })
+
+        cy.wait(500)
+        cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.startGroupButtons.autoplayButton.emit('pointerdown')
         })
 
+        cy.wait(500)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[2].list[0].emit('pointerdown')
         })
 
+        cy.wait(500)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[7].list[0].emit('pointerdown')
         })

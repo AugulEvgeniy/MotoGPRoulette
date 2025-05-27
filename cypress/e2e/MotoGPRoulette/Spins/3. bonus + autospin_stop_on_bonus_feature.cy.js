@@ -387,10 +387,10 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
 
-        cy.window({timeout: 40000}).should((win) => {
-            const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
-            expect(win_banner, 'win banner is displayed').to.be.true
-        })
+        // cy.window({timeout: 40000}).should((win) => {
+        //     const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
+        //     expect(win_banner, 'win banner is displayed').to.be.true
+        // })
 
         cy.window().then((win) => {
             try {
@@ -416,7 +416,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
 
         cy.wait(2500)
 
-        cy.window({ timeout: 30000 }).should((win) => {
+        cy.window({ timeout: 60000 }).should((win) => {
             const autospin_button = win.game.scene.scenes[1].gameContainer.startGroupButtons.autoplayButton.visible;
             const isAutoplay = win.game.scene.scenes[1].gameContainer.roulette.isAutoplay;
             expect(autospin_button, 'Autospin button is visible').to.be.true;

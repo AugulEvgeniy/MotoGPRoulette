@@ -120,6 +120,10 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         })
 
         cy.window({ timeout: 50000 }).should((win) => {
+            expect(win.game.scene.scenes[1].gameContainer.stakeSelector.visible, 'The game returned to the table').to.be.true;
+        })
+
+        cy.window({ timeout: 50000 }).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 8').to.equal('8');
         })
 

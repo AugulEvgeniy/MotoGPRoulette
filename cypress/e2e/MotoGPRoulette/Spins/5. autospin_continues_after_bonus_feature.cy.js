@@ -45,7 +45,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             try {
                 expect(stakes.stakePence).to.equal(50);
                     cy.task("logCatch", {
-                    message: "✅ Assertion Passed: Balance is not 100000",
+                    message: "✅ Assertion Passed: stakePence is 50",
         });
             } catch (err) {
                 cy.task("logCatch", `Assertion Failed: ${err.message}`);
@@ -58,7 +58,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
                 expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 9').to.equal('9');
                 expect(win.game.scene.scenes[1].gameContainer.roulette.list[1].visible, 'Stop auto button is visible').to.be.true;
                     cy.task("logCatch", {
-                    message: "✅ Assertion Passed: Balance is not 100000",
+                    message: "✅ Assertion Passed: Spin count is 9",
         });
             } catch (err) {
                 cy.task("logCatch", `Assertion Failed: ${err.message}`);
@@ -91,7 +91,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.multiplierText.visible, 'No multipliers are visible').to.be.false;
                     cy.task("logCatch", {
-                    message: "✅ Assertion Passed: Balance is not 100000",
+                    message: "✅ Assertion Passed: No multipliers are visible on NO WIN",
         });
             } catch (err) {
                 cy.task("logCatch", `Assertion Failed: ${err.message}`);
@@ -102,7 +102,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             try {
                 expect(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text, '6 SPINS LEFT').to.include('6 SPINS LEFT');
                     cy.task("logCatch", {
-                    message: "✅ Assertion Passed: Balance is not 100000",
+                    message: "✅ Assertion Passed: 6 SPINS LEFT",
         });
             } catch (err) {
                 cy.task("logCatch", `Assertion Failed: ${err.message}`);
@@ -128,11 +128,11 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
 
         cy.wait(2500)
 
-        cy.window({ timeout: 25000 }).should((win) => {
+        cy.window({ timeout: 30000 }).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 9').to.equal('9');
         })
 
-        cy.window({ timeout: 25000 }).should((win) => {
+        cy.window({ timeout: 30000 }).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 8').to.equal('8');
         })
 

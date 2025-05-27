@@ -1,11 +1,11 @@
 describe('Autospin is played without issues', () => {
-    it('Should check that the game is loaded and autospin is triggered', () => {
+    it('Should check that spin counter updates correctly, and autospin stops after all spins)', () => {
 
         cy.visitTestEnvironment();
         cy.interceptStartGame();
 
 
-        cy.window({ timeout: 60000 }).should((win) => {
+        cy.window({ timeout: 30000 }).should((win) => {
             const start_button = win.game.scene.scenes[1].gameContainer.list[5].list[0].visible;
             expect(start_button, 'Game is loaded').to.be.true
         })
@@ -31,15 +31,10 @@ describe('Autospin is played without issues', () => {
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[7].list[0].emit('pointerdown')
         })
-    })
-})
 
         // 10
-describe('1st spin', () => {
-    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
 
-        cy.interceptStartGame();
-        cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 20000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -100,14 +95,11 @@ describe('1st spin', () => {
                 cy.log('Assertion failed:', err.message);
             }
         })
-    })
-})
 
-describe('2nd spin', () => {
-    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
+
         // 9
-        cy.interceptStartGame();
-        cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
+
+        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -169,15 +161,11 @@ describe('2nd spin', () => {
             }
 
         })
-    })
-})
 
-describe('3rd spin', () => {
-    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
 
         // 8
-        cy.interceptStartGame();
-        cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
+
+        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -238,15 +226,11 @@ describe('3rd spin', () => {
                 cy.log('Assertion failed:', err.message);
             }
         })
-    })
-})
 
-describe('4th spin', () => {
-    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
 
         // 7
-        cy.interceptStartGame();
-        cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
+
+        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -308,15 +292,11 @@ describe('4th spin', () => {
             }
 
         })
-    })
-})
 
 
-describe('5th spin', () => {
-    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
         // 6
-        cy.interceptStartGame();
-        cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
+
+        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -377,15 +357,10 @@ describe('5th spin', () => {
                 cy.log('Assertion failed:', err.message);
             }
         })
-    })
-})
 
-
-describe('6th spin', () => {
-    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
         // 5
-        cy.interceptStartGame();
-        cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
+
+        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -446,15 +421,11 @@ describe('6th spin', () => {
                 cy.log('Assertion failed:', err.message);
             }
         })
-    })
-})
 
-describe('7th spin', () => {
-    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
 
         // 4
-        cy.interceptStartGame();
-        cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
+
+        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -516,15 +487,11 @@ describe('7th spin', () => {
             }
 
         })
-    })
-})
 
-describe('8th spin', () => {
-    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
 
         // 3
-        cy.interceptStartGame();
-        cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
+
+        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -585,14 +552,10 @@ describe('8th spin', () => {
                 cy.log('Assertion failed:', err.message);
             }
         })
-    })
-})
 
-describe('9th spin', () => {
-    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
         // 2
-        cy.interceptStartGame();
-        cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
+
+        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -653,14 +616,10 @@ describe('9th spin', () => {
                 cy.log('Assertion failed:', err.message);
             }
         })
-    })
-})
 
-describe('10th spin', () => {
-    it('Should check that spin counter updates correctly, and autospin stops after all spins', () => {
         // 1
-        cy.interceptStartGame();
-        cy.wait('@startGame', { timeout: 30000}).its('response.body').then((body) => {
+
+        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(50);
             } catch (err) {
@@ -721,12 +680,8 @@ describe('10th spin', () => {
                 cy.log('Assertion failed:', err.message);
             }
         })
-    })
-})
 
-describe('The game works correctly after autospin', () => {
-    it('Should check that the buttins are active', () => {
-
+        // The game works correctly after autospin
 
         cy.window({timeout: 20000}).should((win) => {
             const table = win.game.scene.scenes[1].gameContainer.stakeSelector.visible;
@@ -767,4 +722,3 @@ describe('The game works correctly after autospin', () => {
 
         })
     }) 
-

@@ -98,14 +98,14 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         })
           
         cy.window().then((win) => {
-        // Retry this assertion for up to 10 seconds (defaultCommandTimeout)
-        cy.wrap(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text)
-            .should('include', '6 SPINS LEFT')
+        cy.get('body') // Any command to trigger retry
+            .should(() => {
+            expect(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text)
+                .to.include('6 SPINS LEFT');
+            })
             .then(() => {
             cy.task("logCatch", { message: "✅ Assertion Passed: 6 SPINS LEFT" });
             });
-        }).catch((err) => {
-        cy.task("logCatch", `Assertion Failed: ${err.message}`);
         });
 
 

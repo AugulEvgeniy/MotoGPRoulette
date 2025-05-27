@@ -22,14 +22,10 @@ describe('Autospin is played without issues', () => {
             win.game.scene.scenes[1].gameContainer.startGroupButtons.autoplayButton.emit('pointerdown')
         })
 
-        cy.wait(1500)
-
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[2].list[0].emit('pointerdown')
         })
 
- cy.wait(1500)
- 
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[7].list[0].emit('pointerdown')
         })

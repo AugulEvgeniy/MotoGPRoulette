@@ -97,16 +97,11 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
           
-        cy.window().then((win) => {
-        cy.get('body') // Any command to trigger retry
-            .should(() => {
-            expect(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text)
-                .to.include('6 SPINS LEFT');
-            })
-            .then(() => {
-            cy.task("logCatch", { message: "✅ Assertion Passed: 6 SPINS LEFT" });
-            });
-        });
+        
+        cy.window({timeout: 15000}).should((win) => {
+            expect(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text).to.include('6 SPINS LEFT');
+        })
+
 
 
         cy.window({timeout: 40000}).should((win) => {

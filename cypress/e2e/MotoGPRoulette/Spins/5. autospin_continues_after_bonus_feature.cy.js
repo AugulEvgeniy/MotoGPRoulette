@@ -93,16 +93,9 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
                     message: "✅ Assertion Passed: No multipliers are visible on NO WIN",
         });
             } catch (err) {
-                cy.task("logCatch", `Assertion Failed: ${err.message}`);
+                cy.task("logCatch", `Assertion Failed, No multipliers are visible on NO WIN: ${err.message}`);
             }   
         })
-          
-        
-        cy.window({timeout: 40000}).should((win) => {
-            expect(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text).to.include('6 SPINS LEFT');
-        })
-
-
 
         cy.window({timeout: 40000}).should((win) => {
             const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;

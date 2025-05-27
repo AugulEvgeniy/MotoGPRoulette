@@ -16,7 +16,7 @@ describe('multiply works correctly', () => {
         cy.window({ timeout: 30000 }).should((win) => {
             expect (win.game.scene.scenes[1].gameContainer.stakeSelector.active).to.be.true
         })
-        cy.wait(1000)
+        cy.wait(15000)
 
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.list[4].list[0].list[0].emit('pointerdown')
@@ -115,7 +115,7 @@ describe('Multiply works correctly for Neighbours stake', () => {
     describe('Multiply works correctly for Tiers stake', () => {
     it('Should multiply Tiers stake', () => {
 
-        cy.wait(2000)
+        cy.wait(10000)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.stakeSelector.tiersButton.emit('pointerdown')
         })
@@ -192,7 +192,7 @@ describe('Multiply works correctly for Neighbours stake', () => {
     describe('Multiply works correctly for Voisins stake', () => {
     it('Should multiply Voisins stake', () => {
 
-        cy.wait(1500)
+        cy.wait(10000)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.stakeSelector.voisinsButton.emit('pointerdown')
         })

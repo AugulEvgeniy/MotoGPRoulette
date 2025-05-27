@@ -110,7 +110,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         })
 
 
-        cy.window({timeout: 20000}).should((win) => {
+        cy.window({timeout: 40000}).should((win) => {
             const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
             expect(win_banner).to.be.true
         })

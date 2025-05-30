@@ -13,7 +13,7 @@ module.exports = defineConfig({
       // implement node event listeners here
     require('mochawesome/addContext')(on);
 
-    // return config;
+    return config;
     },
     testIsolation: false,
     defaultCommandTimeout: 7000,

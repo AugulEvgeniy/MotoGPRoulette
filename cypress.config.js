@@ -1,21 +1,28 @@
 const { defineConfig } = require("cypress");
 const addContext = require('mochawesome/addContext');
 
-
 module.exports = defineConfig({
   videoCompression: false,
   projectId: 'ch1gds',
   e2e: {
     setupNodeEvents(on, config) {
+      // Set TERM environment variable
       process.env.TERM = 'xterm';
+      
+      // Task for logging
       on('task', {
         logCatch(message) {
-          console.log(message); // Handles all log messages
+          console.log(message);
           return null;
-        }}),
-      // implement node event listeners here
-    addContext(on);
-    return config;
+        }
+      });
+
+      // Proper mochawesome context setup
+      on('after:run', (results) => {
+        addContext({ test }, results);
+      });
+
+      return config;
     },
     testIsolation: false,
     defaultCommandTimeout: 7000,

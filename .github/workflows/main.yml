@@ -70,6 +70,8 @@ jobs:
         run: mkdir -p cypress/reports/chrome
 
       - name: Run Cypress tests in Chrome
+        env:
+          TERM: xterm  # Fixes the "tput" error
         run: |
           npx cypress run \
             --browser chrome \

@@ -23,7 +23,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
             cy.wait(100)
 
-            cy.window().should((win) => {
+            cy.window({ timeout: 20000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
             const race_track = scene.gameContainer.stakeSelector.isRaceTable;

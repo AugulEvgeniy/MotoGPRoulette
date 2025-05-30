@@ -101,6 +101,7 @@ jobs:
           test -f cypress/reports/chrome/chrome-report.html || echo "HTML report missing"
 
       - name: Upload HTML Reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: chrome-test-report

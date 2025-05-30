@@ -1,19 +1,24 @@
 const { defineConfig } = require("cypress");
+const addContext = require('mochawesome/addContext');
 
 module.exports = defineConfig({
   videoCompression: false,
   projectId: 'ch1gds',
   e2e: {
     setupNodeEvents(on, config) {
+      // Task for logging
       on('task', {
         logCatch(message) {
-          console.log(message); // Handles all log messages
+          console.log(message);
           return null;
-        }}),
-      // implement node event listeners here
-    require('mochawesome/addContext')(on);
+        }
+      });
 
-    return config;
+      // Mochawesome context
+      addContext(on);
+
+      // Return the config object
+      return config;
     },
     testIsolation: false,
     defaultCommandTimeout: 7000,

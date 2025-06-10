@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-06-02T08:44:37.028Z",
+    "end": "2025-06-02T08:45:12.580Z",
+    "duration": 35552,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e7d80a79-a6c3-4a63-97d4-b1540be77fdf",
+      "title": "",
+      "fullFile": "cypress\\e2e\\MotoGPRoulette\\Spins\\5. autospin_continues_after_bonus_feature.cy.js",
+      "file": "cypress\\e2e\\MotoGPRoulette\\Spins\\5. autospin_continues_after_bonus_feature.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "360f16ba-1251-41c4-91fe-b9cdca2b7c0e",
+          "title": "Autospin continues after Bonus Feature and Bonus Round is played without issues with extra spins",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should check that \"Spins Left\" counter updates correctly, correct multipliers are displayed, total winnings updates correctly, autospin does not continue after Bonus Round)",
+              "fullTitle": "Autospin continues after Bonus Feature and Bonus Round is played without issues with extra spins Should check that \"Spins Left\" counter updates correctly, correct multipliers are displayed, total winnings updates correctly, autospin does not continue after Bonus Round)",
+              "timedOut": null,
+              "duration": 33697,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visitTestEnvironment();\ncy.intercept('startgame', {\n  fixture: 'only_one_bonus_spin_roulette.json'\n}).as('startGame');\ncy.window({\n  timeout: 50000\n}).should(win => {\n  const start_button = win.game.scene.scenes[1].gameContainer.list[5].list[0].visible;\n  expect(start_button, 'Game is loaded').to.be.true;\n});\n// cy.get('#open_button').click()\n// cy.get('#chip').select(2)\n// cy.get('#open_button').click({force: true})\n// cy.get('#win_bonus_button')\n// cy.get('#set_state').click()\n// cy.get('#close_button').click()\ncy.window().should(win => {\n  const chip = win.game.scene.scenes[1].gameContainer.list[7].activeButton.layout.name;\n  expect(chip).to.include(\"chip_1\");\n});\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.list[4].list[1].list[0].emit('pointerdown');\n  cy.wait(50);\n  win.game.scene.scenes[1].gameContainer.startGroupButtons.autoplayButton.emit('pointerdown');\n});\ncy.wait(500);\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[2].list[0].emit('pointerdown');\n});\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[7].list[0].emit('pointerdown');\n});\n// 10\ncy.wait('@startGame').its('response.body').then(body => {\n  try {\n    expect(body.gameResult.stakePence).to.equal(50);\n    cy.task(\"logCatch\", `stakePence is 50`);\n  } catch (err) {\n    cy.log('Assertion failed:', err.message);\n    cy.task(\"logCatch\", `Assertion Failed: ${err.message}`);\n  }\n});\ncy.wait(150);\ncy.window().then(win => {\n  try {\n    expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 9').to.equal('9');\n    expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].visible, 'Stop auto button is visible').to.be.true;\n    cy.task(\"logCatch\", `Spin count is 9, stop Auto button is visible`);\n  } catch (err) {\n    cy.log('Assertion failed:', err.message);\n    cy.task(\"logCatch\", `Assertion Failed: ${err.message}`);\n  }\n});\ncy.window({\n  timeout: 20000\n}).should(win => {\n  const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;\n  expect(win_banner).to.be.true;\n});\ncy.window().then(win => {\n  try {\n    expect(win.game.scene.scenes[1].gameContainer.topPanel.balance, 'Balance is updated').to.not.equal(100000);\n    cy.task(\"logCatch\", `Balance is updated`);\n  } catch (err) {\n    cy.log('Assertion failed:', err.message);\n    cy.task(\"logCatch\", `Assertion Failed: ${err.message}`);\n  }\n});\ncy.window({\n  timeout: 10000\n}).should(win => {\n  const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;\n  expect(bonus_no_win).to.equal('NO WIN');\n});\ncy.window().then(win => {\n  try {\n    expect(win.game.scene.scenes[1].gameContainer.videoPopup.multiplierText.visible, 'No multipliers are visible').to.be.false;\n    cy.task(\"logCatch\", `No multipliers are visible`);\n  } catch (err) {\n    cy.log('Assertion failed:', err.message);\n    cy.task(\"logCatch\", `Assertion Failed: ${err.message}`);\n  }\n});\ncy.window().then(win => {\n  try {\n    expect(win.game.scene.scenes[1].gameContainer.videoPopup.spinsLeft.text, '6 SPINS LEFT').to.include('6 SPINS LEFT');\n    cy.task(\"logCatch\", `6 SPINS LEFT`);\n  } catch (err) {\n    cy.log('Assertion failed:', err.message);\n    cy.task(\"logCatch\", `Assertion Failed: ${err.message}`);\n  }\n});\ncy.wait(2500);\ncy.window({\n  timeout: 25000\n}).should(win => {\n  expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 9').to.equal('9');\n});\ncy.window({\n  timeout: 25000\n}).should(win => {\n  expect(win.game.scene.scenes[1].gameContainer.roulette.list[2].list[2].text, 'Spin count is 8').to.equal('8');\n});",
+              "err": {},
+              "uuid": "da7fa17c-e3d6-4baa-9b7b-455a6addacc5",
+              "parentUUID": "360f16ba-1251-41c4-91fe-b9cdca2b7c0e",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "da7fa17c-e3d6-4baa-9b7b-455a6addacc5"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 33697,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/chrome",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

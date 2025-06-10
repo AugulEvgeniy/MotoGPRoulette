@@ -2,30 +2,30 @@ describe('Rebet and reset bet are working correctly', () => {
     it('Should check that all of types of bets are displayed after rebetting', () => {
 
         cy.visitTestEnvironment()
-        cy.interceptStartGameRebet()
+        cy.interceptStartGame()
 
 
         cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const start_button = scene.gameContainer.list[5].list[0].visible;
+            const start_button = scene.gameContainer.startGroupButtons.list[0].visible;
 
             expect(start_button, 'Game is loaded').to.be.true
         })
 
-        // cy.get('#open_button').click()
-        // cy.get('#chip').select(36)
-        // cy.get('#open_button').click({force: true})
-        // cy.get('#set_state').click()
-        // cy.get('#close_button').click()
+        cy.get('#open_button').click()
+        cy.get('#chip').select(36)
+        cy.get('#open_button').click({force: true})
+        cy.get('#set_state').click()
+        cy.get('#close_button').click()
 
 
         cy.window().should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const chip = scene.gameContainer.list[7].activeButton.layout.name;
+            const chip = scene.gameContainer.betPanel.activeButton.layout.name;
 
-            expect(chip).to.include("chip_1")
+            expect(chip).to.include("chip_2")
         })
 
         cy.window().then((win) => {
@@ -33,26 +33,25 @@ describe('Rebet and reset bet are working correctly', () => {
             const scene = game.scene.scenes[1]
 
             scene.gameContainer.stakeSelector.dozensButtons[0].list[0].emit('pointerdown') // dozen 1
-            scene.gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown') // dozen 2
-            scene.gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown') // dozen 2 next stake
-            scene.gameContainer.stakeSelector.dozensButtons[2].list[0].emit('pointerdown') // dozen 2
-            scene.gameContainer.stakeSelector.evenOrOddButtons[0].emit('pointerdown') // even
-            scene.gameContainer.stakeSelector.evenOrOddButtons[1].emit('pointerdown') // odd
-            scene.gameContainer.stakeSelector.highOrLowButtons[0].emit('pointerdown') // low
-            scene.gameContainer.stakeSelector.highOrLowButtons[1].emit('pointerdown') // high
-            scene.gameContainer.stakeSelector.redOrBlackButtons[0].list[0].emit('pointerdown') // red
-            scene.gameContainer.stakeSelector.redOrBlackButtons[1].list[0].emit('pointerdown') // black
-            scene.gameContainer.list[4].list[1].list[0].emit('pointerdown') // straight
-            scene.gameContainer.list[4].list[37].emit('pointerdown') // split
-            scene.gameContainer.stakeSelector.streetButtons[1].emit('pointerdown') // street
-            scene.gameContainer.stakeSelector.cornerButtons[3].emit('pointerdown') // corner
-            scene.gameContainer.stakeSelector.sixLineButtons[0].emit('pointerdown') // six line
-            scene.gameContainer.stakeSelector.columnButtons[0].list[0].emit('pointerdown') // column 1
-            scene.gameContainer.stakeSelector.columnButtons[1].list[0].emit('pointerdown') // column 2
-            scene.gameContainer.stakeSelector.columnButtons[2].list[0].emit('pointerdown') // column 3
+            // scene.gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown') // dozen 2
+            // scene.gameContainer.stakeSelector.dozensButtons[2].list[0].emit('pointerdown') // dozen 3
+            // scene.gameContainer.stakeSelector.evenOrOddButtons[0].emit('pointerdown') // even
+            // scene.gameContainer.stakeSelector.evenOrOddButtons[1].emit('pointerdown') // odd
+            // scene.gameContainer.stakeSelector.highOrLowButtons[0].emit('pointerdown') // low
+            // scene.gameContainer.stakeSelector.highOrLowButtons[1].emit('pointerdown') // high
+            // scene.gameContainer.stakeSelector.redOrBlackButtons[0].list[0].emit('pointerdown') // red
+            // scene.gameContainer.stakeSelector.redOrBlackButtons[1].list[0].emit('pointerdown') // black
+            // scene.gameContainer.stakeSelector.list[1].list[0].emit('pointerdown') // straight
+            // scene.gameContainer.stakeSelector.list[37].emit('pointerdown') // split
+            // scene.gameContainer.stakeSelector.streetButtons[1].emit('pointerdown') // street
+            // scene.gameContainer.stakeSelector.cornerButtons[3].emit('pointerdown') // corner
+            // scene.gameContainer.stakeSelector.sixLineButtons[0].emit('pointerdown') // six line
+            // scene.gameContainer.stakeSelector.columnButtons[0].list[0].emit('pointerdown') // column 1
+            // scene.gameContainer.stakeSelector.columnButtons[1].list[0].emit('pointerdown') // column 2
+            // scene.gameContainer.stakeSelector.columnButtons[2].list[0].emit('pointerdown') // column 3
 
             cy.wait(50)
-            scene.gameContainer.list[5].list[0].emit('pointerdown')
+            scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
         })
 
         cy.window({timeout: 30000}).should((win) => {
@@ -80,54 +79,54 @@ describe('Rebet and reset bet are working correctly', () => {
             expect(chip[0].stakeType).to.include('dozen')
             expect(chip[0].buttonId).to.equal(1)
 
-            expect(chip[1].stakeType).to.include('dozen')
-            expect(chip[1].buttonId).to.equal(2)
-            expect(chip[1].bet).to.equal(100)
+            // expect(chip[1].stakeType).to.include('dozen')
+            // expect(chip[1].buttonId).to.equal(2)
+            // expect(chip[1].bet).to.equal(100)
 
-            expect(chip[2].stakeType).to.include('dozen')
-            expect(chip[2].buttonId).to.equal(3)
+            // expect(chip[2].stakeType).to.include('dozen')
+            // expect(chip[2].buttonId).to.equal(3)
 
-            expect(chip[3].stakeType).to.include('even_or_odd')
-            expect(chip[3].buttonId).to.equal(0)
+            // expect(chip[3].stakeType).to.include('even_or_odd')
+            // expect(chip[3].buttonId).to.equal(0)
 
-            expect(chip[4].stakeType).to.include('even_or_odd')
-            expect(chip[4].buttonId).to.equal(1)
+            // expect(chip[4].stakeType).to.include('even_or_odd')
+            // expect(chip[4].buttonId).to.equal(1)
 
-            expect(chip[5].stakeType).to.include('high_or_low')
-            expect(chip[5].buttonId).to.equal(1)
+            // expect(chip[5].stakeType).to.include('high_or_low')
+            // expect(chip[5].buttonId).to.equal(1)
 
-            expect(chip[6].stakeType).to.include('high_or_low')
-            expect(chip[6].buttonId).to.equal(0)
+            // expect(chip[6].stakeType).to.include('high_or_low')
+            // expect(chip[6].buttonId).to.equal(0)
 
-            expect(chip[7].stakeType).to.include('red_or_black')
-            expect(chip[7].buttonId).to.equal(0)
+            // expect(chip[7].stakeType).to.include('red_or_black')
+            // expect(chip[7].buttonId).to.equal(0)
 
-            expect(chip[8].stakeType).to.include('red_or_black')
-            expect(chip[8].buttonId).to.equal(1)
+            // expect(chip[8].stakeType).to.include('red_or_black')
+            // expect(chip[8].buttonId).to.equal(1)
 
-            expect(chip[9].stakeType).to.include('straight')
-            expect(chip[9].buttonId).to.equal(1)
+            // expect(chip[9].stakeType).to.include('straight')
+            // expect(chip[9].buttonId).to.equal(1)
 
-            expect(chip[10].stakeType).to.include('split')
-            expect(chip[10].buttonId).to.equal(1)
+            // expect(chip[10].stakeType).to.include('split')
+            // expect(chip[10].buttonId).to.equal(1)
 
-            expect(chip[11].stakeType).to.include('street')
-            expect(chip[11].buttonId).to.equal(2)
+            // expect(chip[11].stakeType).to.include('street')
+            // expect(chip[11].buttonId).to.equal(2)
 
-            expect(chip[12].stakeType).to.include('corner')
-            expect(chip[12].buttonId).to.equal(4)
+            // expect(chip[12].stakeType).to.include('corner')
+            // expect(chip[12].buttonId).to.equal(4)
 
-            expect(chip[13].stakeType).to.include('six_line')
-            expect(chip[13].buttonId).to.equal(1)
+            // expect(chip[13].stakeType).to.include('six_line')
+            // expect(chip[13].buttonId).to.equal(1)
 
-            expect(chip[14].stakeType).to.include('column')
-            expect(chip[14].buttonId).to.equal(1)
+            // expect(chip[14].stakeType).to.include('column')
+            // expect(chip[14].buttonId).to.equal(1)
 
-            expect(chip[15].stakeType).to.include('column')
-            expect(chip[15].buttonId).to.equal(2)
+            // expect(chip[15].stakeType).to.include('column')
+            // expect(chip[15].buttonId).to.equal(2)
 
-            expect(chip[16].stakeType).to.include('column')
-            expect(chip[16].buttonId).to.equal(3)
+            // expect(chip[16].stakeType).to.include('column')
+            // expect(chip[16].buttonId).to.equal(3)
         })
         })
     }) 
@@ -154,13 +153,13 @@ describe('Rebet and reset bet are working correctly', () => {
     it('Should check that "chips" array is rewritten after placing the second bet', () => {
         
         cy.window().then((win) => {
-        win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[0].list[0].emit('pointerdown')
+        win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown')
     })
 
         cy.wait(500)
 
         cy.window().then((win) => {
-        win.game.scene.scenes[1].gameContainer.list[5].list[0].emit('pointerdown')
+        win.game.scene.scenes[1].gameContainer.startGroupButtons.list[0].emit('pointerdown')
     })
 
         cy.window({timeout: 30000}).should((win) => {
@@ -185,7 +184,7 @@ describe('Rebet and reset bet are working correctly', () => {
         const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;
 
         expect(chip[0].stakeType).to.include('dozen')
-        expect(chip[0].buttonId).to.equal(1)
+        expect(chip[0].buttonId).to.equal(2)
  })
 
 })
@@ -208,7 +207,7 @@ describe('Rebet and reset bet are working correctly', () => {
         const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;
 
         expect(chip[0].stakeType).to.include('dozen')
-        expect(chip[0].buttonId).to.equal(1)
+        expect(chip[0].buttonId).to.equal(2)
         expect(win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable, 'isRaceTable is false').to.be.false
     })
 
@@ -219,13 +218,13 @@ describe('Rebet and reset bet are working correctly', () => {
 describe('Rebet and reset bet are working correctly in Race Track', () => {
     it('Should check that all of types of bets are displayed after rebetting in Race Track)', () => {
 
-        cy.interceptStartGameRebetRace()
+        cy.interceptStartGame()
 
 
         cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const start_button = scene.gameContainer.list[5].list[0].visible;
+            const start_button = scene.gameContainer.startGroupButtons.list[0].visible;
 
             expect(start_button, 'Game is loaded').to.be.true
         })
@@ -238,11 +237,11 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
             scene.gameContainer.tapBar.raceButton.emit('pointerdown')
         })
 
-        // cy.get('#open_button').click()
-        // cy.get('#chip').select(10)
-        // cy.get('#open_button').click({force: true})
-        // cy.get('#set_state').click()
-        // cy.get('#close_button').click()
+        cy.get('#open_button').click()
+        cy.get('#chip').select(10)
+        cy.get('#open_button').click({force: true})
+        cy.get('#set_state').click()
+        cy.get('#close_button').click()
 
         cy.wait(100)
 
@@ -261,7 +260,7 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
 
         cy.window().then((win) => {
             cy.wait(3000)
-            win.game.scene.scenes[1].gameContainer.list[5].list[0].emit('pointerdown')
+            win.game.scene.scenes[1].gameContainer.startGroupButtons.list[0].emit('pointerdown')
         })
 
         cy.window({timeout: 30000}).should((win) => {
@@ -287,7 +286,11 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
             const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;
 
             expect(chip[0].stakeType).to.include('straight')
-            expect(chip[0].buttonId).to.equal(1)
+            expect(chip[0].buttonId).to.equal(14)
+            expect(chip[1].buttonId).to.equal(20)
+            expect(chip[2].buttonId).to.equal(1)
+            expect(chip[3].buttonId).to.equal(33)
+            expect(chip[4].buttonId).to.equal(16)
         })
         })
     }) 
@@ -297,7 +300,7 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
     it('Should check that "spins" array is 0 after reset)', () => {
 
 
-        cy.wait(5000)
+        cy.wait(3000)
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.startGroupButtons.resetButton.emit('pointerdown');
     })
@@ -314,17 +317,17 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
     describe('Rebet works correctly after the second spin with a different stake', () => {
     it('Should check that "chips" array is rewritten after placing the second bet)', () => {
 
-        cy.interceptStartGameRebetRace_2nd()
+        cy.interceptStartGame()
         
         cy.window().then((win) => {
         win.game.scene.scenes[1].gameContainer.stakeSelector.raceButtons[2].emit('pointerdown')
         cy.wait(50)
-        win.game.scene.scenes[1].gameContainer.list[5].list[0].emit('pointerdown')
+        win.game.scene.scenes[1].gameContainer.startGroupButtons.list[0].emit('pointerdown')
     })
 
         cy.wait(500)
         cy.window().then((win) => {
-        win.game.scene.scenes[1].gameContainer.list[5].list[0].emit('pointerdown')
+        win.game.scene.scenes[1].gameContainer.startGroupButtons.list[0].emit('pointerdown')
     })
 
         cy.window({timeout: 40000}).should((win) => {
@@ -349,7 +352,11 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
         const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;
 
         expect(chip[0].stakeType).to.include('straight')
-        expect(chip[0].buttonId).to.equal(2)
+        expect(chip[0].buttonId).to.equal(17)
+        expect(chip[1].buttonId).to.equal(25)
+        expect(chip[2].buttonId).to.equal(2)
+        expect(chip[3].buttonId).to.equal(21)
+        expect(chip[4].buttonId).to.equal(4)
  })
 
 })

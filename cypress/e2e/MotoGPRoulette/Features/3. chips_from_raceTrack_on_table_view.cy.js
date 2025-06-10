@@ -2,11 +2,10 @@ describe('Chips from Race Track view are displayed in Table View when entering i
     it('Should check that 20 bet in Race Track is 33, 1, 20, 14, 31 in Table View)', () => {
 
         cy.visitTestEnvironment()
-        cy.intercept('start-game').as('startGame')
 
 
         cy.window({ timeout: 50000 }).should((win) => {
-            const start_button = win.game.scene.scenes[1].gameContainer.list[5].list[0].visible;
+            const start_button = win.game.scene.scenes[1].gameContainer.startGroupButtons.list[0].visible;
 
             expect(start_button, 'Game is loaded').to.be.true
         })

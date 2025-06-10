@@ -2,47 +2,49 @@
     "state": "COMPLETE",
     "gameResult": {
         "gameInstanceId": 999,
-        "stakePence": 50,
+        "stakePence": 100,
+        "isWin": false,
         "totalWinPence": 0,
-        "decimalOdds": 0.0
+        "decimalOdds": 0.0,
+        "integrationResultData": {
+            "bonusList": [],
+            "bonusWin": 0,
+            "bonusStake": 0,
+            "stakes": [
+                {
+                    "type": "dozen",
+                    "cells": [
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        22,
+                        23,
+                        24
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 100
+                }
+            ],
+            "winNumber": 5
+        }
     },
-    "wagerNumber": 1049804,
-    "integrationResultData": {
-        "bonusList": [],
-        "bonusWin": 0,
-        "bonusStake": 0,
-        "stakes": [
-            {
-                "type": "dozen",
-                "cells": [
-                    13,
-                    14,
-                    15,
-                    16,
-                    17,
-                    18,
-                    19,
-                    20,
-                    21,
-                    22,
-                    23,
-                    24
-                ],
-                "buttonId": 2,
-                "amountsPence": 50
-            }
-        ],
-        "winNumber": 5
-    },
+    "wagerNumber": 1097921,
+    "startTime": "0001-01-01T00:00:00",
     "operationResult": 0,
     "upstream": {
-        "txId": "1049804",
-        "processedTxId": "TVaosns0_X",
-        "createdAt": "2025-05-23T09:19:20Z",
+        "txId": "1097921",
+        "processedTxId": "2m6svGMql0",
+        "createdAt": "2025-06-09T08:11:31Z",
         "balance": 1000,
         "alreadyProcessed": false,
         "status": 0,
         "errDesc": null
     },
-    "referenceGuid": "1b0b3692-3ea0-465a-8a7f-8688decd17c7"
+    "referenceGuid": "5b76d479-2ff3-4891-988d-720171c3cf7f"
 }

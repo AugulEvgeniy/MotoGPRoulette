@@ -4,7 +4,7 @@ describe('Fullscreen button', () => {
         cy.visitTestEnvironment()
 
         cy.window({ timeout: 50000 }).should((win) => {
-            const start_button = win.game.scene.scenes[1].gameContainer.list[5].list[0].visible;
+            const start_button = win.game.scene.scenes[1].gameContainer.startGroupButtons.list[0].visible;
 
             expect(start_button, 'Game is loaded').to.be.true
         })
@@ -18,8 +18,8 @@ describe('Fullscreen button', () => {
         });
     });
         cy.window().then((win) => {
-            win.game.scene.scenes[1].gameContainer.topPanel.menuSettingsButton.list[0].emit('pointerdown');
-            win.game.scene.scenes[1].gameContainer.settingsMenu.list[5].emit('pointerdown');
+            win.game.scene.scenes[1].gameContainer.topPanel.menuSettingsButton.emit('pointerdown');
+            win.game.scene.scenes[1].gameContainer.settingsMenu.list[4].emit('pointerdown');
         })
 
         cy.window({ timeout: 25000 }).should((win) => {
@@ -28,7 +28,7 @@ describe('Fullscreen button', () => {
 
         cy.wait(700)
         cy.window().then((win) => {
-            win.game.scene.scenes[1].gameContainer.settingsMenu.list[5].emit('pointerdown');
+            win.game.scene.scenes[1].gameContainer.settingsMenu.list[4].emit('pointerdown');
         })
 
         cy.window({ timeout: 25000 }).should((win) => {

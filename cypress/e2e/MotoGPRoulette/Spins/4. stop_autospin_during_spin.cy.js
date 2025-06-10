@@ -6,14 +6,14 @@ describe('Autospin is played without issues', () => {
 
 
         cy.window({ timeout: 50000 }).should((win) => {
-            const start_button = win.game.scene.scenes[1].gameContainer.list[5].list[0].visible;
+            const start_button = win.game.scene.scenes[1].gameContainer.startGroupButtons.list[0].visible;
             expect(start_button, 'Game is loaded').to.be.true
         })
 
 
         cy.window().should((win) => {
-            const chip = win.game.scene.scenes[1].gameContainer.list[7].activeButton.layout.name;
-            expect(chip).to.include("chip_1")
+            const chip = win.game.scene.scenes[1].gameContainer.betPanel.activeButton.layout.name;
+            expect(chip).to.include("chip_2")
         })
 
         cy.window().then((win) => {
@@ -29,7 +29,7 @@ describe('Autospin is played without issues', () => {
         })
 
         cy.window().then((win) => {
-            win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[7].list[0].emit('pointerdown')
+            win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.startSpinsButton.list[0].emit('pointerdown')
         })
 
         // 10

@@ -16,13 +16,13 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            scene.gameContainer.list[7].list[1].list[0].emit('pointerdown')
+            scene.gameContainer.betPanel.list[1].list[0].emit('pointerdown')
         })
 
         cy.window().should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const chip = scene.gameContainer.list[7].activeButton.layout.name;
+            const chip = scene.gameContainer.betPanel.activeButton.layout.name;
 
             expect(chip).to.include("chip_0")
         })
@@ -58,13 +58,13 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             cy.log('Assertion failed:', err.message);
         }            
 
-            scene.gameContainer.list[7].list[2].list[0].emit('pointerdown')
+            scene.gameContainer.betPanel.list[2].list[0].emit('pointerdown')
         })
 
         cy.window().should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const chip = scene.gameContainer.list[7].activeButton.layout.name;
+            const chip = scene.gameContainer.betPanel.activeButton.layout.name;
 
             expect(chip).to.include("chip_1")
         })
@@ -100,13 +100,13 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             cy.log('Assertion failed:', err.message);
         }          
             
-            scene.gameContainer.list[7].list[3].list[0].emit('pointerdown')
+            scene.gameContainer.betPanel.list[3].list[0].emit('pointerdown')
         })
 
         cy.window().should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const chip = scene.gameContainer.list[7].activeButton.layout.name;
+            const chip = scene.gameContainer.betPanel.activeButton.layout.name;
 
             expect(chip).to.include("chip_2")
         })
@@ -142,13 +142,13 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             cy.log('Assertion failed:', err.message);
         }
 
-            scene.gameContainer.list[7].list[4].list[0].emit('pointerdown')
+            scene.gameContainer.betPanel.list[4].list[0].emit('pointerdown')
         })
 
         cy.window().should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const chip = scene.gameContainer.list[7].activeButton.layout.name;
+            const chip = scene.gameContainer.betPanel.activeButton.layout.name;
 
             expect(chip).to.include("chip_3")
         })
@@ -184,13 +184,13 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             cy.log('Assertion failed:', err.message);
         }
 
-            scene.gameContainer.list[7].list[5].list[0].emit('pointerdown')
+            scene.gameContainer.betPanel.list[5].list[0].emit('pointerdown')
         })
 
         cy.window().should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const chip = scene.gameContainer.list[7].activeButton.layout.name;
+            const chip = scene.gameContainer.betPanel.activeButton.layout.name;
 
             expect(chip).to.include("chip_4")
         })
@@ -215,7 +215,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             scene.gameContainer.stakeSelector.streetZeroButtons[1].emit('pointerdown')
 
             cy.wait(300)
-            scene.gameContainer.list[5].list[0].emit('pointerdown')
+            scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
         })
 
 
@@ -231,13 +231,19 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
         // This assertion checks total bet value
 
-            scene.gameContainer.list[7].list[3].list[0].emit('pointerdown')
+            scene.gameContainer.betPanel.list[3].list[0].emit('pointerdown')
         })
 
 
         cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
         cy.log('startGame response:', body.game);
         
+        cy.window().should((body) => {
+            expect(body).to.have.property('gameResult')
+            expect(body).to.have.property('integrationResultData')
+            expect(body).to.have.property('upstream')
+        })
+
         if  (body.state == "INVALID") {
         throw new Error(
         `API returned INVALID state. Full response: ${JSON.stringify(body)}`

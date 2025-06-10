@@ -1,11 +1,13 @@
 name: Cypress Tests (Chrome Only)
 
 on: 
-  push:
-  workflow_dispatch:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches: [main, master]
 
 jobs:
   cypress-run:
+    if: contains(github.event.pull_request.title, 'test')
     runs-on: ubuntu-24.04
     env:
       NODE_VERSION: 22
@@ -15,24 +17,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Get commit message
-        id: commit_message
-        run: echo "message=$(git log -1 --pretty=%B | head -n 1)" >> $GITHUB_OUTPUT
-
-      - name: Determine test folder
+      - name: Determine test folder from PR title
         id: test_folder
         run: |
-          if [[ "${{ steps.commit_message.outputs.message }}" == *"Burger"* ]]; then
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          echo "PR Title: $PR_TITLE"
+    
+          TITLE_LOWER=$(echo "$PR_TITLE" | tr '[:upper:]' '[:lower:]')
+    
+          if [[ "$TITLE_LOWER" == *"burger"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Burger_Menu" >> $GITHUB_OUTPUT
-          elif [[ "${{ steps.commit_message.outputs.message }}" == *"Features"* ]]; then
+          elif [[ "$TITLE_LOWER" == *"features"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Features" >> $GITHUB_OUTPUT
-          elif [[ "${{ steps.commit_message.outputs.message }}" == *"Spins"* ]]; then
+          elif [[ "$TITLE_LOWER" == *"spins"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Spins" >> $GITHUB_OUTPUT
-          elif [[ "${{ steps.commit_message.outputs.message }}" == *"Stakes"* ]]; then
+          elif [[ "$TITLE_LOWER" == *"stakes"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Stakes" >> $GITHUB_OUTPUT
+          elif [[ "$TITLE_LOWER" == *"test"* ]]; then
+            echo "folder=cypress/e2e/MotoGPRoulette/Test" >> $GITHUB_OUTPUT
           else
             echo "folder=cypress/e2e" >> $GITHUB_OUTPUT
           fi
+          echo "Selected folder: ${{ steps.test_folder.outputs.folder }}"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -55,7 +61,6 @@ jobs:
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
 
-      # Removed global installation - using local packages instead
       - name: Verify mochawesome packages
         run: npm list mochawesome mochawesome-merge mochawesome-report-generator
 
@@ -80,7 +85,6 @@ jobs:
             --reporter-options "reportDir=cypress/reports/chrome,overwrite=false,html=false,json=true" \
             --config video=true
 
-      # Updated report generation steps using npx
       - name: Merge Mochawesome reports
         if: always()
         run: |

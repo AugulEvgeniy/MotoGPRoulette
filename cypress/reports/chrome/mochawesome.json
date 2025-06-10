@@ -1,0 +1,351 @@
+{
+  "stats": {
+    "suites": 7,
+    "tests": 7,
+    "passes": 4,
+    "pending": 0,
+    "failures": 3,
+    "start": "2025-06-02T07:08:09.078Z",
+    "end": "2025-06-02T07:10:47.840Z",
+    "duration": 158762,
+    "testsRegistered": 7,
+    "passPercent": 57.14285714285714,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "5eaf2353-3614-4605-9e73-ed434881de53",
+      "title": "",
+      "fullFile": "cypress\\e2e\\MotoGPRoulette\\Features\\1. rebet_and_reset_std_and_raceTrack.cy.js",
+      "file": "cypress\\e2e\\MotoGPRoulette\\Features\\1. rebet_and_reset_std_and_raceTrack.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6793f339-7e52-44d1-8f32-8727d37c0666",
+          "title": "Rebet and reset bet are working correctly",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should check that all of types of bets are displayed after rebetting",
+              "fullTitle": "Rebet and reset bet are working correctly Should check that all of types of bets are displayed after rebetting",
+              "timedOut": null,
+              "duration": 22140,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.visitTestEnvironment();\ncy.interceptStartGameRebet();\ncy.window({\n  timeout: 50000\n}).should(win => {\n  const game = win.game;\n  const scene = game.scene.scenes[1];\n  const start_button = scene.gameContainer.list[5].list[0].visible;\n  expect(start_button, 'Game is loaded').to.be.true;\n});\n// cy.get('#open_button').click()\n// cy.get('#chip').select(36)\n// cy.get('#open_button').click({force: true})\n// cy.get('#set_state').click()\n// cy.get('#close_button').click()\ncy.window().should(win => {\n  const game = win.game;\n  const scene = game.scene.scenes[1];\n  const chip = scene.gameContainer.list[7].activeButton.layout.name;\n  expect(chip).to.include(\"chip_1\");\n});\ncy.window().then(win => {\n  const game = win.game;\n  const scene = game.scene.scenes[1];\n  scene.gameContainer.stakeSelector.dozensButtons[0].list[0].emit('pointerdown'); // dozen 1\n  scene.gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown'); // dozen 2\n  scene.gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown'); // dozen 2 next stake\n  scene.gameContainer.stakeSelector.dozensButtons[2].list[0].emit('pointerdown'); // dozen 2\n  scene.gameContainer.stakeSelector.evenOrOddButtons[0].emit('pointerdown'); // even\n  scene.gameContainer.stakeSelector.evenOrOddButtons[1].emit('pointerdown'); // odd\n  scene.gameContainer.stakeSelector.highOrLowButtons[0].emit('pointerdown'); // low\n  scene.gameContainer.stakeSelector.highOrLowButtons[1].emit('pointerdown'); // high\n  scene.gameContainer.stakeSelector.redOrBlackButtons[0].list[0].emit('pointerdown'); // red\n  scene.gameContainer.stakeSelector.redOrBlackButtons[1].list[0].emit('pointerdown'); // black\n  scene.gameContainer.list[4].list[1].list[0].emit('pointerdown'); // straight\n  scene.gameContainer.list[4].list[37].emit('pointerdown'); // split\n  scene.gameContainer.stakeSelector.streetButtons[1].emit('pointerdown'); // street\n  scene.gameContainer.stakeSelector.cornerButtons[3].emit('pointerdown'); // corner\n  scene.gameContainer.stakeSelector.sixLineButtons[0].emit('pointerdown'); // six line\n  scene.gameContainer.stakeSelector.columnButtons[0].list[0].emit('pointerdown'); // column 1\n  scene.gameContainer.stakeSelector.columnButtons[1].list[0].emit('pointerdown'); // column 2\n  scene.gameContainer.stakeSelector.columnButtons[2].list[0].emit('pointerdown'); // column 3\n  cy.wait(50);\n  scene.gameContainer.list[5].list[0].emit('pointerdown');\n});\ncy.window({\n  timeout: 30000\n}).should(win => {\n  const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;\n  const no_win_banner = win.game.scene.scenes[1].gameContainer.noWinBanner.visible;\n  expect(win_banner || no_win_banner).to.be.true;\n  expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(100000);\n});\ncy.window().should(win => {\n  const rebet = win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.list[2].visible;\n  expect(rebet).to.be.true;\n});\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.emit('pointerdown');\n});\ncy.window({\n  timeout: 10000\n}).should(win => {\n  const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;\n  expect(chip[0].stakeType).to.include('dozen');\n  expect(chip[0].buttonId).to.equal(1);\n  expect(chip[1].stakeType).to.include('dozen');\n  expect(chip[1].buttonId).to.equal(2);\n  expect(chip[1].bet).to.equal(100);\n  expect(chip[2].stakeType).to.include('dozen');\n  expect(chip[2].buttonId).to.equal(3);\n  expect(chip[3].stakeType).to.include('even_or_odd');\n  expect(chip[3].buttonId).to.equal(0);\n  expect(chip[4].stakeType).to.include('even_or_odd');\n  expect(chip[4].buttonId).to.equal(1);\n  expect(chip[5].stakeType).to.include('high_or_low');\n  expect(chip[5].buttonId).to.equal(1);\n  expect(chip[6].stakeType).to.include('high_or_low');\n  expect(chip[6].buttonId).to.equal(0);\n  expect(chip[7].stakeType).to.include('red_or_black');\n  expect(chip[7].buttonId).to.equal(0);\n  expect(chip[8].stakeType).to.include('red_or_black');\n  expect(chip[8].buttonId).to.equal(1);\n  expect(chip[9].stakeType).to.include('straight');\n  expect(chip[9].buttonId).to.equal(1);\n  expect(chip[10].stakeType).to.include('split');\n  expect(chip[10].buttonId).to.equal(1);\n  expect(chip[11].stakeType).to.include('street');\n  expect(chip[11].buttonId).to.equal(2);\n  expect(chip[12].stakeType).to.include('corner');\n  expect(chip[12].buttonId).to.equal(4);\n  expect(chip[13].stakeType).to.include('six_line');\n  expect(chip[13].buttonId).to.equal(1);\n  expect(chip[14].stakeType).to.include('column');\n  expect(chip[14].buttonId).to.equal(1);\n  expect(chip[15].stakeType).to.include('column');\n  expect(chip[15].buttonId).to.equal(2);\n  expect(chip[16].stakeType).to.include('column');\n  expect(chip[16].buttonId).to.equal(3);\n});",
+              "err": {},
+              "uuid": "2ae278ce-e069-4d61-b1ac-925a43696d7b",
+              "parentUUID": "6793f339-7e52-44d1-8f32-8727d37c0666",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2ae278ce-e069-4d61-b1ac-925a43696d7b"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 22140,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "d463165a-70ab-4356-b4bf-aa0e18041ef4",
+          "title": "Reset bet is working correctly",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should check that \"spins\" array is 0 after reset",
+              "fullTitle": "Reset bet is working correctly Should check that \"spins\" array is 0 after reset",
+              "timedOut": null,
+              "duration": 2537,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.wait(2000);\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.startGroupButtons.resetButton.emit('pointerdown');\n});\ncy.wait(500);\ncy.window({\n  timeout: 10000\n}).should(win => {\n  expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips).have.length(0);\n});",
+              "err": {},
+              "uuid": "ff9aac94-494c-43ca-a9e7-183e1c224226",
+              "parentUUID": "d463165a-70ab-4356-b4bf-aa0e18041ef4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ff9aac94-494c-43ca-a9e7-183e1c224226"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2537,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "18534db9-0747-4259-aecc-a5392ed10432",
+          "title": "Rebet works correctly after the second spin with a different stake",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should check that \"chips\" array is rewritten after placing the second bet",
+              "fullTitle": "Rebet works correctly after the second spin with a different stake Should check that \"chips\" array is rewritten after placing the second bet",
+              "timedOut": null,
+              "duration": 15010,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[0].list[0].emit('pointerdown');\n});\ncy.wait(500);\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.list[5].list[0].emit('pointerdown');\n});\ncy.window({\n  timeout: 30000\n}).should(win => {\n  const no_win_banner = win.game.scene.scenes[1].gameContainer.noWinBanner.visible;\n  const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;\n  expect(no_win_banner || win_banner, 'result banner is displayed').to.be.true;\n  expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(100000);\n});\ncy.wait(3300);\ncy.window().should(win => {\n  const rebet = win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.list[2].visible;\n  expect(rebet, 'rebet button is visible').to.be.true;\n});\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.emit('pointerdown');\n});\ncy.window({\n  timeout: 25000\n}).should(win => {\n  const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;\n  expect(chip[0].stakeType).to.include('dozen');\n  expect(chip[0].buttonId).to.equal(1);\n});",
+              "err": {},
+              "uuid": "40caf1a7-8556-42f6-a42c-84552de6dd47",
+              "parentUUID": "18534db9-0747-4259-aecc-a5392ed10432",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "40caf1a7-8556-42f6-a42c-84552de6dd47"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 15010,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "0f10fabf-c51e-4823-bcc5-4ef807c2c8d1",
+          "title": "Rebetting on Race Track View switches the table view to standart",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "\"isRaceTrack\" should be false",
+              "fullTitle": "Rebetting on Race Track View switches the table view to standart \"isRaceTrack\" should be false",
+              "timedOut": null,
+              "duration": 2028,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.wait(200);\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.tapBar.raceButton.emit('pointerdown');\n});\ncy.wait(1200);\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.emit('pointerdown');\n});\ncy.wait(500);\ncy.window({\n  timeout: 15000\n}).should(win => {\n  const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;\n  expect(chip[0].stakeType).to.include('dozen');\n  expect(chip[0].buttonId).to.equal(1);\n  expect(win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable, 'isRaceTable is false').to.be.false;\n});",
+              "err": {},
+              "uuid": "cabb1f34-c975-4ab7-8a50-a41c8a4a67de",
+              "parentUUID": "0f10fabf-c51e-4823-bcc5-4ef807c2c8d1",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "cabb1f34-c975-4ab7-8a50-a41c8a4a67de"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2028,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "4822d856-c5ec-47a1-933b-fde71a4d4fd8",
+          "title": "Rebet and reset bet are working correctly in Race Track",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should check that all of types of bets are displayed after rebetting in Race Track)",
+              "fullTitle": "Rebet and reset bet are working correctly in Race Track Should check that all of types of bets are displayed after rebetting in Race Track)",
+              "timedOut": null,
+              "duration": 43921,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.interceptStartGameRebetRace();\ncy.window({\n  timeout: 50000\n}).should(win => {\n  const game = win.game;\n  const scene = game.scene.scenes[1];\n  const start_button = scene.gameContainer.list[5].list[0].visible;\n  expect(start_button, 'Game is loaded').to.be.true;\n});\ncy.wait(500);\ncy.window().then(win => {\n  const game = win.game;\n  const scene = game.scene.scenes[1];\n  scene.gameContainer.tapBar.raceButton.emit('pointerdown');\n});\n// cy.get('#open_button').click()\n// cy.get('#chip').select(10)\n// cy.get('#open_button').click({force: true})\n// cy.get('#set_state').click()\n// cy.get('#close_button').click()\ncy.wait(100);\ncy.window({\n  timeout: 25000\n}).should(win => {\n  const game = win.game;\n  const scene = game.scene.scenes[1];\n  const race_track = scene.gameContainer.stakeSelector.isRaceTable;\n  expect(race_track, \"Switched to Race Track\").to.be.true;\n});\ncy.wait(1000);\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.stakeSelector.raceButtons[1].emit('pointerdown');\n});\ncy.window().then(win => {\n  cy.wait(3000);\n  win.game.scene.scenes[1].gameContainer.list[5].list[0].emit('pointerdown');\n});\ncy.window({\n  timeout: 30000\n}).should(win => {\n  const noWin_banner = win.game.scene.scenes[1].gameContainer.noWinBanner.visible;\n  const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;\n  expect(noWin_banner || win_banner, \"banner is displayed\").to.be.true;\n  expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(1000);\n});\ncy.wait(3000);\ncy.window({\n  timeout: 25000\n}).should(win => {\n  const rebet = win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.list[2].visible;\n  expect(rebet, 'rebet button is visible').to.be.true;\n});\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.emit('pointerdown');\n});\ncy.window({\n  timeout: 25000\n}).should(win => {\n  const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;\n  expect(chip[0].stakeType).to.include('straight');\n  expect(chip[0].buttonId).to.equal(1);\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 25000ms: expected 14 to equal 1",
+                "estack": "AssertionError: Timed out retrying after 25000ms: expected 14 to equal 1\n    at Context.eval (webpack://test/./cypress/e2e/MotoGPRoulette/Features/1. rebet_and_reset_std_and_raceTrack.cy.js:290:40)\n    at <unknown> (http://highlight.spinberry.com/__cypress/runner/cypress_runner.js:119043:17)\n    at tryCatcher (http://highlight.spinberry.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise.attempt.Promise.try (http://highlight.spinberry.com/__cypress/runner/cypress_runner.js:4285:29)\n    at Context.shouldFnWithCallback (http://highlight.spinberry.com/__cypress/runner/cypress_runner.js:119040:66)\n    at Context.shouldFn (http://highlight.spinberry.com/__cypress/runner/cypress_runner.js:119083:37)",
+                "diff": "- 14\n+ 1\n"
+              },
+              "uuid": "e48e92bf-5320-4616-a299-18d9b1c94c64",
+              "parentUUID": "4822d856-c5ec-47a1-933b-fde71a4d4fd8",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "e48e92bf-5320-4616-a299-18d9b1c94c64"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 43921,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "6033e8d2-2167-489d-988e-d37004a051f1",
+          "title": "Reset bet is working correctly",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should check that \"spins\" array is 0 after reset)",
+              "fullTitle": "Reset bet is working correctly Should check that \"spins\" array is 0 after reset)",
+              "timedOut": null,
+              "duration": 29872,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.wait(5000);\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.startGroupButtons.resetButton.emit('pointerdown');\n});\ncy.wait(2000);\ncy.window({\n  timeout: 15000\n}).should(win => {\n  expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips).have.length(0);\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 15000ms: expected [ Array(5) ] to have a length of 0 but got 5",
+                "estack": "AssertionError: Timed out retrying after 15000ms: expected [ Array(5) ] to have a length of 0 but got 5\n    at Context.eval (webpack://test/./cypress/e2e/MotoGPRoulette/Features/1. rebet_and_reset_std_and_raceTrack.cy.js:307:84)\n    at <unknown> (http://highlight.spinberry.com/__cypress/runner/cypress_runner.js:119043:17)\n    at tryCatcher (http://highlight.spinberry.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise.attempt.Promise.try (http://highlight.spinberry.com/__cypress/runner/cypress_runner.js:4285:29)",
+                "diff": null
+              },
+              "uuid": "a1db69e9-a12c-40f1-913e-301103e72c69",
+              "parentUUID": "6033e8d2-2167-489d-988e-d37004a051f1",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "a1db69e9-a12c-40f1-913e-301103e72c69"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 29872,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "f385fa3d-a2fa-4b85-89d6-7c370450f489",
+          "title": "Rebet works correctly after the second spin with a different stake",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should check that \"chips\" array is rewritten after placing the second bet)",
+              "fullTitle": "Rebet works correctly after the second spin with a different stake Should check that \"chips\" array is rewritten after placing the second bet)",
+              "timedOut": null,
+              "duration": 40977,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.interceptStartGameRebetRace_2nd();\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.stakeSelector.raceButtons[2].emit('pointerdown');\n  cy.wait(50);\n  win.game.scene.scenes[1].gameContainer.list[5].list[0].emit('pointerdown');\n});\ncy.wait(500);\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.list[5].list[0].emit('pointerdown');\n});\ncy.window({\n  timeout: 40000\n}).should(win => {\n  const no_win_banner = win.game.scene.scenes[1].gameContainer.noWinBanner.visible;\n  const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;\n  expect(no_win_banner || win_banner, 'banner is displayed').to.be.true;\n  expect(win.game.scene.scenes[1].gameContainer.topPanel.balance).to.not.equal(1000);\n});\ncy.wait(3000);\ncy.window({\n  timeout: 15000\n}).should(win => {\n  const rebet = win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.list[2].visible;\n  expect(rebet).to.be.true;\n});\ncy.window().then(win => {\n  win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.emit('pointerdown');\n});\ncy.window({\n  timeout: 25000\n}).should(win => {\n  const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;\n  expect(chip[0].stakeType).to.include('straight');\n  expect(chip[0].buttonId).to.equal(2);\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 40000ms: banner is displayed: expected false to be true",
+                "estack": "AssertionError: Timed out retrying after 40000ms: banner is displayed: expected false to be true\n    at Context.eval (webpack://test/./cypress/e2e/MotoGPRoulette/Features/1. rebet_and_reset_std_and_raceTrack.cy.js:334:73)\n    at <unknown> (http://highlight.spinberry.com/__cypress/runner/cypress_runner.js:119043:17)\n    at tryCatcher (http://highlight.spinberry.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise.attempt.Promise.try (http://highlight.spinberry.com/__cypress/runner/cypress_runner.js:4285:29)\n    at Context.shouldFnWithCallback (http://highlight.spinberry.com/__cypress/runner/cypress_runner.js:119040:66)",
+                "diff": null
+              },
+              "uuid": "32ec8f3a-4924-4154-b770-9ba846831c20",
+              "parentUUID": "f385fa3d-a2fa-4b85-89d6-7c370450f489",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "32ec8f3a-4924-4154-b770-9ba846831c20"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 40977,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/chrome",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

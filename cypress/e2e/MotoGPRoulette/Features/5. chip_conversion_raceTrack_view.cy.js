@@ -1,14 +1,12 @@
 describe('0.10 chip conversion', () => {
     it('Should check that five 0.10 chips convert to 0.50)', () => {
-
+       
         cy.visitTestEnvironment()
-        cy.intercept('start-game').as('startGame')
-
 
         cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const start_button = scene.gameContainer.list[5].list[0].visible;
+            const start_button = scene.gameContainer.startGroupButtons.list[0].visible;
 
             expect(start_button, 'Game is loaded').to.be.true
         })
@@ -34,13 +32,13 @@ describe('0.10 chip conversion', () => {
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            scene.gameContainer.list[7].list[1].list[0].emit('pointerdown')
+            scene.gameContainer.betPanel.list[1].list[0].emit('pointerdown')
         })
 
         cy.window().should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const chip = scene.gameContainer.list[7].activeButton.layout.name;
+            const chip = scene.gameContainer.betPanel.activeButton.layout.name;
 
             expect(chip).to.include("chip_0")
         })
@@ -90,13 +88,13 @@ describe('0.10 chip conversion', () => {
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            scene.gameContainer.list[7].list[2].list[0].emit('pointerdown')
+            scene.gameContainer.betPanel.list[2].list[0].emit('pointerdown')
         })
 
         cy.window().should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const chip = scene.gameContainer.list[7].activeButton.layout.name;
+            const chip = scene.gameContainer.betPanel.activeButton.layout.name;
 
             expect(chip).to.include("chip_1")
         })
@@ -122,13 +120,13 @@ describe('0.10 chip conversion', () => {
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            scene.gameContainer.list[7].list[3].list[0].emit('pointerdown')
+            scene.gameContainer.betPanel.list[3].list[0].emit('pointerdown')
         })
 
         cy.window().should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const chip = scene.gameContainer.list[7].activeButton.layout.name;
+            const chip = scene.gameContainer.betPanel.activeButton.layout.name;
 
             expect(chip).to.include("chip_2")
         })
@@ -154,13 +152,13 @@ describe('0.10 chip conversion', () => {
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            scene.gameContainer.list[7].list[4].list[0].emit('pointerdown')
+            scene.gameContainer.betPanel.list[4].list[0].emit('pointerdown')
         })
 
         cy.window().should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const chip = scene.gameContainer.list[7].activeButton.layout.name;
+            const chip = scene.gameContainer.betPanel.activeButton.layout.name;
 
             expect(chip).to.include("chip_3")
         })

@@ -5,14 +5,14 @@ describe('Back to lobby button', () => {
         cy.intercept('abeta.html').as('lobby')
 
         cy.window({ timeout: 50000 }).should((win) => {
-            const start_button = win.game.scene.scenes[1].gameContainer.list[5].list[0].visible;
+            const start_button = win.game.scene.scenes[1].gameContainer.startGroupButtons.list[0].visible;
             expect(start_button, 'Game is loaded').to.be.true
         })
 
         
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.topPanel.menuSettingsButton.list[0].emit('pointerdown');
-            win.game.scene.scenes[1].gameContainer.settingsMenu.list[6].emit('pointerdown');
+            win.game.scene.scenes[1].gameContainer.settingsMenu.list[5].emit('pointerdown');
         })
 
         cy.wait('@lobby')

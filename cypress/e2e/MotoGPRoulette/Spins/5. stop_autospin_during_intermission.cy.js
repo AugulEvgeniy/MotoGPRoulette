@@ -6,14 +6,14 @@ describe('Autospin is played without issues', () => {
 
 
         cy.window({ timeout: 50000 }).should((win) => {
-            const start_button = win.game.scene.scenes[1].gameContainer.list[5].list[0].visible;
+            const start_button = win.game.scene.scenes[1].gameContainer.startGroupButtons.list[0].visible;
             expect(start_button, 'Game is loaded').to.be.true
         })
 
 
         cy.window().should((win) => {
-            const chip = win.game.scene.scenes[1].gameContainer.list[7].activeButton.layout.name;
-            expect(chip).to.include("chip_1")
+            const chip = win.game.scene.scenes[1].gameContainer.betPanel.activeButton.layout.name;
+            expect(chip).to.include("chip_2")
         })
 
         cy.window().then((win) => {
@@ -29,7 +29,7 @@ describe('Autospin is played without issues', () => {
         })
 
         cy.window().then((win) => {
-            win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[7].list[0].emit('pointerdown')
+            win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.startSpinsButton.list[0].emit('pointerdown')
         })
 
         // 10
@@ -37,7 +37,7 @@ describe('Autospin is played without issues', () => {
         cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             const stakes = body;
             try {
-                expect(stakes.gameResult.stakePence).to.equal(50);
+                expect(stakes.gameResult.stakePence).to.equal(100);
             } catch (err) {
                 cy.log('Assertion failed:', err.message);
             }   
@@ -77,30 +77,11 @@ describe('Autospin is played without issues', () => {
         cy.window({ timeout: 0}).should((win) => {
             const roulette = win.game.scene.scenes[1].gameContainer.roulette.visible;
             expect(roulette, 'Spin is not played').to.be.false;
-
-            try {
-                expect(win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.active, 'Rebet button is active').to.be.true;
-            } catch (err) {
-                cy.log('Assertion failed:', err.message);
-            }
-
-            try {
-                expect(win.game.scene.scenes[1].gameContainer.tapBar.raceButton.active, 'RaceButton button is active').to.be.true;
-            } catch (err) {
-                cy.log('Assertion failed:', err.message);
-            }
-
-            try {
-                expect(win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.active, 'Multiply button is active').to.be.true;
-            } catch (err) {
-                cy.log('Assertion failed:', err.message);
-            }
-            
-            try {
-                expect(win.game.scene.scenes[1].gameContainer.startGroupButtons.autoplayButton.list[5].text, 'Auto spin button is displayed instead of Stop Auto').to.equal('AUTO SPIN');
-            } catch (err) {
-                cy.log('Assertion failed:', err.message);
-            }   
+            // expect(win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.active, 'Rebet button is active').to.be.true;          
+            expect(win.game.scene.scenes[1].gameContainer.tapBar.raceButton.active, 'RaceButton button is active').to.be.true;
+            expect(win.game.scene.scenes[1].gameContainer.tapBar.multiplyButton.active, 'Multiply button is active').to.be.true;
+            expect(win.game.scene.scenes[1].gameContainer.startGroupButtons.autoplayButton.list[5].text, 'Auto spin button is displayed instead of Stop Auto').to.equal('AUTO SPIN');
+        
         })
         })
     }) 

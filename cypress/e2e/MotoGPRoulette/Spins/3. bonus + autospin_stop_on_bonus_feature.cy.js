@@ -34,7 +34,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             win.game.scene.scenes[1].gameContainer.startGroupButtons.autoplayButton.emit('pointerdown')
         })
 
-        cy.wait(500)
+        cy.wait(600)
 
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[2].list[0].emit('pointerdown')
@@ -79,6 +79,10 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
                     expect(contentLength, 'Video size').to.be.greaterThan(400000);
                 });
             });
+        });
+
+        cy.task("logCatch", {
+                message: "✅ Assertion Passed: All videos are loaded, resource size is more than 400kB",
         });
 
         cy.wait(150)

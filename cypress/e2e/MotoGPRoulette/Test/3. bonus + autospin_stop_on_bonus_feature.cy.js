@@ -1,5 +1,5 @@
 describe('Autospin stops on Bonus Feature and Bonus Round is played without issues with extra spins', () => {
-    it('Should check that "Spins Left" counter updates correctly, correct multipliers are displayed, total winnings updates correctly, autospin does not continue after Bonus Round)', () => {
+    it('Should check that "Spins Left" counter updates correctly, correct multipliers are displayed, total winnings updates correctly, autospin does not continue after Bonus Round', () => {
 
         cy.visitTestEnvironment()
         cy.intercept('startgame', { fixture: 'extra_spins_roulette.json'}).as('startGame')
@@ -34,7 +34,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             win.game.scene.scenes[1].gameContainer.startGroupButtons.autoplayButton.emit('pointerdown')
         })
 
-        cy.wait(500)
+        cy.wait(600)
 
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.autoplaySpinsSelect.list[2].list[0].emit('pointerdown')
@@ -59,6 +59,32 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
 
+        let responses = [];
+        const urlPrefix = 'https://video.highlight.games/mp4med/mgp/vid-mgp-';
+        cy.intercept(urlPrefix + '*', (req) => {
+            req.continue((res) => {
+                responses.push({
+                    url: res.url,
+                    headers: res.headers
+                });
+            });
+        }).as('videoRequest');
+
+        cy.wait('@videoRequest', { timeout: 15000 }).then(() => {
+            cy.wrap(null, { timeout: 15000 }).should(() => {
+                const matching = responses.filter(r => r.url.startsWith(urlPrefix));
+                expect(matching).to.have.length(8);
+                matching.forEach(r => {
+                    const contentLength = Number(r.headers['content-length']);
+                    expect(contentLength, 'Video size').to.be.greaterThan(400000);
+                });
+            });
+        });
+
+        cy.task("logCatch", {
+                message: "✅ Assertion Passed: All videos are loaded, resource size is more than 400kB",
+        });
+
         cy.wait(150)
         cy.window().then((win) => {
             try {
@@ -71,8 +97,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
                 cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
-
-
+        
         cy.window({timeout: 20000}).should((win) => {
             const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
             expect(win_banner).to.be.true
@@ -88,6 +113,9 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
                 cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
+
+        // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-sbdjjc2y9aijdv1.mp4").as("video_1")
+        // cy.wait('@video_1', { timeout: 20000 })
 
         cy.window({timeout: 40000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
@@ -115,6 +143,9 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
                 cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
+
+        // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-0UAjR0IxGXaepEh.mp4").as("video_2")
+        // cy.wait('@video_2', { timeout: 20000 })
 
         cy.window({timeout: 40000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
@@ -154,6 +185,9 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
 
+        // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-DrJvPC37x6Hthtw.mp4").as("video_3")
+        // cy.wait('@video_3', { timeout: 20000 })
+
         cy.window({timeout: 40000}).should((win) => {
             const extra_spins = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(extra_spins).to.equal('EXTRA SPINS')
@@ -182,7 +216,10 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         })
 
 
- cy.window({timeout: 40000}).should((win) => {
+        // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-JXOleCtxAVe4KmW.mp4").as("video_4")
+        // cy.wait('@video_4', { timeout: 20000 })
+
+        cy.window({timeout: 40000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('WIN £5.00');
         })
@@ -220,6 +257,8 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
         
+        // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-x96MCwcI6FE7Ng1.mp4").as("video_5")
+        // cy.wait('@video_5', { timeout: 20000 })
 
          cy.window({timeout: 40000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
@@ -259,6 +298,9 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
 
+        // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-OvgfVw5WdaEYO80.mp4").as("video_6")
+        // cy.wait('@video_6', { timeout: 20000 })
+
         cy.window({timeout: 40000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('NO WIN')
@@ -284,6 +326,9 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
                 cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
+
+        // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-1lfA4S2bTVQ5p4D.mp4").as("video_7")
+        // cy.wait('@video_7', { timeout: 20000 })
 
         cy.window({timeout: 40000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
@@ -321,6 +366,9 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
                 cy.task("logCatch", `Assertion Failed: ${err.message}`);
             }   
         })
+
+        // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-Ij3x4mqgaH8eQWf.mp4").as("video_8")
+        // cy.wait('@video_8', { timeout: 20000 })
 
         cy.window({timeout: 40000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;

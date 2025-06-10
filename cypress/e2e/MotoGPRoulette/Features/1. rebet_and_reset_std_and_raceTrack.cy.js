@@ -361,3 +361,31 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
 
 })
 })
+
+
+    describe('Rebetting on Table View switches the Table view to Race Track', () => {
+    it('"isRaceTrack" should be true', () => {
+
+        cy.wait(200)
+        cy.window().then((win) => {
+        win.game.scene.scenes[1].gameContainer.tapBar.raceButton.emit('pointerdown');
+    })
+        cy.wait(1200)
+        cy.window().then((win) => {
+        win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.emit('pointerdown');
+    })
+        cy.wait(500)
+        cy.window({ timeout: 15000 }).should((win) => {
+        const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips;
+
+        expect(chip[0].stakeType).to.include('straight')
+        expect(chip[0].buttonId).to.equal(17)
+        expect(chip[1].buttonId).to.equal(25)
+        expect(chip[2].buttonId).to.equal(2)
+        expect(chip[3].buttonId).to.equal(21)
+        expect(chip[4].buttonId).to.equal(4)
+        expect(win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable, 'isRaceTable is true').to.be.true
+    })
+
+    })
+})

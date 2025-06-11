@@ -33,22 +33,22 @@ describe('Rebet and reset bet are working correctly', () => {
             const scene = game.scene.scenes[1]
 
             scene.gameContainer.stakeSelector.dozensButtons[0].list[0].emit('pointerdown') // dozen 1
-            // scene.gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown') // dozen 2
-            // scene.gameContainer.stakeSelector.dozensButtons[2].list[0].emit('pointerdown') // dozen 3
-            // scene.gameContainer.stakeSelector.evenOrOddButtons[0].emit('pointerdown') // even
-            // scene.gameContainer.stakeSelector.evenOrOddButtons[1].emit('pointerdown') // odd
-            // scene.gameContainer.stakeSelector.highOrLowButtons[0].emit('pointerdown') // low
-            // scene.gameContainer.stakeSelector.highOrLowButtons[1].emit('pointerdown') // high
-            // scene.gameContainer.stakeSelector.redOrBlackButtons[0].list[0].emit('pointerdown') // red
-            // scene.gameContainer.stakeSelector.redOrBlackButtons[1].list[0].emit('pointerdown') // black
-            // scene.gameContainer.stakeSelector.list[1].list[0].emit('pointerdown') // straight
-            // scene.gameContainer.stakeSelector.list[37].emit('pointerdown') // split
-            // scene.gameContainer.stakeSelector.streetButtons[1].emit('pointerdown') // street
-            // scene.gameContainer.stakeSelector.cornerButtons[3].emit('pointerdown') // corner
-            // scene.gameContainer.stakeSelector.sixLineButtons[0].emit('pointerdown') // six line
-            // scene.gameContainer.stakeSelector.columnButtons[0].list[0].emit('pointerdown') // column 1
-            // scene.gameContainer.stakeSelector.columnButtons[1].list[0].emit('pointerdown') // column 2
-            // scene.gameContainer.stakeSelector.columnButtons[2].list[0].emit('pointerdown') // column 3
+            scene.gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown') // dozen 2
+            scene.gameContainer.stakeSelector.dozensButtons[2].list[0].emit('pointerdown') // dozen 3
+            scene.gameContainer.stakeSelector.evenOrOddButtons[0].emit('pointerdown') // even
+            scene.gameContainer.stakeSelector.evenOrOddButtons[1].emit('pointerdown') // odd
+            scene.gameContainer.stakeSelector.highOrLowButtons[0].emit('pointerdown') // low
+            scene.gameContainer.stakeSelector.highOrLowButtons[1].emit('pointerdown') // high
+            scene.gameContainer.stakeSelector.redOrBlackButtons[0].list[0].emit('pointerdown') // red
+            scene.gameContainer.stakeSelector.redOrBlackButtons[1].list[0].emit('pointerdown') // black
+            scene.gameContainer.stakeSelector.list[1].list[0].emit('pointerdown') // straight
+            scene.gameContainer.stakeSelector.list[37].emit('pointerdown') // split
+            scene.gameContainer.stakeSelector.streetButtons[1].emit('pointerdown') // street
+            scene.gameContainer.stakeSelector.cornerButtons[3].emit('pointerdown') // corner
+            scene.gameContainer.stakeSelector.sixLineButtons[0].emit('pointerdown') // six line
+            scene.gameContainer.stakeSelector.columnButtons[0].list[0].emit('pointerdown') // column 1
+            scene.gameContainer.stakeSelector.columnButtons[1].list[0].emit('pointerdown') // column 2
+            scene.gameContainer.stakeSelector.columnButtons[2].list[0].emit('pointerdown') // column 3
 
             cy.wait(50)
             scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
@@ -79,54 +79,54 @@ describe('Rebet and reset bet are working correctly', () => {
             expect(chip[0].stakeType).to.include('dozen')
             expect(chip[0].buttonId).to.equal(1)
 
-            // expect(chip[1].stakeType).to.include('dozen')
-            // expect(chip[1].buttonId).to.equal(2)
-            // expect(chip[1].bet).to.equal(100)
+            expect(chip[1].stakeType).to.include('dozen')
+            expect(chip[1].buttonId).to.equal(2)
+            expect(chip[1].bet).to.equal(100)
 
-            // expect(chip[2].stakeType).to.include('dozen')
-            // expect(chip[2].buttonId).to.equal(3)
+            expect(chip[2].stakeType).to.include('dozen')
+            expect(chip[2].buttonId).to.equal(3)
 
-            // expect(chip[3].stakeType).to.include('even_or_odd')
-            // expect(chip[3].buttonId).to.equal(0)
+            expect(chip[3].stakeType).to.include('even_or_odd')
+            expect(chip[3].buttonId).to.equal(0)
 
-            // expect(chip[4].stakeType).to.include('even_or_odd')
-            // expect(chip[4].buttonId).to.equal(1)
+            expect(chip[4].stakeType).to.include('even_or_odd')
+            expect(chip[4].buttonId).to.equal(1)
 
-            // expect(chip[5].stakeType).to.include('high_or_low')
-            // expect(chip[5].buttonId).to.equal(1)
+            expect(chip[5].stakeType).to.include('high_or_low')
+            expect(chip[5].buttonId).to.equal(1)
 
-            // expect(chip[6].stakeType).to.include('high_or_low')
-            // expect(chip[6].buttonId).to.equal(0)
+            expect(chip[6].stakeType).to.include('high_or_low')
+            expect(chip[6].buttonId).to.equal(0)
 
-            // expect(chip[7].stakeType).to.include('red_or_black')
-            // expect(chip[7].buttonId).to.equal(0)
+            expect(chip[7].stakeType).to.include('red_or_black')
+            expect(chip[7].buttonId).to.equal(0)
 
-            // expect(chip[8].stakeType).to.include('red_or_black')
-            // expect(chip[8].buttonId).to.equal(1)
+            expect(chip[8].stakeType).to.include('red_or_black')
+            expect(chip[8].buttonId).to.equal(1)
 
-            // expect(chip[9].stakeType).to.include('straight')
-            // expect(chip[9].buttonId).to.equal(1)
+            expect(chip[9].stakeType).to.include('straight')
+            expect(chip[9].buttonId).to.equal(1)
 
-            // expect(chip[10].stakeType).to.include('split')
-            // expect(chip[10].buttonId).to.equal(1)
+            expect(chip[10].stakeType).to.include('split')
+            expect(chip[10].buttonId).to.equal(1)
 
-            // expect(chip[11].stakeType).to.include('street')
-            // expect(chip[11].buttonId).to.equal(2)
+            expect(chip[11].stakeType).to.include('street')
+            expect(chip[11].buttonId).to.equal(2)
 
-            // expect(chip[12].stakeType).to.include('corner')
-            // expect(chip[12].buttonId).to.equal(4)
+            expect(chip[12].stakeType).to.include('corner')
+            expect(chip[12].buttonId).to.equal(4)
 
-            // expect(chip[13].stakeType).to.include('six_line')
-            // expect(chip[13].buttonId).to.equal(1)
+            expect(chip[13].stakeType).to.include('six_line')
+            expect(chip[13].buttonId).to.equal(1)
 
-            // expect(chip[14].stakeType).to.include('column')
-            // expect(chip[14].buttonId).to.equal(1)
+            expect(chip[14].stakeType).to.include('column')
+            expect(chip[14].buttonId).to.equal(1)
 
-            // expect(chip[15].stakeType).to.include('column')
-            // expect(chip[15].buttonId).to.equal(2)
+            expect(chip[15].stakeType).to.include('column')
+            expect(chip[15].buttonId).to.equal(2)
 
-            // expect(chip[16].stakeType).to.include('column')
-            // expect(chip[16].buttonId).to.equal(3)
+            expect(chip[16].stakeType).to.include('column')
+            expect(chip[16].buttonId).to.equal(3)
         })
         })
     }) 

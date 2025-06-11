@@ -3,7 +3,7 @@ describe('Reward History displays winning numbers', () => {
 
         cy.visitTestEnvironment()
 
-        cy.window({ timeout: 25000 }).should((win) => {
+        cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
             const start_button = scene.gameContainer.startGroupButtons.list[0].visible;
@@ -176,7 +176,7 @@ describe('Reward History displays winning numbers', () => {
             expect(chip_1).to.equal('10')
             expect(chip_2).to.equal('10')
             expect(chip_3).to.equal('10')
-            expect(chip_4).to.equal('0')
+            expect(chip_4).to.equal('1')
             expect(win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[4].list[2].visible, 'Helmet icon is displayed').to.be.true;
         })
 

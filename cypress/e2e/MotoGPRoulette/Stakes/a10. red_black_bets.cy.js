@@ -177,7 +177,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
 
         cy.wait('@startGame', { timeout: 25000 }).its('response.body').then((body) => {
-            cy.log('startGame response:', body.game);
+            cy.log('startGame response:', body.gameResult);
 
         if  (body.state == "INVALID") {
         throw new Error(
@@ -188,7 +188,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             const black = [2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35]
 
 
-            const stakes = body.integrationResultData.stakes;
+            const stakes = body.gameResult.integrationResultData.stakes;
 
         cy.window().then((win) => {
             const game = win.game
@@ -201,13 +201,13 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         })
             
             try {
-                expect(body.integrationResultData.stakes).to.have.length(10);
+                expect(body.gameResult.integrationResultData.stakes).to.have.length(10);
             } catch (err) {
              cy.log('Assertion failed:', err.message);
             }
 
-            expect(body.integrationResultData.stakes[0].cells).to.deep.equal(red)
-            expect(body.integrationResultData.stakes[1].cells).to.deep.equal(black)
+            expect(body.gameResult.integrationResultData.stakes[0].cells).to.deep.equal(red)
+            expect(body.gameResult.integrationResultData.stakes[1].cells).to.deep.equal(black)
             
             const splitCombinations = {}; // Track each unique split pair and their amounts
             const cellCoverage = {}; // Track how many times each number appears

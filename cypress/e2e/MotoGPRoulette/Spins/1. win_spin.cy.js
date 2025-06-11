@@ -13,11 +13,11 @@ describe('Winning spin is played without issues', () => {
             expect(start_button, 'Game is loaded').to.be.true
         })
 
-        // cy.get('#open_button').click()
-        // cy.get('#chip').select(2)
-        // cy.get('#open_button').click({force: true})
-        // cy.get('#set_state').click()
-        // cy.get('#close_button').click()
+        cy.get('#open_button').click()
+        cy.get('#chip').select(2)
+        cy.get('#open_button').click({force: true})
+        cy.get('#set_state').click()
+        cy.get('#close_button').click()
 
         cy.window().should((win) => {
             const game = win.game
@@ -40,8 +40,8 @@ describe('Winning spin is played without issues', () => {
         })
 
         cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
-            expect(body.gameResult.totalWinPence).to.equal(150);
-            expect(body.gameResult.stakePence, "stakePence").to.equal(150);
+            expect(body.gameResult.totalWinPence).to.equal(300);
+            expect(body.gameResult.stakePence, "stakePence").to.equal(300);
         })
 
         cy.window({timeout: 20000}).should((win) => {
@@ -50,7 +50,7 @@ describe('Winning spin is played without issues', () => {
             const win_banner = scene.gameContainer.winBanner.visible;
 
             expect(win_banner, "win banner is displayed").to.be.true
-            expect(scene.gameContainer.topPanel.balance, "Balance").to.equal(100100);
+            expect(scene.gameContainer.topPanel.balance, "Balance").to.equal(100000);
         })
 
         cy.wait(3000)

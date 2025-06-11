@@ -224,7 +224,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
 
         cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
-            cy.log('startGame response:', body.game);
+            cy.log('startGame response:', body.gameResult);
         
         if  (body.state == "INVALID") {
         throw new Error(
@@ -242,7 +242,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         })
             
             try {
-                expect(body.integrationResultData.stakes).to.have.length(55);
+                expect(body.gameResult.integrationResultData.stakes).to.have.length(55);
             } catch (err) {
              cy.log('Assertion failed:', err.message);
             }
@@ -256,7 +256,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             }
         
             // Process each stake
-            stakes.forEach(stake => {
+            body.gameResult.integrationResultData.stakes.forEach(stake => {
                 expect(stake.type, 'All stakes should have type "six-line"').to.equal('six_line');
         
                 const amountGBP = stake.amountsPence; // Assuming already in GBP

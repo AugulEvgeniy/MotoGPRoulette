@@ -202,7 +202,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             const column_3 = [3,6,9,12,15,18,21,24,27,30,33,36]
             
         
-            const stakes = body.integrationResultData.stakes;
+            const stakes = body.gameResult.integrationResultData.stakes;
 
         cy.window().then((win) => {
             const game = win.game
@@ -215,15 +215,15 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         })
             
             try {
-                expect(body.integrationResultData.stakes).to.have.length(15);
+                expect(body.gameResult.integrationResultData.stakes).to.have.length(15);
             } catch (err) {
              cy.log('Assertion failed:', err.message);
             }
 
-            expect(JSON.stringify(body.integrationResultData.stakes[0].cells)).to.deep.equal(JSON.stringify(column_1))
-            expect(JSON.stringify(body.integrationResultData.stakes[1].cells)).to.deep.equal(JSON.stringify(column_2))
-            expect(JSON.stringify(body.integrationResultData.stakes[2].cells)).to.deep.equal(JSON.stringify(column_3))
-            cy.log(body.integrationResultData.stakes)
+            expect(JSON.stringify(body.gameResult.integrationResultData.stakes[0].cells)).to.deep.equal(JSON.stringify(column_1))
+            expect(JSON.stringify(body.gameResult.integrationResultData.stakes[1].cells)).to.deep.equal(JSON.stringify(column_2))
+            expect(JSON.stringify(body.gameResult.integrationResultData.stakes[2].cells)).to.deep.equal(JSON.stringify(column_3))
+            cy.log(body.gameResult.integrationResultData.stakes)
             
             const splitCombinations = {}; // Track each unique split pair and their amounts
             const cellCoverage = {}; // Track how many times each number appears

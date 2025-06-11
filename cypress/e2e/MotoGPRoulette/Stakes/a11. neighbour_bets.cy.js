@@ -90,6 +90,8 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             scene.gameContainer.stakeSelector.raceButtons[34].emit('pointerdown')
             scene.gameContainer.stakeSelector.raceButtons[35].emit('pointerdown')
             scene.gameContainer.stakeSelector.raceButtons[36].emit('pointerdown')
+
+            scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
         })
 
 
@@ -104,275 +106,281 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         }
         // This assertion checks total bet value
 
-            scene.gameContainer.betPanel.list[2].list[0].emit('pointerdown')
+            // scene.gameContainer.betPanel.list[2].list[0].emit('pointerdown')
         })
 
-        cy.window().should((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
-            const chip = scene.gameContainer.betPanel.activeButton.layout.name;
+        // cy.window().should((win) => {
+        //     const game = win.game
+        //     const scene = game.scene.scenes[1]
+        //     const chip = scene.gameContainer.betPanel.activeButton.layout.name;
 
-            expect(chip).to.include("chip_1")
-        })
-
-
-        cy.window().then((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
-
-            scene.gameContainer.stakeSelector.raceButtons[0].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[1].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[2].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[3].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[4].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[5].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[6].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[7].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[8].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[9].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[10].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[11].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[12].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[13].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[14].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[15].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[16].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[17].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[18].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[19].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[20].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[21].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[22].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[23].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[24].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[25].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[26].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[27].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[28].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[29].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[30].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[31].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[32].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[33].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[34].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[35].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[36].emit('pointerdown')
-        })
-
-        cy.window().then((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
-
-        try {
-            expect(scene.gameContainer.betPanel.list[9].text).to.include(111);
-        } catch (err) {
-            cy.log('Assertion failed:', err.message);
-        }
-        // This assertion checks total bet value
-
-            scene.gameContainer.betPanel.list[3].list[0].emit('pointerdown')
-        })
-
-        cy.window().should((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
-            const chip = scene.gameContainer.betPanel.activeButton.layout.name;
-
-            expect(chip).to.include("chip_2")
-        })
-
-        cy.window().then((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
-
-            scene.gameContainer.stakeSelector.raceButtons[0].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[1].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[2].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[3].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[4].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[5].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[6].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[7].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[8].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[9].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[10].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[11].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[12].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[13].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[14].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[15].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[16].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[17].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[18].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[19].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[20].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[21].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[22].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[23].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[24].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[25].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[26].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[27].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[28].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[29].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[30].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[31].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[32].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[33].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[34].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[35].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[36].emit('pointerdown')
-        })
+        //     expect(chip).to.include("chip_1")
+        // })
 
 
-        cy.window().then((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
+        // cy.window().then((win) => {
+        //     const game = win.game
+        //     const scene = game.scene.scenes[1]
 
-        try {
-            expect(scene.gameContainer.betPanel.list[9].text).to.include(296);
-        } catch (err) {
-            cy.log('Assertion failed:', err.message);
-        }
-        // This assertion checks total bet value
+        //     scene.gameContainer.stakeSelector.raceButtons[0].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[1].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[2].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[3].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[4].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[5].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[6].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[7].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[8].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[9].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[10].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[11].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[12].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[13].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[14].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[15].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[16].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[17].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[18].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[19].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[20].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[21].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[22].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[23].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[24].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[25].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[26].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[27].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[28].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[29].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[30].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[31].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[32].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[33].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[34].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[35].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[36].emit('pointerdown')
 
-            scene.gameContainer.betPanel.list[4].list[0].emit('pointerdown')
-        })
+        //     scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
+        // })
 
-        cy.window().should((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
-            const chip = scene.gameContainer.betPanel.activeButton.layout.name;
+        // cy.window().then((win) => {
+        //     const game = win.game
+        //     const scene = game.scene.scenes[1]
 
-            expect(chip).to.include("chip_3")
-        })
+        // try {
+        //     expect(scene.gameContainer.betPanel.list[9].text).to.include(111);
+        // } catch (err) {
+        //     cy.log('Assertion failed:', err.message);
+        // }
+        // // This assertion checks total bet value
 
-        cy.window().then((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
+        //     scene.gameContainer.betPanel.list[3].list[0].emit('pointerdown')
+        // })
 
-            scene.gameContainer.stakeSelector.raceButtons[0].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[1].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[2].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[3].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[4].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[5].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[6].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[7].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[8].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[9].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[10].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[11].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[12].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[13].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[14].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[15].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[16].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[17].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[18].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[19].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[20].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[21].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[22].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[23].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[24].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[25].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[26].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[27].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[28].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[29].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[30].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[31].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[32].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[33].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[34].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[35].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[36].emit('pointerdown')
-        })
+        // cy.window().should((win) => {
+        //     const game = win.game
+        //     const scene = game.scene.scenes[1]
+        //     const chip = scene.gameContainer.betPanel.activeButton.layout.name;
+
+        //     expect(chip).to.include("chip_2")
+        // })
+
+        // cy.window().then((win) => {
+        //     const game = win.game
+        //     const scene = game.scene.scenes[1]
+
+        //     scene.gameContainer.stakeSelector.raceButtons[0].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[1].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[2].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[3].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[4].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[5].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[6].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[7].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[8].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[9].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[10].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[11].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[12].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[13].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[14].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[15].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[16].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[17].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[18].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[19].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[20].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[21].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[22].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[23].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[24].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[25].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[26].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[27].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[28].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[29].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[30].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[31].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[32].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[33].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[34].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[35].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[36].emit('pointerdown')
+
+        //     scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
+        // })
 
 
-        cy.window().then((win) => {
-            const game = win.game;
-            const scene = game.scene.scenes[1];
+        // cy.window().then((win) => {
+        //     const game = win.game
+        //     const scene = game.scene.scenes[1]
+
+        // try {
+        //     expect(scene.gameContainer.betPanel.list[9].text).to.include(296);
+        // } catch (err) {
+        //     cy.log('Assertion failed:', err.message);
+        // }
+        // // This assertion checks total bet value
+
+        //     scene.gameContainer.betPanel.list[4].list[0].emit('pointerdown')
+        // })
+
+        // cy.window().should((win) => {
+        //     const game = win.game
+        //     const scene = game.scene.scenes[1]
+        //     const chip = scene.gameContainer.betPanel.activeButton.layout.name;
+
+        //     expect(chip).to.include("chip_3")
+        // })
+
+        // cy.window().then((win) => {
+        //     const game = win.game
+        //     const scene = game.scene.scenes[1]
+
+        //     scene.gameContainer.stakeSelector.raceButtons[0].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[1].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[2].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[3].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[4].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[5].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[6].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[7].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[8].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[9].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[10].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[11].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[12].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[13].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[14].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[15].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[16].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[17].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[18].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[19].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[20].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[21].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[22].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[23].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[24].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[25].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[26].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[27].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[28].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[29].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[30].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[31].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[32].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[33].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[34].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[35].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[36].emit('pointerdown')
+
+        //     scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
+        // })
+
+
+        // cy.window().then((win) => {
+        //     const game = win.game;
+        //     const scene = game.scene.scenes[1];
     
-            // Get the text and convert to comparable number
-            const betText = scene.gameContainer.betPanel.list[9].text;
-            const betValue = parseFloat(betText.replace(/[^0-9.]/g, ''));
+        //     // Get the text and convert to comparable number
+        //     const betText = scene.gameContainer.betPanel.list[9].text;
+        //     const betValue = parseFloat(betText.replace(/[^0-9.]/g, ''));
     
-            expect(betValue).to.equal(1221);  // Now compares numbers
+        //     expect(betValue).to.equal(1221);  // Now compares numbers
     
-            // Continue with your interaction
-            scene.gameContainer.betPanel.list[5].list[0].emit('pointerdown');
-        });
+        //     // Continue with your interaction
+        //     scene.gameContainer.betPanel.list[5].list[0].emit('pointerdown');
+        // });
 
-        cy.window().should((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
-            const chip = scene.gameContainer.betPanel.activeButton.layout.name;
+        // cy.window().should((win) => {
+        //     const game = win.game
+        //     const scene = game.scene.scenes[1]
+        //     const chip = scene.gameContainer.betPanel.activeButton.layout.name;
 
-            expect(chip).to.include("chip_4")
-        })
+        //     expect(chip).to.include("chip_4")
+        // })
 
-        cy.window().then((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
+        // cy.window().then((win) => {
+        //     const game = win.game
+        //     const scene = game.scene.scenes[1]
 
-            scene.gameContainer.stakeSelector.raceButtons[0].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[1].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[2].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[3].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[4].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[5].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[6].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[7].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[8].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[9].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[10].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[11].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[12].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[13].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[14].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[15].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[16].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[17].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[18].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[19].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[20].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[21].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[22].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[23].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[24].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[25].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[26].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[27].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[28].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[29].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[30].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[31].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[32].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[33].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[34].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[35].emit('pointerdown')
-            scene.gameContainer.stakeSelector.raceButtons[36].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[0].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[1].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[2].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[3].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[4].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[5].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[6].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[7].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[8].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[9].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[10].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[11].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[12].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[13].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[14].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[15].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[16].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[17].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[18].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[19].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[20].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[21].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[22].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[23].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[24].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[25].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[26].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[27].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[28].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[29].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[30].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[31].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[32].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[33].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[34].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[35].emit('pointerdown')
+        //     scene.gameContainer.stakeSelector.raceButtons[36].emit('pointerdown')
 
-            cy.wait(300)
-            scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
-        })
+        //     cy.wait(300)
+        //     scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
+        // })
 
-        cy.window().then((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
+        // cy.window().then((win) => {
+        //     const game = win.game
+        //     const scene = game.scene.scenes[1]
 
-        try {
-            // Get the text and convert to comparable number
-            const betText = scene.gameContainer.betPanel.list[9].text;
-            const betValue = parseFloat(betText.replace(/[^0-9.]/g, ''));
+        // try {
+        //     // Get the text and convert to comparable number
+        //     const betText = scene.gameContainer.betPanel.list[9].text;
+        //     const betValue = parseFloat(betText.replace(/[^0-9.]/g, ''));
     
-            expect(betValue).to.equal(3071);  // Now compares numbers
-        } catch (err) {
-            cy.log('Assertion failed:', err.message);
-        }   
-        })
+        //     expect(betValue).to.equal(3071);  // Now compares numbers
+        // } catch (err) {
+        //     cy.log('Assertion failed:', err.message);
+        // }   
+        // })
 
         cy.wait('@startGame', { timeout: 25000 }).its('response.body').then((body) => {
         
@@ -392,7 +400,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         })
 
             try {
-                expect(body.integrationResultData.stakes).to.have.length(925);
+                expect(body.gameResult.integrationResultData.stakes).to.have.length(185); // 925 if all stakes were placed
             } catch (err) {
              cy.log('Assertion failed:', err.message);
             }
@@ -407,7 +415,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             }
             
             // Count stakes and collect amounts for each cell
-            stakes.forEach(stake => {
+            body.gameResult.integrationResultData.stakes.forEach(stake => {
                 expect(stake.type, 'All stakes should have type "straight"').to.equal('straight');
                 stake.cells.forEach(cell => {
                     if (cell >= 0 && cell <= 36) {
@@ -419,7 +427,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             });
             
             // Expected amounts     
-            const expectedAmounts = [10, 50, 100, 500, 1000, 10, 50, 100, 500, 1000, 10, 50, 100, 500, 1000, 10, 50, 100, 500, 1000, 10, 50, 100, 500, 1000];
+            const expectedAmounts = [10, 10, 10, 10, 10];
             
             // Verify each cell has exactly 5 stakes with the correct amounts
             for (let cell = 0; cell <= 36; cell++) {

@@ -193,7 +193,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
 
         cy.wait('@startGame', { timeout: 25000 }).its('response.body').then((body) => {
-            cy.log('startGame response:', body.game);
+            cy.log('startGame response:', body.gameResult);
         
         if  (body.state == "INVALID") {
         throw new Error(
@@ -211,7 +211,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         })
 
             try {
-                expect(body.integrationResultData.stakes).to.have.length(30);
+                expect(body.gameResult.integrationResultData.stakes).to.have.length(30);
             } catch (err) {
              cy.log('Assertion failed:', err.message);
             }
@@ -228,7 +228,7 @@ const expectedSplits = [
 
 expectedSplits.forEach(expected => {
     // Find all stakes that match this cell combination
-    const matchingStakes = stakes.filter(stake => {
+    const matchingStakes = body.gameResult.integrationResultData.stakes.filter(stake => {
         const sortedCells = [...stake.cells].sort((a, b) => a - b);
         return JSON.stringify(sortedCells) === JSON.stringify(expected.cells);
     });

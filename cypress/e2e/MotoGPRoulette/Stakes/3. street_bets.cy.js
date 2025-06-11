@@ -237,12 +237,8 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
         cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
         cy.log('startGame response:', body.game);
-        
-        cy.window().should((body) => {
-            expect(body).to.have.property('gameResult')
-            expect(body).to.have.property('integrationResultData')
-            expect(body).to.have.property('upstream')
-        })
+        expect(body.gameResult).to.have.property('integrationResultData')
+        expect(body).to.have.property('upstream')
 
         if  (body.state == "INVALID") {
         throw new Error(
@@ -261,7 +257,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
 
         try {
-            expect(body.game.integrationResultData.stakes).to.have.length(70);
+            expect(body.gameResult.integrationResultData.stakes).to.have.length(70);
         } catch (err) {
             cy.log('Assertion failed:', err.message);
         }
@@ -275,7 +271,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         }
         
             // Process each stake
-        stakes.forEach(stake => {
+        body.gameResult.integrationResultData.stakes.forEach(stake => {
             expect(stake.type, 'All stakes should have type "street"').to.equal('street');
         
             const amountGBP = stake.amountsPence; // Assuming already in GBP

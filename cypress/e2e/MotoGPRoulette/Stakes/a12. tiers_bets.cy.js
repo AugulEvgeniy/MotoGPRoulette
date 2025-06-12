@@ -3,7 +3,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
         cy.visitTestEnvironment()
         cy.interceptStartGame()
-
+        const assertionErrors = []; // Array to collect stake validation errors
 
         cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game
@@ -187,61 +187,60 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         try {
             expect(scene.gameContainer.betPanel.list[9].text).to.include(99.60);
         } catch (err) {
-            cy.log('Assertion failed:', err.message);
+            assertionErrors.push(err.message);
         }   
         })
 
 
-        cy.wait('@startGame', { timeout: 25000 }).its('response.body').then((body) => {
-            cy.log('startGame response:', body.gameResult);
+    cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
+    cy.log('startGame response:', body.gameResult);
+    
+    if (body.state == "INVALID") {
+        throw new Error(`API returned INVALID state. Full response: ${JSON.stringify(body)}`);
+    }    
+
+    // Process each stake combination
+    const Combinations = {};
+    body.gameResult.integrationResultData.stakes.forEach(stake => {
+        try {
+            expect(stake.type, 'Stake type should be "split"').to.equal('split');
+        } catch (err) {
+            assertionErrors.push(err.message);
+        }
         
-        if  (body.state == "INVALID") {
-        throw new Error(
-        `API returned INVALID state. Full response: ${JSON.stringify(body)}`
-        )}    
-            
-            cy.window().then((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
-            try {
-                expect(scene.gameContainer.topPanel.balance).to.not.equal(100000);
-            } catch (err) {
-                cy.log('Assertion failed:', err.message);
-            }   
-        })
+        const amountsPence = stake.amountsPence;
+        const comboKey = stake.cells; // Stringify for consistent key
 
-            try {
-                expect(body.gameResult.integrationResultData.stakes).to.have.length(30);
-            } catch (err) {
-             cy.log('Assertion failed:', err.message);
-            }
-            
-// Verify that all expected split combinations exist with correct amounts
-const expectedSplits = [
-    { cells: [5, 8], amounts: [10, 50, 100, 500, 1000] },
-    { cells: [13, 16], amounts: [10, 50, 100, 500, 1000] },
-    { cells: [27, 30], amounts: [10, 50, 100, 500, 1000] },
-    { cells: [33, 36], amounts: [10, 50, 100, 500, 1000] },
-    { cells: [10, 11], amounts: [10, 50, 100, 500, 1000] },
-    { cells: [23, 24], amounts: [10, 50, 100, 500, 1000] }
-];
-
-expectedSplits.forEach(expected => {
-    // Find all stakes that match this cell combination
-    const matchingStakes = body.gameResult.integrationResultData.stakes.filter(stake => {
-        const sortedCells = [...stake.cells].sort((a, b) => a - b);
-        return JSON.stringify(sortedCells) === JSON.stringify(expected.cells);
+        if (!Combinations[comboKey]) {
+            Combinations[comboKey] = [];
+        }
+        Combinations[comboKey].push(amountsPence);
     });
-    
-    // Verify we found exactly 5 stakes for this combination (one for each amount)
-    expect(matchingStakes.length, `Should find 5 stakes for split ${expected.cells}`).to.equal(5);
-    
-    // Verify all expected amounts are present
-    const actualAmounts = matchingStakes.map(stake => stake.amountsPence).sort((a, b) => a - b);
-    const expectedAmounts = expected.amounts.sort((a, b) => a - b);
-    expect(actualAmounts, `Split ${expected.cells} should have amounts 0.1, 0.5, 1, 5, 10 GBP`)
-        .to.deep.equal(expectedAmounts);
-});
+
+    // Expected amounts in pence (assuming amountsPence is in pence)
+    const expectedAmounts = [10, 50, 100, 500, 1000]; 
+
+    // Validate each corner combination has all amounts exactly once
+    Object.entries(Combinations).forEach(([combo, amounts]) => {
+        try {
+            // Sort amounts for consistent comparison
+            expect(amounts, `Split ${combo} should have amounts (0.1, 0.5, 1, 5, 10`).to.deep.equal(expectedAmounts);
+        } catch (err) {
+            assertionErrors.push(err.message);
+        }
+    });
+
+    // Check total stakes count
+    try {
+        expect(body.gameResult.integrationResultData.stakes).to.have.length(30, 'Should have 30 total stakes');
+    } catch (err) {
+        assertionErrors.push(err.message);
+    }
+
+    // Throw all collected errors at once if any failed
+    if (assertionErrors.length > 0) {
+        throw new Error(`Stake validation failed:\n${assertionErrors.join('\n')}`);
+    }
 });
 });
 });

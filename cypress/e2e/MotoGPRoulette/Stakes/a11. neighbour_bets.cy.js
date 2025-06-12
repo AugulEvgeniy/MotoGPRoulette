@@ -3,7 +3,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
         cy.visitTestEnvironment()
         cy.interceptStartGame()
-
+        const assertionErrors = []; // Array to collect stake validation errors
 
         cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game
@@ -102,7 +102,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         try {
             expect(scene.gameContainer.betPanel.list[9].text).to.include(18.50);
         } catch (err) {
-            cy.log('Assertion failed:', err.message);
+            assertionErrors.push(err.message);
         }
         // This assertion checks total bet value
 
@@ -398,47 +398,45 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
                 cy.log('Assertion failed:', err.message);
             }   
         })
-
-            try {
-                expect(body.gameResult.integrationResultData.stakes).to.have.length(185); // 925 if all stakes were placed
-            } catch (err) {
-             cy.log('Assertion failed:', err.message);
-            }
             
-            const cellCounts = {};
-            const cellAmounts = {}; // To track amounts for each cell
-        
-            // Initialize counts and amounts for all cells 0-36
-            for (let i = 0; i <= 36; i++) {
-                cellCounts[i] = 0;
-                cellAmounts[i] = [];
-            }
-            
-            // Count stakes and collect amounts for each cell
-            body.gameResult.integrationResultData.stakes.forEach(stake => {
-                expect(stake.type, 'All stakes should have type "straight"').to.equal('straight');
-                stake.cells.forEach(cell => {
-                    if (cell >= 0 && cell <= 36) {
-                        cellCounts[cell]++;
-                        const amountGBP = stake.amountsPence
-                        cellAmounts[cell].push(amountGBP);
-                    }
-                });
-            });
-            
-            // Expected amounts     
-            const expectedAmounts = [10, 10, 10, 10, 10];
-            
-            // Verify each cell has exactly 5 stakes with the correct amounts
-            for (let cell = 0; cell <= 36; cell++) {
-                // expect(cellCounts[cell], `Cell ${cell} should have exactly 5 stakes`).to.equal(5);
+            // Process each stake combination
+            const Combinations = {};
                 
-                // Check that the amounts match exactly the expected amounts
-                expect(cellAmounts[cell].sort((a, b) => a - b), 
-                    `Cell ${cell} should have stakes with amounts 0.1, 0.5, 1, 5, 10 GBP`
-                ).to.deep.equal(expectedAmounts.sort((a, b) => a - b));
+            body.gameResult.integrationResultData.stakes.forEach(stake => {
+                
+            const amountsPence = stake.amountsPence;
+            const comboKey = stake.cells; // Stringify for consistent key
+
+                if (!Combinations[comboKey]) {
+                    Combinations[comboKey] = [];
+                }
+                Combinations[comboKey].push(amountsPence);
+            });
+
+            // Expected amounts in pence (assuming amountsPence is in pence)
+            const expectedAmounts = [10, 10, 10, 10, 10]; 
+
+            // Validate each corner combination has all amounts exactly once
+            Object.entries(Combinations).forEach(([combo, amounts]) => {
+                try {
+                    expect(amounts, `5 straight ${combo} are in the response`).to.deep.equal(expectedAmounts);
+                } catch (err) {
+                    assertionErrors.push(err.message);
+                }
+            });
+
+            // Check total stakes count
+            try {
+                expect(body.gameResult.integrationResultData.stakes).to.have.length(185, 'Should have 185 total stakes');
+            } catch (err) {
+                assertionErrors.push(err.message);
             }
-        })
+
+            // Throw all collected errors at once if any failed
+            if (assertionErrors.length > 0) {
+                throw new Error(`Stake validation failed:\n${assertionErrors.join('\n')}`);
+            }
+        }) 
     }) 
 })
 

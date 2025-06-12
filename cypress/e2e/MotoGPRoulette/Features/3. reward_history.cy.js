@@ -1,5 +1,5 @@
 describe('Reward History displays winning numbers', () => {
-    it('Should check that 5 numbers are displayed, and 6th/2nd numbers rewrite 5th/1st)', () => {
+    it('5 numbers are displayed, and 6th/2nd numbers rewrite 5th/1st)', () => {
 
         cy.visitTestEnvironment()
 
@@ -179,6 +179,5 @@ describe('Reward History displays winning numbers', () => {
             expect(chip_4).to.equal('1')
             expect(win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[4].list[2].visible, 'Helmet icon is displayed').to.be.true;
         })
-
         })
     }) 

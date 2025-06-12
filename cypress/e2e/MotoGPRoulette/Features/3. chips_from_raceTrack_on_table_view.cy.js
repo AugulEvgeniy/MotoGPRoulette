@@ -1,5 +1,5 @@
 describe('Chips from Race Track view are displayed in Table View when entering it', () => {
-    it('Should check that 20 bet in Race Track is 33, 1, 20, 14, 31 in Table View)', () => {
+    it('bet 20 in Race Track is 33, 1, 20, 14, 31 in Table View)', () => {
 
         cy.visitTestEnvironment()
 
@@ -47,11 +47,9 @@ describe('Chips from Race Track view are displayed in Table View when entering i
             expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[4].buttonId).to.equal(33);
             })
         })
-    }) 
 
-    
-    describe('Chips from Table View reset after entering Race Track', () => {
-        it('Should check that the bet is reset', () => {
+            
+        it('Chips from Table View reset after entering Race Track', () => {
             
         cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.tapBar.raceButton.emit('pointerdown')
@@ -69,4 +67,5 @@ describe('Chips from Race Track view are displayed in Table View when entering i
             expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips).to.have.length(0)
             })
         })
-    })
+    }) 
+

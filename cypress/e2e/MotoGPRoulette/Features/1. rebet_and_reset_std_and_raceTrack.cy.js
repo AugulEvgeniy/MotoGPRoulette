@@ -129,11 +129,8 @@ describe('Rebet and reset bet are working correctly', () => {
             expect(chip[16].buttonId).to.equal(3)
         })
         })
-    }) 
 
-
-    describe('Reset bet is working correctly', () => {
-    it('Should check that "spins" array is 0 after reset', () => {
+            it('Reset bet is working correctly', () => {
         
         cy.wait(2000)
         cy.window().then((win) => {
@@ -146,12 +143,8 @@ describe('Rebet and reset bet are working correctly', () => {
     })
 
     })
-})
 
-
-    describe('Rebet works correctly after the second spin with a different stake', () => {
-    it('Should check that "chips" array is rewritten after placing the second bet', () => {
-        
+    it('Rebet works correctly after the second spin with a different stake', () => {
         cy.window().then((win) => {
         win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown')
     })
@@ -188,11 +181,9 @@ describe('Rebet and reset bet are working correctly', () => {
  })
 
 })
-})
 
 
-    describe('Rebetting on Race Track View switches the table view to standart', () => {
-    it('"isRaceTrack" should be false', () => {
+    it('Rebetting on Race Track View switches the table view to standart', () => {
 
         cy.wait(200)
         cy.window().then((win) => {
@@ -210,13 +201,10 @@ describe('Rebet and reset bet are working correctly', () => {
         expect(chip[0].buttonId).to.equal(2)
         expect(win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable, 'isRaceTable is false').to.be.false
     })
-
     })
-})
 
 
-describe('Rebet and reset bet are working correctly in Race Track', () => {
-    it('Should check that all of types of bets are displayed after rebetting in Race Track)', () => {
+    it('Rebet and reset bet are working correctly in Race Track', () => {
 
         cy.interceptStartGame()
 
@@ -293,11 +281,9 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
             expect(chip[4].buttonId).to.equal(16)
         })
         })
-    }) 
 
 
-    describe('Reset bet is working correctly', () => {
-    it('Should check that "spins" array is 0 after reset)', () => {
+    it('Reset bet is working correctly', () => {
 
 
         cy.wait(3000)
@@ -309,13 +295,9 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
         cy.window( {timeout: 15000} ).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips).have.length(0)
     })
-
     })
-})
 
-
-    describe('Rebet works correctly after the second spin with a different stake', () => {
-    it('Should check that "chips" array is rewritten after placing the second bet)', () => {
+    it('Rebet works correctly after the second spin with a different stake', () => {
 
         cy.interceptStartGame()
         
@@ -358,13 +340,9 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
         expect(chip[3].buttonId).to.equal(21)
         expect(chip[4].buttonId).to.equal(4)
  })
-
-})
 })
 
-
-    describe('Rebetting on Table View switches the Table view to Race Track', () => {
-    it('"isRaceTrack" should be true', () => {
+    it('Rebetting on Table View switches the Table view to Race Track', () => {
 
         cy.wait(200)
         cy.window().then((win) => {
@@ -388,4 +366,7 @@ describe('Rebet and reset bet are working correctly in Race Track', () => {
     })
 
     })
-})
+
+    }) 
+
+

@@ -52,14 +52,9 @@ describe('multiply works correctly', () => {
             const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
             expect (total_bet).to.include('4.00')
         })
-        
     })
-})
 
-
-describe('Multiply works correctly in Race Track', () => {
-    it('should multiply neighbours stake', () => {
-
+    it('Multiply works correctly in Race Track', () => {
         cy.wait(500)
 
         cy.window().then((win) => {
@@ -111,3 +106,6 @@ describe('Multiply works correctly in Race Track', () => {
         })
     })
 })
+
+
+

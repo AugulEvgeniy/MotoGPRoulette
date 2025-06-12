@@ -3,7 +3,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
         cy.visitTestEnvironment()
         cy.interceptStartGame()
-
+        const assertionErrors = []; // Array to collect stake validation errors
 
         cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game
@@ -188,7 +188,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         try {
             expect(scene.gameContainer.betPanel.list[9].text).to.include(149.4);
         } catch (err) {
-            cy.log('Assertion failed:', err.message);
+            assertionErrors.push(err.message);
         }   
         })
 
@@ -214,80 +214,50 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             try {
                 expect(body.gameResult.integrationResultData.stakes).to.have.length(45);
             } catch (err) {
-             cy.log('Assertion failed:', err.message);
-            
+                assertionErrors.push(err.message);
             }
             
-const splitCombinations = {}; // Track each unique stake group and their amounts
-const cellCoverage = {}; // Track how many times each number appears
-
-// Initialize coverage for all cells
-for (let i = 0; i <= 30; i++) {
-    cellCoverage[i] = 0;
-}
+const Combinations = {}; // Track each unique stake group and their amounts
 
 // Process each stake
 body.gameResult.integrationResultData.stakes.forEach(stake => {
-    const amountGBP = stake.amountsPence;
-    const sortedCells = [...stake.cells].sort((a, b) => a - b);
-    const comboKey = sortedCells.join(',');
+    const amountPence = stake.amountsPence;
+    const comboKey = [...stake.cells]
 
     // Initialize if this combination hasn't been tracked yet
-    if (!splitCombinations[comboKey]) {
-        splitCombinations[comboKey] = [];
+    if (!Combinations[comboKey]) {
+        Combinations[comboKey] = [];
     }
 
     // Track this amount for the combination
-    splitCombinations[comboKey].push(amountGBP);
-
-    // Count coverage for each cell in this combination
-    stake.cells.forEach(cell => {
-        if (cell >= 0 && cell <= 30) {
-            cellCoverage[cell]++;
-        }
-    });
+    Combinations[comboKey].push(amountPence);
 });
 
 // Expected amounts
 const expectedAmounts = [10, 50, 100, 500, 1000];
+const expectedDoubled = [10, 10, 50, 50, 100, 100, 500, 500, 1000, 1000]
 
 // Verify each combination has correct amounts
-Object.entries(splitCombinations).forEach(([combo, amounts]) => {
-    const sortedAmounts = amounts.sort((a, b) => a - b);
-    
+Object.entries(Combinations).forEach(([combo, amounts]) => {
     // Special cases for corner and street bets that should have doubled amounts (10 stakes)
+    try {
     if (combo === '25,26,28,29' || combo === '0,2,3') {
-        const expectedDoubled = [...expectedAmounts, ...expectedAmounts].sort((a, b) => a - b);
-        expect(sortedAmounts, `${combo} should have doubled amounts (10 stakes)`).to.deep.equal(expectedDoubled);
+        const expectedDouble = [...expectedDoubled];
+        expect(JSON.stringify(amounts), `${combo} should have doubled amounts (10 stakes)`).to.deep.equal(JSON.stringify(expectedDouble));
     } else {
-        const expectedSorted = [...expectedAmounts].sort((a, b) => a - b);
-        expect(sortedAmounts, `${combo} should have single amounts (5 stakes)`).to.deep.equal(expectedSorted);
+        const expected = [...expectedAmounts];
+        expect(JSON.stringify(amounts), `${combo} should have single amounts (5 stakes)`).to.deep.equal(JSON.stringify(expected));
+    }
+    } catch(err) {
+        assertionErrors.push(err.message);
     }
 });
 
-// Define all expected stakes with their types and expected counts
-const expectedStakes = [
-    { cells: [4, 7], type: "split", count: 5 },
-    { cells: [12, 15], type: "split", count: 5 },
-    { cells: [18, 21], type: "split", count: 5 },
-    { cells: [19, 22], type: "split", count: 5 },
-    { cells: [32, 35], type: "split", count: 5 },
-    { cells: [25, 26, 28, 29], type: "corner", count: 10 },
-    { cells: [0, 2, 3], type: "street", count: 10 }
-];
+            // Throw all collected errors at once if any failed
+    if (assertionErrors.length > 0) {
+        throw new Error(`Stake validation failed:\n${assertionErrors.join('\n')}`);
+    }
 
-// Verify all expected stakes exist with correct types and counts
-expectedStakes.forEach(expected => {
-    const matchingStakes = body.gameResult.integrationResultData.stakes.filter(stake => {
-        const sortedCells = [...stake.cells].sort((a, b) => a - b);
-        return JSON.stringify(sortedCells) === JSON.stringify(expected.cells) &&
-               stake.type === expected.type;
-    });
-    
-    expect(matchingStakes.length, 
-        `Should find ${expected.count} stake(s) with cells ${expected.cells} and type ${expected.type}`
-    ).to.equal(expected.count);
-});
 }); 
 });
 });

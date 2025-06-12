@@ -3,7 +3,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
         cy.visitTestEnvironment()
         cy.interceptStartGame()
-
+        const assertionErrors = []; // Array to collect stake validation errors
 
         cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game
@@ -175,7 +175,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         try {
             expect(scene.gameContainer.betPanel.list[9].text).to.include(49.80);
         } catch (err) {
-            cy.log('Assertion failed:', err.message);
+            assertionErrors.push(err.message);
         }   
         })
 
@@ -192,9 +192,6 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             const dozen_2 = [13,14,15,16,17,18,19,20,21,22,23,24]
             const dozen_3 = [25,26,27,28,29,30,31,32,33,34,35,36]
 
-
-            const stakes = body.gameResult.integrationResultData.stakes;
-
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
@@ -205,62 +202,52 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             }   
         })
              
-            try {
-                expect(body.gameResult.integrationResultData.stakes).to.have.length(15);
-            } catch (err) {
-             cy.log('Assertion failed:', err.message);
-            }
-        
             expect(body.gameResult.integrationResultData.stakes[0].cells).to.deep.equal(dozen_1)
             expect(body.gameResult.integrationResultData.stakes[1].cells).to.deep.equal(dozen_2)
             expect(body.gameResult.integrationResultData.stakes[2].cells).to.deep.equal(dozen_3)
             
-            const splitCombinations = {}; // Track each unique split pair and their amounts
-            const cellCoverage = {}; // Track how many times each number appears
-        
-            // Initialize coverage for all cells (0-60 or your max number)
-            for (let i = 0; i <= 3; i++) {
-                cellCoverage[i] = 0;
-            }
-        
-            // Process each stake
-            stakes.forEach(stake => {
-                expect(stake.type, 'All stakes should have type "dozen"').to.equal('dozen');
-        
-                const amountGBP = stake.amountsPence; // Assuming already in GBP
-                const sortedCells = [...stake.cells].sort((a, b) => a - b);
-                const comboKey = sortedCells.join(',');
-        
-                // Initialize if this split combination hasn't been tracked yet
-                if (!splitCombinations[comboKey]) {
-                    splitCombinations[comboKey] = [];
+            // Process each stake combination
+            const Combinations = {};
+                
+            body.gameResult.integrationResultData.stakes.forEach(stake => {
+                
+            const amountsPence = stake.amountsPence;
+            const comboKey = stake.cells; // Stringify for consistent key
+
+                if (!Combinations[comboKey]) {
+                    Combinations[comboKey] = [];
                 }
-        
-                // Track this amount for the split combination
-                splitCombinations[comboKey].push(amountGBP);
-        
-                // Count coverage for each cell in this split
-                stake.cells.forEach(cell => {
-                    if (cell >= 0 && cell <= 3) {
-                        cellCoverage[cell]++;
-                    }
-                });
+                Combinations[comboKey].push(amountsPence);
             });
-        
-            // Expected amounts
-            const expectedAmounts = [10, 50, 100, 500, 1000];
-        
-            // Verify each split combination has all 5 amounts exactly once
-            Object.entries(splitCombinations).forEach(([combo, amounts]) => {
-                expect(amounts.sort((a, b) => a - b), 
-                    `Corner ${combo} should have amounts 0.1, 0.5, 1, 5, 10 GBP`
-                ).to.deep.equal(expectedAmounts.sort((a, b) => a - b));
+
+            // Expected amounts in pence (assuming amountsPence is in pence)
+            const expectedAmounts = [10, 50, 100, 500, 1000]; 
+
+            // Validate each corner combination has all amounts exactly once
+            Object.entries(Combinations).forEach(([combo, amounts]) => {
+                try {
+                    expect(amounts, `Dozen ${combo} should have all amounts (0.1, 0.5, 1, 5, 10 GBP`).to.deep.equal(expectedAmounts);
+                } catch (err) {
+                    assertionErrors.push(err.message);
+                }
             });
-        });
+
+            // Check total stakes count
+            try {
+                expect(body.gameResult.integrationResultData.stakes).to.have.length(15, 'Should have 15 total stakes');
+            } catch (err) {
+                assertionErrors.push(err.message);
+            }
+
+            // Throw all collected errors at once if any failed
+            if (assertionErrors.length > 0) {
+                throw new Error(`Stake validation failed:\n${assertionErrors.join('\n')}`);
+            }
+        }) 
     }) 
 })
             
-describe('Bonus Game cells are highlighted', () => {
+describe('Bonus Game cells are not highlighted', () => {
     it('Dozen bets should not activate Bonus Game', () =>{
         cy.window().should((win) => {
             const game = win.game

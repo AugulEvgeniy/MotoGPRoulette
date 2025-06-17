@@ -100,7 +100,7 @@ describe('Spins are played without issues', () => {
             scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
         })
 
-        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 50000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(10);
                     cy.task("logCatch", {

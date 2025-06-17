@@ -364,9 +364,7 @@ describe('Rebet and reset bet are working correctly', () => {
         expect(chip[4].buttonId).to.equal(4)
         expect(win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable, 'isRaceTable is true').to.be.true
     })
-
     })
-
     }) 
 
 

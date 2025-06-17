@@ -1,0 +1,1056 @@
+{
+    "state": "COMPLETE",
+    "gameResult": {
+        "gameInstanceId": 999,
+        "stakePence": 33200,
+        "isWin": false,
+        "totalWinPence": 29880,
+        "decimalOdds": 0.0,
+        "integrationResultData": {
+            "bonusList": [],
+            "bonusWin": 0,
+            "bonusStake": 1106.6666666666665,
+            "stakes": [
+                {
+                    "type": "split",
+                    "cells": [
+                        5,
+                        8
+                    ],
+                    "buttonId": 8,
+                    "amountsPence": 10,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        13,
+                        16
+                    ],
+                    "buttonId": 16,
+                    "amountsPence": 10,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        27,
+                        30
+                    ],
+                    "buttonId": 30,
+                    "amountsPence": 10,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        33,
+                        36
+                    ],
+                    "buttonId": 36,
+                    "amountsPence": 10,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        10,
+                        11
+                    ],
+                    "buttonId": 7,
+                    "amountsPence": 10,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        23,
+                        24
+                    ],
+                    "buttonId": 16,
+                    "amountsPence": 10,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        6,
+                        9
+                    ],
+                    "buttonId": 9,
+                    "amountsPence": 10,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        14,
+                        17
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 10,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        17,
+                        20
+                    ],
+                    "buttonId": 20,
+                    "amountsPence": 10,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        31,
+                        34
+                    ],
+                    "buttonId": 34,
+                    "amountsPence": 10,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "straight",
+                    "cells": [
+                        1
+                    ],
+                    "buttonId": 1,
+                    "amountsPence": 10,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        4,
+                        7
+                    ],
+                    "buttonId": 7,
+                    "amountsPence": 10,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        12,
+                        15
+                    ],
+                    "buttonId": 15,
+                    "amountsPence": 10,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        18,
+                        21
+                    ],
+                    "buttonId": 21,
+                    "amountsPence": 10,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        19,
+                        22
+                    ],
+                    "buttonId": 22,
+                    "amountsPence": 10,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        32,
+                        35
+                    ],
+                    "buttonId": 35,
+                    "amountsPence": 10,
+                    "description": "voisins"
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        25,
+                        26,
+                        28,
+                        29
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 10,
+                    "description": "voisins"
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        25,
+                        26,
+                        28,
+                        29
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 10,
+                    "description": "voisins"
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        0,
+                        2,
+                        3
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 10,
+                    "description": "voisins"
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        0,
+                        2,
+                        3
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 10,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        5,
+                        8
+                    ],
+                    "buttonId": 8,
+                    "amountsPence": 50,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        13,
+                        16
+                    ],
+                    "buttonId": 16,
+                    "amountsPence": 50,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        27,
+                        30
+                    ],
+                    "buttonId": 30,
+                    "amountsPence": 50,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        33,
+                        36
+                    ],
+                    "buttonId": 36,
+                    "amountsPence": 50,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        10,
+                        11
+                    ],
+                    "buttonId": 7,
+                    "amountsPence": 50,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        23,
+                        24
+                    ],
+                    "buttonId": 16,
+                    "amountsPence": 50,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        6,
+                        9
+                    ],
+                    "buttonId": 9,
+                    "amountsPence": 50,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        14,
+                        17
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 50,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        17,
+                        20
+                    ],
+                    "buttonId": 20,
+                    "amountsPence": 50,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        31,
+                        34
+                    ],
+                    "buttonId": 34,
+                    "amountsPence": 50,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "straight",
+                    "cells": [
+                        1
+                    ],
+                    "buttonId": 1,
+                    "amountsPence": 50,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        4,
+                        7
+                    ],
+                    "buttonId": 7,
+                    "amountsPence": 50,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        12,
+                        15
+                    ],
+                    "buttonId": 15,
+                    "amountsPence": 50,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        18,
+                        21
+                    ],
+                    "buttonId": 21,
+                    "amountsPence": 50,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        19,
+                        22
+                    ],
+                    "buttonId": 22,
+                    "amountsPence": 50,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        32,
+                        35
+                    ],
+                    "buttonId": 35,
+                    "amountsPence": 50,
+                    "description": "voisins"
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        25,
+                        26,
+                        28,
+                        29
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 50,
+                    "description": "voisins"
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        25,
+                        26,
+                        28,
+                        29
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 50,
+                    "description": "voisins"
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        0,
+                        2,
+                        3
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 50,
+                    "description": "voisins"
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        0,
+                        2,
+                        3
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 50,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        5,
+                        8
+                    ],
+                    "buttonId": 8,
+                    "amountsPence": 100,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        13,
+                        16
+                    ],
+                    "buttonId": 16,
+                    "amountsPence": 100,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        27,
+                        30
+                    ],
+                    "buttonId": 30,
+                    "amountsPence": 100,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        33,
+                        36
+                    ],
+                    "buttonId": 36,
+                    "amountsPence": 100,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        10,
+                        11
+                    ],
+                    "buttonId": 7,
+                    "amountsPence": 100,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        23,
+                        24
+                    ],
+                    "buttonId": 16,
+                    "amountsPence": 100,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        6,
+                        9
+                    ],
+                    "buttonId": 9,
+                    "amountsPence": 100,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        14,
+                        17
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 100,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        17,
+                        20
+                    ],
+                    "buttonId": 20,
+                    "amountsPence": 100,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        31,
+                        34
+                    ],
+                    "buttonId": 34,
+                    "amountsPence": 100,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "straight",
+                    "cells": [
+                        1
+                    ],
+                    "buttonId": 1,
+                    "amountsPence": 100,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        4,
+                        7
+                    ],
+                    "buttonId": 7,
+                    "amountsPence": 100,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        12,
+                        15
+                    ],
+                    "buttonId": 15,
+                    "amountsPence": 100,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        18,
+                        21
+                    ],
+                    "buttonId": 21,
+                    "amountsPence": 100,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        19,
+                        22
+                    ],
+                    "buttonId": 22,
+                    "amountsPence": 100,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        32,
+                        35
+                    ],
+                    "buttonId": 35,
+                    "amountsPence": 100,
+                    "description": "voisins"
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        25,
+                        26,
+                        28,
+                        29
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 100,
+                    "description": "voisins"
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        25,
+                        26,
+                        28,
+                        29
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 100,
+                    "description": "voisins"
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        0,
+                        2,
+                        3
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 100,
+                    "description": "voisins"
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        0,
+                        2,
+                        3
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 100,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        5,
+                        8
+                    ],
+                    "buttonId": 8,
+                    "amountsPence": 500,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        13,
+                        16
+                    ],
+                    "buttonId": 16,
+                    "amountsPence": 500,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        27,
+                        30
+                    ],
+                    "buttonId": 30,
+                    "amountsPence": 500,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        33,
+                        36
+                    ],
+                    "buttonId": 36,
+                    "amountsPence": 500,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        10,
+                        11
+                    ],
+                    "buttonId": 7,
+                    "amountsPence": 500,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        23,
+                        24
+                    ],
+                    "buttonId": 16,
+                    "amountsPence": 500,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        6,
+                        9
+                    ],
+                    "buttonId": 9,
+                    "amountsPence": 500,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        14,
+                        17
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 500,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        17,
+                        20
+                    ],
+                    "buttonId": 20,
+                    "amountsPence": 500,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        31,
+                        34
+                    ],
+                    "buttonId": 34,
+                    "amountsPence": 500,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "straight",
+                    "cells": [
+                        1
+                    ],
+                    "buttonId": 1,
+                    "amountsPence": 500,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        4,
+                        7
+                    ],
+                    "buttonId": 7,
+                    "amountsPence": 500,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        12,
+                        15
+                    ],
+                    "buttonId": 15,
+                    "amountsPence": 500,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        18,
+                        21
+                    ],
+                    "buttonId": 21,
+                    "amountsPence": 500,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        19,
+                        22
+                    ],
+                    "buttonId": 22,
+                    "amountsPence": 500,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        32,
+                        35
+                    ],
+                    "buttonId": 35,
+                    "amountsPence": 500,
+                    "description": "voisins"
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        25,
+                        26,
+                        28,
+                        29
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 500,
+                    "description": "voisins"
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        25,
+                        26,
+                        28,
+                        29
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 500,
+                    "description": "voisins"
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        0,
+                        2,
+                        3
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 500,
+                    "description": "voisins"
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        0,
+                        2,
+                        3
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 500,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        5,
+                        8
+                    ],
+                    "buttonId": 8,
+                    "amountsPence": 1000,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        13,
+                        16
+                    ],
+                    "buttonId": 16,
+                    "amountsPence": 1000,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        27,
+                        30
+                    ],
+                    "buttonId": 30,
+                    "amountsPence": 1000,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        33,
+                        36
+                    ],
+                    "buttonId": 36,
+                    "amountsPence": 1000,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        10,
+                        11
+                    ],
+                    "buttonId": 7,
+                    "amountsPence": 1000,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        23,
+                        24
+                    ],
+                    "buttonId": 16,
+                    "amountsPence": 1000,
+                    "description": "tiers"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        6,
+                        9
+                    ],
+                    "buttonId": 9,
+                    "amountsPence": 1000,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        14,
+                        17
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 1000,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        17,
+                        20
+                    ],
+                    "buttonId": 20,
+                    "amountsPence": 1000,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        31,
+                        34
+                    ],
+                    "buttonId": 34,
+                    "amountsPence": 1000,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "straight",
+                    "cells": [
+                        1
+                    ],
+                    "buttonId": 1,
+                    "amountsPence": 1000,
+                    "description": "orphelns"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        4,
+                        7
+                    ],
+                    "buttonId": 7,
+                    "amountsPence": 1000,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        12,
+                        15
+                    ],
+                    "buttonId": 15,
+                    "amountsPence": 1000,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        18,
+                        21
+                    ],
+                    "buttonId": 21,
+                    "amountsPence": 1000,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        19,
+                        22
+                    ],
+                    "buttonId": 22,
+                    "amountsPence": 1000,
+                    "description": "voisins"
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        32,
+                        35
+                    ],
+                    "buttonId": 35,
+                    "amountsPence": 1000,
+                    "description": "voisins"
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        25,
+                        26,
+                        28,
+                        29
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 1000,
+                    "description": "voisins"
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        25,
+                        26,
+                        28,
+                        29
+                    ],
+                    "buttonId": 17,
+                    "amountsPence": 1000,
+                    "description": "voisins"
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        0,
+                        2,
+                        3
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 1000,
+                    "description": "voisins"
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        0,
+                        2,
+                        3
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 1000,
+                    "description": "voisins"
+                }
+            ],
+            "winNumber": 3
+        }
+    },
+    "wagerNumber": 1109099,
+    "startTime": "0001-01-01T00:00:00",
+    "operationResult": 0,
+    "upstream": {
+        "txId": "1109099",
+        "processedTxId": "UZqLW2qo9A",
+        "createdAt": "2025-06-13T14:46:37Z",
+        "balance": 1000,
+        "alreadyProcessed": false,
+        "status": 0,
+        "errDesc": null
+    },
+    "referenceGuid": "512e980b-9364-45a5-87cf-cca535591575"
+}

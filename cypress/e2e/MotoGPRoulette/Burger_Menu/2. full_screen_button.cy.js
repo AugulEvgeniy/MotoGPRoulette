@@ -34,8 +34,5 @@ describe('Fullscreen button', () => {
         cy.window({ timeout: 25000 }).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.settingsMenu.isFullscreenActive, 'isFullScreenActive is true').to.be.false;
         })
-
         })
-    }) 
-
-            
+    })

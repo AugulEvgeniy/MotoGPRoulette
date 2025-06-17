@@ -38,7 +38,7 @@ describe('Chips from Race Track view are displayed in Table View when entering i
             expect(race_track, 'Table View').to.be.false;
         })
 
-
+        cy.wait(200)
         cy.window({ timeout: 25000 }).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].buttonId).to.equal(31);
             expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[1].buttonId).to.equal(14);

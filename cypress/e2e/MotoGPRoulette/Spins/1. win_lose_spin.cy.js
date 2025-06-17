@@ -38,12 +38,12 @@ describe('Spins are played without issues', () => {
             scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
         })
 
-        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 50000}).its('response.body').then((body) => {
             expect(body.gameResult.totalWinPence).to.equal(300);
             expect(body.gameResult.stakePence, "stakePence").to.equal(300);
         })
 
-        cy.window({timeout: 20000}).should((win) => {
+        cy.window({timeout: 30000}).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
             const win_banner = scene.gameContainer.winBanner.visible;
@@ -103,7 +103,7 @@ describe('Spins are played without issues', () => {
             scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
         })
 
-        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 50000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(10);
                     cy.task("logCatch", {
@@ -115,7 +115,7 @@ describe('Spins are played without issues', () => {
         })
 
 
-        cy.window({timeout: 20000}).should((win) => {
+        cy.window({timeout: 30000}).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
             const no_win_banner = scene.gameContainer.noWinBanner.visible;

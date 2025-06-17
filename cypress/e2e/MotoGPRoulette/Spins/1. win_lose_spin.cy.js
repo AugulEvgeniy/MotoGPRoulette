@@ -12,7 +12,6 @@ describe('Spins are played without issues', () => {
             expect(start_button, 'Game is loaded').to.be.true
         })
 
-        cy.wait(5000)
         cy.get('#open_button').click()
         cy.get('#chip').select(2)
         cy.get('#open_button').click({force: true})
@@ -39,12 +38,12 @@ describe('Spins are played without issues', () => {
             scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
         })
 
-        cy.wait('@startGame', { timeout: 50000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             expect(body.gameResult.totalWinPence).to.equal(300);
             expect(body.gameResult.stakePence, "stakePence").to.equal(300);
         })
 
-        cy.window({timeout: 50000}).should((win) => {
+        cy.window({timeout: 20000}).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
             const win_banner = scene.gameContainer.winBanner.visible;
@@ -90,17 +89,21 @@ describe('Spins are played without issues', () => {
         cy.get('#set_state').click()
         cy.get('#close_button').click()
 
+        cy.wait(2000)
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-
             scene.gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown')
+        })
 
-            cy.wait(50)
+        cy.wait(2000)
+        cy.window().then((win) => {
+            const game = win.game
+            const scene = game.scene.scenes[1]
             scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
         })
 
-        cy.wait('@startGame', { timeout: 50000}).its('response.body').then((body) => {
+        cy.wait('@startGame', { timeout: 25000}).its('response.body').then((body) => {
             try {
                 expect(body.gameResult.stakePence).to.equal(10);
                     cy.task("logCatch", {

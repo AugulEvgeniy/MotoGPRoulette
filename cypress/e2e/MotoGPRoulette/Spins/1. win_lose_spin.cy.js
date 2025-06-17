@@ -4,7 +4,6 @@ describe('Spins are played without issues', () => {
         cy.visitTestEnvironment()
         cy.interceptStartGame()
 
-
         cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]

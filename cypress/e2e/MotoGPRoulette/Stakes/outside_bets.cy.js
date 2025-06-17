@@ -27,6 +27,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             expect(chip).to.include("chip_0")
         })
 
+        cy.wait(500)
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]

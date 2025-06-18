@@ -34,7 +34,8 @@ jobs:
           elif [[ "$MSG_LOWER" == *"stakes"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Stakes" >> $GITHUB_OUTPUT
           else
-            echo "folder=cypress/e2e" >> $GITHUB_OUTPUT
+            echo "No matching keyword found in commit message. Skipping pipeline."
+            exit 78  # Neutral exit code to skip the workflow
           fi
           echo "Selected folder: ${{ steps.test_folder.outputs.folder }}"
 

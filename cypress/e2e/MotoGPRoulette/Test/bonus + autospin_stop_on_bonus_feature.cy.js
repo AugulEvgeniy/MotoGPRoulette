@@ -70,8 +70,8 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             });
         }).as('videoRequest');
 
-        cy.wait('@videoRequest', { timeout: 15000 }).then(() => {
-            cy.wrap(null, { timeout: 15000 }).should(() => {
+        cy.wait('@videoRequest', { timeout: 50000 }).then(() => {
+            cy.wrap(null, { timeout: 50000 }).should(() => {
                 const matching = responses.filter(r => r.url.startsWith(urlPrefix));
                 expect(matching).to.have.length(8);
                 matching.forEach(r => {

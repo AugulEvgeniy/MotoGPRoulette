@@ -25,16 +25,14 @@ jobs:
     
           TITLE_LOWER=$(echo "$PR_TITLE" | tr '[:upper:]' '[:lower:]')
     
-          if [[ "$TITLE_LOWER" == *"burger"* ]]; then
-            echo "folder=cypress/e2e/MotoGPRoulette/Burger_Menu" >> $GITHUB_OUTPUT
+          if [[ "$TITLE_LOWER" == *"test"* ]]; then
+            echo "folder=cypress/e2e/MotoGPRoulette/Test" >> $GITHUB_OUTPUT
           elif [[ "$TITLE_LOWER" == *"features"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Features" >> $GITHUB_OUTPUT
           elif [[ "$TITLE_LOWER" == *"spins"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Spins" >> $GITHUB_OUTPUT
           elif [[ "$TITLE_LOWER" == *"stakes"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Stakes" >> $GITHUB_OUTPUT
-          elif [[ "$TITLE_LOWER" == *"test"* ]]; then
-            echo "folder=cypress/e2e/MotoGPRoulette/Test" >> $GITHUB_OUTPUT
           else
             echo "folder=cypress/e2e" >> $GITHUB_OUTPUT
           fi

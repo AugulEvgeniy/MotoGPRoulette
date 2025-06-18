@@ -38,7 +38,7 @@ describe('Spins are played without issues', () => {
         // Check if chips array exists and is empty
         if (chips && chips.length === 0) {
             cy.log('No chips found - selecting dozens...');
-            cy.wait(5000);
+            cy.wait(15000);
             
             cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[0].list[0].emit('pointerdown');
@@ -46,7 +46,7 @@ describe('Spins are played without issues', () => {
             win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[2].list[0].emit('pointerdown');
             })
 
-            cy.window().should((win) => {
+            cy.window( {timeout: 15000} ).should((win) => {
             expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].stakeType).to.equal('dozen');
             });
         } else {

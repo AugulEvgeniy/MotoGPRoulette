@@ -38,7 +38,7 @@ describe('Spins are played without issues', () => {
         // Check if chips array exists and is empty
         if (chips && chips.length === 0) {
             cy.log('No chips found - selecting dozens...');
-            cy.wait(50000);
+            cy.wait(5000);
             
             cy.window().then((win) => {
             win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[0].list[0].emit('pointerdown');

@@ -7,7 +7,6 @@ on:
 
 jobs:
   cypress-run:
-    if: contains(github.event.pull_request.title, 'test')
     runs-on: ubuntu-24.04
     env:
       NODE_VERSION: 22
@@ -16,22 +15,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Needed to get commit history
 
-      - name: Determine test folder from PR title
+      - name: Determine test folder from commit message
         id: test_folder
         run: |
-          PR_TITLE="${{ github.event.pull_request.title }}"
-          echo "PR Title: $PR_TITLE"
+          # Get the most recent commit message in the PR
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+          echo "Commit Message: $COMMIT_MSG"
     
-          TITLE_LOWER=$(echo "$PR_TITLE" | tr '[:upper:]' '[:lower:]')
+          MSG_LOWER=$(echo "$COMMIT_MSG" | tr '[:upper:]' '[:lower:]')
     
-          if [[ "$TITLE_LOWER" == *"test"* ]]; then
+          if [[ "$MSG_LOWER" == *"test"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Test" >> $GITHUB_OUTPUT
-          elif [[ "$TITLE_LOWER" == *"features"* ]]; then
+          elif [[ "$MSG_LOWER" == *"features"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Features" >> $GITHUB_OUTPUT
-          elif [[ "$TITLE_LOWER" == *"spins"* ]]; then
+          elif [[ "$MSG_LOWER" == *"spins"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Spins" >> $GITHUB_OUTPUT
-          elif [[ "$TITLE_LOWER" == *"stakes"* ]]; then
+          elif [[ "$MSG_LOWER" == *"stakes"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Stakes" >> $GITHUB_OUTPUT
           else
             echo "folder=cypress/e2e" >> $GITHUB_OUTPUT

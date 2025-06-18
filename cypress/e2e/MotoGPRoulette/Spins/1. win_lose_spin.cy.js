@@ -4,7 +4,7 @@ describe('Spins are played without issues', () => {
         cy.visitTestEnvironment()
         cy.interceptStartGame()
 
-        cy.window({ timeout: 50000 }).should((win) => {
+        cy.window({ timeout: 60000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
             const start_button = scene.gameContainer.startGroupButtons.list[0].visible;

@@ -96,7 +96,10 @@ describe('Spins are played without issues', () => {
             scene.gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown')
         })
 
-        cy.wait(2000)
+        cy.window({timeout: 30000}).should((win) => {
+            expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].stakeType).to.equal('dozen');
+        })
+
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]

@@ -27,15 +27,17 @@ describe('Spins are played without issues', () => {
         })
 
         cy.window().then((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
+            win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[0].list[0].emit('pointerdown')
+            win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown')
+            win.game.scene.scenes[1].gameContainer.stakeSelector.dozensButtons[2].list[0].emit('pointerdown')
+        })
 
-            scene.gameContainer.stakeSelector.dozensButtons[0].list[0].emit('pointerdown')
-            scene.gameContainer.stakeSelector.dozensButtons[1].list[0].emit('pointerdown')
-            scene.gameContainer.stakeSelector.dozensButtons[2].list[0].emit('pointerdown')
+        cy.window({timeout: 30000}).should((win) => {
+            expect(win.game.scene.scenes[1].gameContainer.stakeSelector.chips[0].stakeType).to.equal('dozen');
+        })
 
-            cy.wait(50)
-            scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
+        cy.window().then((win) => {
+            win.game.scene.scenes[1].gameContainer.startGroupButtons.list[0].emit('pointerdown')
         })
 
         cy.wait('@startGame', { timeout: 50000}).its('response.body').then((body) => {

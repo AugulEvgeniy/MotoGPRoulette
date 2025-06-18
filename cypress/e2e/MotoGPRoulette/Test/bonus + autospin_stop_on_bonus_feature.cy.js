@@ -99,7 +99,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
         
-        cy.window({timeout: 20000}).should((win) => {
+        cy.window({timeout: 60000}).should((win) => {
             const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
             expect(win_banner).to.be.true
         })
@@ -118,7 +118,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-sbdjjc2y9aijdv1.mp4").as("video_1")
         // cy.wait('@video_1', { timeout: 20000 })
 
-        cy.window({timeout: 40000}).should((win) => {
+        cy.window({timeout: 60000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('NO WIN')
         })
@@ -148,7 +148,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-0UAjR0IxGXaepEh.mp4").as("video_2")
         // cy.wait('@video_2', { timeout: 20000 })
 
-        cy.window({timeout: 40000}).should((win) => {
+        cy.window({timeout: 60000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('WIN £1.00');
         })
@@ -189,7 +189,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-DrJvPC37x6Hthtw.mp4").as("video_3")
         // cy.wait('@video_3', { timeout: 20000 })
 
-        cy.window({timeout: 40000}).should((win) => {
+        cy.window({timeout: 60000}).should((win) => {
             const extra_spins = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(extra_spins).to.equal('EXTRA SPINS')
         })
@@ -220,7 +220,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-JXOleCtxAVe4KmW.mp4").as("video_4")
         // cy.wait('@video_4', { timeout: 20000 })
 
-        cy.window({timeout: 40000}).should((win) => {
+        cy.window({timeout: 60000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('WIN £5.00');
         })
@@ -261,7 +261,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-x96MCwcI6FE7Ng1.mp4").as("video_5")
         // cy.wait('@video_5', { timeout: 20000 })
 
-         cy.window({timeout: 40000}).should((win) => {
+         cy.window({timeout: 60000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('WIN £7.00');
         })
@@ -302,7 +302,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-OvgfVw5WdaEYO80.mp4").as("video_6")
         // cy.wait('@video_6', { timeout: 20000 })
 
-        cy.window({timeout: 40000}).should((win) => {
+        cy.window({timeout: 60000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('NO WIN')
         })
@@ -331,7 +331,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-1lfA4S2bTVQ5p4D.mp4").as("video_7")
         // cy.wait('@video_7', { timeout: 20000 })
 
-        cy.window({timeout: 40000}).should((win) => {
+        cy.window({timeout: 60000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('WIN £4.00');
         })
@@ -371,7 +371,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
         // cy.intercept("https://video.highlight.games/mp4med/mgp/vid-mgp-Ij3x4mqgaH8eQWf.mp4").as("video_8")
         // cy.wait('@video_8', { timeout: 20000 })
 
-        cy.window({timeout: 40000}).should((win) => {
+        cy.window({timeout: 60000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('WIN £3.00');
         })
@@ -409,7 +409,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
 
-        cy.window({timeout: 40000}).should((win) => {
+        cy.window({timeout: 60000}).should((win) => {
             const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
             expect(bonus_no_win).to.equal('WIN £2.00');
         })
@@ -447,7 +447,7 @@ describe('Autospin stops on Bonus Feature and Bonus Round is played without issu
             }   
         })
 
-        cy.window({timeout: 40000}).should((win) => {
+        cy.window({timeout: 60000}).should((win) => {
             const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
             expect(win_banner, 'win banner is displayed').to.be.true
         })

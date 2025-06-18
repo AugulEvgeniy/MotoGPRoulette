@@ -1,10 +1,13 @@
 name: Cypress Tests (Chrome Only)
 
-on: 
-  push
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches: [main, master]
 
 jobs:
   cypress-run:
+    if: contains(github.event.pull_request.title, 'test')
     runs-on: ubuntu-24.04
     env:
       NODE_VERSION: 22
@@ -13,37 +16,35 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Needed to get commit history
 
-      - name: Determine test folder from commit message
+      - name: Init submodules
+        run: git submodule update --init --recursive
+
+      - name: Determine test folder from PR title
         id: test_folder
         run: |
-          # Get the most recent commit message in the PR
-          COMMIT_MSG=$(git log -1 --pretty=%B)
-          echo "Commit Message: $COMMIT_MSG"
-    
-          MSG_LOWER=$(echo "$COMMIT_MSG" | tr '[:upper:]' '[:lower:]')
-    
-          if [[ "$MSG_LOWER" == *"test"* ]]; then
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          echo "PR Title: $PR_TITLE"
+
+          TITLE_LOWER=$(echo "$PR_TITLE" | tr '[:upper:]' '[:lower:]')
+
+          if [[ "$TITLE_LOWER" == *"test"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Test" >> $GITHUB_OUTPUT
-          elif [[ "$MSG_LOWER" == *"features"* ]]; then
+          elif [[ "$TITLE_LOWER" == *"features"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Features" >> $GITHUB_OUTPUT
-          elif [[ "$MSG_LOWER" == *"spins"* ]]; then
+          elif [[ "$TITLE_LOWER" == *"spins"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Spins" >> $GITHUB_OUTPUT
-          elif [[ "$MSG_LOWER" == *"stakes"* ]]; then
+          elif [[ "$TITLE_LOWER" == *"stakes"* ]]; then
             echo "folder=cypress/e2e/MotoGPRoulette/Stakes" >> $GITHUB_OUTPUT
           else
-            echo "No matching keyword found in commit message. Skipping pipeline."
-            exit 78  # Neutral exit code to skip the workflow
+            echo "folder=cypress/e2e" >> $GITHUB_OUTPUT
           fi
-          echo "Selected folder: ${{ steps.test_folder.outputs.folder }}"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          # кеширование npm убрано, т.к. lock-файла нет в сабмодуле
 
       - name: Cache node_modules and .npm
         uses: actions/cache@v4
@@ -51,16 +52,18 @@ jobs:
         with:
           path: |
             ~/.npm
-            node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+            external-test/node_modules
+          key: ${{ runner.os }}-node-modules-external-test
           restore-keys: |
-            ${{ runner.os }}-node-modules-
+            ${{ runner.os }}-node-modules-external-test
 
       - name: Install dependencies (if needed)
         if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm ci
+        working-directory: external-test
+        run: npm install
 
       - name: Verify mochawesome packages
+        working-directory: external-test
         run: npm list mochawesome mochawesome-merge mochawesome-report-generator
 
       - name: Cache Cypress binary
@@ -68,51 +71,60 @@ jobs:
         id: cypress-cache
         with:
           path: ~/.cache/Cypress
-          key: ${{ runner.os }}-cypress-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-cypress-external-test
 
       - name: Create reports directory
-        run: mkdir -p cypress/reports/chrome
+        run: mkdir -p external-test/reports/chrome
+
+      - name: Show test folder and list test files
+        working-directory: external-test
+        run: |
+          echo "Test folder is: ${{ steps.test_folder.outputs.folder }}"
+          ls -l ${{ steps.test_folder.outputs.folder }}/**/*.cy.js || echo "No test files found"
 
       - name: Run Cypress tests in Chrome
+        working-directory: external-test
         env:
-          TERM: xterm  # Fixes the "tput" error
+          TERM: xterm
         run: |
           npx cypress run \
             --browser chrome \
             --spec "${{ steps.test_folder.outputs.folder }}/**/*.cy.js" \
             --reporter mochawesome \
-            --reporter-options "reportDir=cypress/reports/chrome,overwrite=false,html=false,json=true" \
+            --reporter-options "reportDir=reports/chrome,overwrite=false,html=false,json=true" \
             --config video=true
+
+      - name: List generated reports after Cypress run
+        working-directory: external-test
+        run: |
+          ls -l reports/chrome || echo "No reports directory found"
+          ls -l reports/chrome/*.json || echo "No JSON reports found"
 
       - name: Merge Mochawesome reports
         if: always()
+        working-directory: external-test
         run: |
-          npx mochawesome-merge@4.2.2 cypress/reports/chrome/*.json > cypress/reports/chrome/merged-report.json
+          npx mochawesome-merge reports/chrome/*.json > reports/chrome/merged-report.json
 
       - name: Generate HTML reports
         if: always()
+        working-directory: external-test
         run: |
-          npx marge cypress/reports/chrome/merged-report.json \
-            --reportDir cypress/reports/chrome \
+          npx marge reports/chrome/merged-report.json \
+            --reportDir reports/chrome \
             --reportFilename chrome-report.html \
             --inline
-
-      - name: Verify reports exist
-        if: always()
-        run: |
-          ls -la cypress/reports/chrome/
-          test -f cypress/reports/chrome/chrome-report.html || echo "HTML report missing"
 
       - name: Upload HTML Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: chrome-test-report
-          path: cypress/reports/chrome/chrome-report.html
+          path: external-test/reports/chrome/chrome-report.html
 
       - name: Upload Test Videos
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: chrome-test-videos
-          path: cypress/videos
+          path: external-test/cypress/videos

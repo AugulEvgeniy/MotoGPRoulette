@@ -1,4 +1,4 @@
-name: Cypress Tests (Last Commit Message Trigger)
+name: Cypress Tests (Commit Message Triggers)
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ jobs:
     env:
       NODE_VERSION: 22
       CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
-
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,46 +21,60 @@ jobs:
       - name: Init submodules
         run: git submodule update --init --recursive
 
-      - name: Get last commit message
-        id: get-commit
+      - name: Check for brackets in commit messages
+        id: check-commits
         run: |
-          LAST_COMMIT_MSG=$(git log -1 --pretty=%B)
-          echo "last_commit_message=$LAST_COMMIT_MSG" >> $GITHUB_OUTPUT
-          echo "Last commit message: $LAST_COMMIT_MSG"
-
-      - name: Check for brackets in last commit message
-        id: check-commit
-        run: |
-          if echo "${{ steps.get-commit.outputs.last_commit_message }}" | grep -q "\[.*\]"; then
+          COMMIT_MESSAGES=$(git log --pretty=%B origin/${{ github.base_ref }}..HEAD)
+          if echo "$COMMIT_MESSAGES" | grep -q "\[.*\]"; then
             echo "has_brackets=true" >> $GITHUB_OUTPUT
+            echo "commit_messages<<EOF" >> $GITHUB_OUTPUT
+            echo "$COMMIT_MESSAGES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
           else
             echo "has_brackets=false" >> $GITHUB_OUTPUT
-            echo "No brackets found in last commit message"
+            echo "No commit messages with square brackets found"
           fi
 
-      - name: Determine test specs from last commit message
-        if: steps.check-commit.outputs.has_brackets == 'true'
+      - name: Determine combined test specs
+        if: steps.check-commits.outputs.has_brackets == 'true'
         id: test_specs
         run: |
-          MSG_LOWER=$(echo "${{ steps.get-commit.outputs.last_commit_message }}" | tr '[:upper:]' '[:lower:]')
+          # Initialize spec list
           SPECS=""
+          
+          # Convert to lowercase for case-insensitive matching
+          MSG_LOWER=$(echo "${{ steps.check-commits.outputs.commit_messages }}" | tr '[:upper:]' '[:lower:]')
+          echo "Analyzing commit messages: $MSG_LOWER"
 
-          [[ "$MSG_LOWER" == *"[spins]"* ]] && SPECS+="cypress/e2e/MotoGPRoulette/Spins/Spins.cy.js,"
-          [[ "$MSG_LOWER" == *"[features]"* ]] && SPECS+="cypress/e2e/MotoGPRoulette/Features/Features.cy.js,"
-          [[ "$MSG_LOWER" == *"[bonus]"* ]] && SPECS+="cypress/e2e/MotoGPRoulette/Spins/bonus + autospin_stop_on_bonus_feature.cy.js,"
-          [[ "$MSG_LOWER" == *"[bets]"* ]] && SPECS+="cypress/e2e/MotoGPRoulette/Stakes/inside_bets.cy.js,"
-          [[ "$MSG_LOWER" == *"[bets]"* ]] && SPECS+="cypress/e2e/MotoGPRoulette/Stakes/outside_bets.cy.js,"
-          [[ "$MSG_LOWER" == *"[bets]"* ]] && SPECS+="cypress/e2e/MotoGPRoulette/Stakes/race_sectors_bets.cy.js,"
-
-          SPECS=${SPECS%,} # Remove trailing comma
-
-          if [ -z "$SPECS" ]; then
-            echo "No test specs matched."
-            exit 1
+          # Check for each tag and append corresponding specs
+          if [[ "$MSG_LOWER" == *"[spins]"* ]]; then
+            SPECS+="cypress/e2e/MotoGPRoulette/Spins/Spins.cy.js,"
+          fi
+          
+          if [[ "$MSG_LOWER" == *"[features]"* ]]; then
+            SPECS+="cypress/e2e/MotoGPRoulette/Features/Features.cy.js,"
+          fi
+          
+          if [[ "$MSG_LOWER" == *"[bonus]"* ]]; then
+            SPECS+="cypress/e2e/MotoGPRoulette/Spins/bonus + autospin_stop_on_bonus_feature.cy.js,"
+          fi
+          
+          if [[ "$MSG_LOWER" == *"[bets]"* ]]; then
+            SPECS+="cypress/e2e/MotoGPRoulette/Stakes/inside_bets.cy.js,"
+            SPECS+="cypress/e2e/MotoGPRoulette/Stakes/outside_bets.cy.js,"
+            SPECS+="cypress/e2e/MotoGPRoulette/Stakes/race_sectors_bets.cy.js,"
           fi
 
+          # Remove trailing comma if exists
+          SPECS=${SPECS%,}
+          
+          if [ -z "$SPECS" ]; then
+            echo "No matching tags found in commit messages"
+            exit 1
+          fi
+          
           echo "specs=$SPECS" >> $GITHUB_OUTPUT
-          echo "Matched test specs: $SPECS"
+          echo "Combined test specs: $SPECS"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -117,7 +131,7 @@ jobs:
           done
 
       - name: Run Cypress tests in Chrome
-        if: steps.check-commit.outputs.has_brackets == 'true'
+        if: steps.check-commits.outputs.has_brackets == 'true'
         working-directory: external
         env:
           TERM: xterm

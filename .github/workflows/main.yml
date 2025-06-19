@@ -35,40 +35,35 @@ jobs:
       - name: Determine test specs
         if: steps.last-commit.outputs.has_brackets == 'true'
         id: test_specs
+        shell: bash
         run: |
           MSG_LOWER=$(echo "${{ steps.last-commit.outputs.commit_msg }}" | tr '[:upper:]' '[:lower:]')
           SPECS=""
           
-          # Extract comma-separated tags between brackets
           if [[ "$MSG_LOWER" =~ \[([^]]+)\] ]]; then
             TAGS_STR="${BASH_REMATCH[1]}"
             IFS=',' read -ra TAGS <<< "$TAGS_STR"
             
-            # Check each tag individually
             for tag in "${TAGS[@]}"; do
-              tag=$(echo "$tag" | xargs)  # Trim whitespace
+              tag=$(echo "$tag" | xargs)
               case "$tag" in
                 *spins*)
-                  SPECS+="cypress/e2e/MotoGPRoulette/Spins/Spins.cy.js,"
-                  ;;
+                  SPECS+="cypress/e2e/MotoGPRoulette/Spins/Spins.cy.js," ;;
                 *features*)
-                  SPECS+="cypress/e2e/MotoGPRoulette/Features/Features.cy.js,"
-                  ;;
+                  SPECS+="cypress/e2e/MotoGPRoulette/Features/Features.cy.js," ;;
                 *bonus*)
-                  SPECS+="cypress/e2e/MotoGPRoulette/Spins/bonus + autospin_stop_on_bonus_feature.cy.js,"
-                  ;;
+                  SPECS+="cypress/e2e/MotoGPRoulette/Spins/bonus + autospin_stop_on_bonus_feature.cy.js," ;;
                 *bets*)
                   SPECS+="cypress/e2e/MotoGPRoulette/Stakes/inside_bets.cy.js,"
                   SPECS+="cypress/e2e/MotoGPRoulette/Stakes/outside_bets.cy.js,"
-                  SPECS+="cypress/e2e/MotoGPRoulette/Stakes/race_sectors_bets.cy.js,"
-                  ;;
+                  SPECS+="cypress/e2e/MotoGPRoulette/Stakes/race_sectors_bets.cy.js," ;;
               esac
             done
           fi
 
           SPECS=${SPECS%,}
           [ -z "$SPECS" ] && { echo "No valid tags found"; exit 1; }
-          
+
           echo "specs=$SPECS" >> $GITHUB_OUTPUT
           echo "Test specs: $SPECS"
 

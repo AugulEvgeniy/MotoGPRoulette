@@ -1,9 +1,11 @@
 describe('All stake objects are sent and validated. Total Bet value and Balance updates correctly in UI', () => {
     it('"type": "straight", 100 stake objects with every stake value', () =>{
 
-        cy.visitTestEnvironment()
+        // cy.visitTestEnvironment()
         cy.interceptStartGame()
         const assertionErrors = []; // Array to collect stake validation errors
+        const testUrl = 'http://localhost:8000/?productId=riwo-extern-1pt&lang=EN&currency=GBP&go=staging&serverAddress=https%3A%2F%2Friw-dev.olsworth.com&home=https://google.com'
+        cy.visit(testUrl, { timeout: 100000 })
 
         cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game

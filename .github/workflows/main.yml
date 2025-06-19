@@ -1,4 +1,4 @@
-name: Cypress Tests (Chrome Only)
+name: Cypress Tests (Commit Message Triggers)
 
 on:
   pull_request:
@@ -7,37 +7,74 @@ on:
 
 jobs:
   cypress-run:
-    if: contains(github.event.pull_request.title, 'HMR')
     runs-on: ubuntu-24.04
     env:
       NODE_VERSION: 22
       CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
-
+    
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Init submodules
         run: git submodule update --init --recursive
 
-      - name: Determine test folder from PR title
-        id: test_folder
+      - name: Check for brackets in commit messages
+        id: check-commits
         run: |
-          PR_TITLE="${{ github.event.pull_request.title }}"
-          echo "PR Title: $PR_TITLE"
-          TITLE_LOWER=$(echo "$PR_TITLE" | tr '[:upper:]' '[:lower:]')
-
-          if [[ "$TITLE_LOWER" == *"HMR"* ]]; then
-            echo "folder=cypress/e2e/MotoGPRoulette/Test" >> $GITHUB_OUTPUT
-          elif [[ "$TITLE_LOWER" == *"features"* ]]; then
-            echo "folder=cypress/e2e/MotoGPRoulette/Features" >> $GITHUB_OUTPUT
-          elif [[ "$TITLE_LOWER" == *"spins"* ]]; then
-            echo "folder=cypress/e2e/MotoGPRoulette/Spins" >> $GITHUB_OUTPUT
-          elif [[ "$TITLE_LOWER" == *"stakes"* ]]; then
-            echo "folder=cypress/e2e/MotoGPRoulette/Stakes" >> $GITHUB_OUTPUT
+          COMMIT_MESSAGES=$(git log --pretty=%B origin/${{ github.base_ref }}..HEAD)
+          if echo "$COMMIT_MESSAGES" | grep -q "\[.*\]"; then
+            echo "has_brackets=true" >> $GITHUB_OUTPUT
+            echo "commit_messages<<EOF" >> $GITHUB_OUTPUT
+            echo "$COMMIT_MESSAGES" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
           else
-            echo "folder=cypress/e2e" >> $GITHUB_OUTPUT
+            echo "has_brackets=false" >> $GITHUB_OUTPUT
+            echo "No commit messages with square brackets found"
           fi
+
+      - name: Determine combined test specs
+        if: steps.check-commits.outputs.has_brackets == 'true'
+        id: test_specs
+        run: |
+          # Initialize spec list
+          SPECS=""
+          
+          # Convert to lowercase for case-insensitive matching
+          MSG_LOWER=$(echo "${{ steps.check-commits.outputs.commit_messages }}" | tr '[:upper:]' '[:lower:]')
+          echo "Analyzing commit messages: $MSG_LOWER"
+
+          # Check for each tag and append corresponding specs
+          if [[ "$MSG_LOWER" == *"[spins]"* ]]; then
+            SPECS+="cypress/e2e/MotoGPRoulette/Spins/Spins.cy.js,"
+          fi
+          
+          if [[ "$MSG_LOWER" == *"[features]"* ]]; then
+            SPECS+="cypress/e2e/MotoGPRoulette/Features/Features.cy.js,"
+          fi
+          
+          if [[ "$MSG_LOWER" == *"[bonus]"* ]]; then
+            SPECS+="cypress/e2e/MotoGPRoulette/Spins/bonus + autospin_stop_on_bonus_feature.cy.js,"
+          fi
+          
+          if [[ "$MSG_LOWER" == *"[bets]"* ]]; then
+            SPECS+="cypress/e2e/MotoGPRoulette/Stakes/inside_bets.cy.js,"
+            SPECS+="cypress/e2e/MotoGPRoulette/Stakes/outside_bets.cy.js,"
+            SPECS+="cypress/e2e/MotoGPRoulette/Stakes/race_sector_bets.cy.js,"
+          fi
+
+          # Remove trailing comma if exists
+          SPECS=${SPECS%,}
+          
+          if [ -z "$SPECS" ]; then
+            echo "No matching tags found in commit messages"
+            exit 1
+          fi
+          
+          echo "specs=$SPECS" >> $GITHUB_OUTPUT
+          echo "Combined test specs: $SPECS"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -58,7 +95,7 @@ jobs:
         working-directory: external
         run: npm install
 
-      - name: Install wait-on (ensure available)
+      - name: Install wait-on
         run: npm install --no-save wait-on
 
       - name: Cache Cypress binary
@@ -77,32 +114,40 @@ jobs:
           npx serve -s dist -l 8000 &
         continue-on-error: false
 
-      - name: Wait for local server to start
+      - name: Wait for local server
         run: npx wait-on http://localhost:8000
 
       - name: Check if server is up
         run: |
           curl -I http://localhost:8000 || (echo "Server not running!" && exit 1)
 
-      - name: Show test folder and list test files
+      - name: Show test specs
         working-directory: external
         run: |
-          echo "Test folder is: ${{ steps.test_folder.outputs.folder }}"
-          ls -l ${{ steps.test_folder.outputs.folder }}/**/*.cy.js || echo "No test files found"
+          echo "Test specs: ${{ steps.test_specs.outputs.specs }}"
+          IFS=',' read -ra SPEC_ARRAY <<< "${{ steps.test_specs.outputs.specs }}"
+          for spec in "${SPEC_ARRAY[@]}"; do
+            ls -l "$spec" || echo "Test file not found: $spec"
+          done
 
       - name: Run Cypress tests in Chrome
+        if: steps.check-commits.outputs.has_brackets == 'true'
         working-directory: external
         env:
           TERM: xterm
         run: |
-          npx cypress run \
-            --browser chrome \
-            --spec "${{ steps.test_folder.outputs.folder }}/**/*.cy.js" \
-            --reporter mochawesome \
-            --reporter-options "reportDir=reports/chrome,overwrite=false,html=false,json=true" \
-            --config video=true,chromeWebSecurity=false
+          IFS=',' read -ra SPEC_ARRAY <<< "${{ steps.test_specs.outputs.specs }}"
+          for spec in "${SPEC_ARRAY[@]}"; do
+            echo "Running test: $spec"
+            npx cypress run \
+              --browser chrome \
+              --spec "$spec" \
+              --reporter mochawesome \
+              --reporter-options "reportDir=reports/chrome,overwrite=false,html=false,json=true" \
+              --config video=true,chromeWebSecurity=false
+          done
 
-      - name: List generated reports after Cypress run
+      - name: List generated reports
         working-directory: external
         run: |
           ls -l reports/chrome || echo "No reports directory found"

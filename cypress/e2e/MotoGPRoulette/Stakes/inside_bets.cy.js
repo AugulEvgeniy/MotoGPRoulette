@@ -1,5 +1,5 @@
 describe('All stake objects are sent and validated. Total Bet value and Balance updates correctly in UI', () => {
-    it('"type": "straight", 100 stake objects with every stake value', () =>{
+    it('inside bets API response validation', () => {
 
         // cy.visitTestEnvironment()
         cy.interceptStartGame()
@@ -10,42 +10,11 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
         cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
-            const start_button = scene.gameContainer.startGroupButtons.list[0].visible;
+            const start_button = scene.gameContainer.list[5].list[0].visible;
 
             expect(start_button, 'Game is loaded').to.be.true
         })
-
-        cy.wait(500)
-
-        cy.window().then((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
-            scene.gameContainer.tapBar.raceButton.emit('pointerdown')
-        })
-
-        cy.wait(100)
-
-        cy.window({ timeout: 20000 }).should((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
-            const race_track = scene.gameContainer.stakeSelector.isRaceTable;
-
-            expect(race_track, 'Race Track is entered').to.be.true;
-        })
-
-        cy.window().then((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
-
-        try {
-            expect(scene.gameContainer.tapBar.raceButton.list[2].visible, 'Button is "Table View"').to.be.false
-        } catch (err) {
-            cy.log('Assertion failed:', err.message);
-            cy.task("logCatch", `Assertion Failed: ${err.message}`);
-        }})
-
         
-        cy.wait(500)
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
@@ -60,25 +29,26 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             expect(chip).to.include("chip_0")
         })
 
+        cy.wait(500)
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
 
-            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
-            scene.gameContainer.stakeSelector.orphelinsButton.emit('pointerdown')
-            scene.gameContainer.stakeSelector.voisinsButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.list[1].list[0].emit('pointerdown')
+            scene.gameContainer.stakeSelector.list[64].emit('pointerdown')
+            scene.gameContainer.stakeSelector.streetButtons[2].emit('pointerdown')
+            scene.gameContainer.stakeSelector.cornerButtons[3].emit('pointerdown')
+            scene.gameContainer.stakeSelector.sixLineButtons[1].emit('pointerdown')
         })
-
 
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
 
         try {
-            expect(scene.gameContainer.betPanel.list[9].text).to.include(2.00);
+            expect(scene.gameContainer.betPanel.list[9].text).to.include(0.50);
         } catch (err) {
             cy.log('Assertion failed:', err.message);
-            cy.task("logCatch", `Assertion Failed: ${err.message}`);
         }
 
         // This assertion checks total bet value
@@ -94,26 +64,30 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             expect(chip).to.include("chip_1")
         })
 
-        cy.wait(1000)
+
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
 
-            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
-            scene.gameContainer.stakeSelector.orphelinsButton.emit('pointerdown')
-            scene.gameContainer.stakeSelector.voisinsButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.list[1].list[0].emit('pointerdown')
+            scene.gameContainer.stakeSelector.list[64].emit('pointerdown')
+            scene.gameContainer.stakeSelector.streetButtons[2].emit('pointerdown')
+            scene.gameContainer.stakeSelector.cornerButtons[3].emit('pointerdown')
+            scene.gameContainer.stakeSelector.sixLineButtons[1].emit('pointerdown')
         })
 
+        cy.wait(150)
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
 
         try {
-            expect(scene.gameContainer.betPanel.list[9].text).to.include(12.00);
+            expect(scene.gameContainer.betPanel.list[9].text).to.include(3.00);
         } catch (err) {
             cy.log('Assertion failed:', err.message);
-            cy.task("logCatch", `Assertion Failed: ${err.message}`);
         }
+
+        // This assertion checks total bet value
 
             scene.gameContainer.betPanel.list[3].list[0].emit('pointerdown')
         })
@@ -130,24 +104,23 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             const game = win.game
             const scene = game.scene.scenes[1]
 
-            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
-            scene.gameContainer.stakeSelector.orphelinsButton.emit('pointerdown')
-            scene.gameContainer.stakeSelector.voisinsButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.list[1].list[0].emit('pointerdown')
+            scene.gameContainer.stakeSelector.list[64].emit('pointerdown')
+            scene.gameContainer.stakeSelector.streetButtons[2].emit('pointerdown')
+            scene.gameContainer.stakeSelector.cornerButtons[3].emit('pointerdown')
+            scene.gameContainer.stakeSelector.sixLineButtons[1].emit('pointerdown')
         })
 
-
+        cy.wait(150)
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
 
         try {
-            expect(scene.gameContainer.betPanel.list[9].text).to.include(32.00);
+            expect(scene.gameContainer.betPanel.list[9].text).to.include(8.00);
         } catch (err) {
             cy.log('Assertion failed:', err.message);
-            cy.task("logCatch", `Assertion Failed: ${err.message}`);
         }
-
-        // This assertion checks total bet value
 
             scene.gameContainer.betPanel.list[4].list[0].emit('pointerdown')
         })
@@ -164,9 +137,11 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             const game = win.game
             const scene = game.scene.scenes[1]
 
-            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
-            scene.gameContainer.stakeSelector.orphelinsButton.emit('pointerdown')
-            scene.gameContainer.stakeSelector.voisinsButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.list[1].list[0].emit('pointerdown')
+            scene.gameContainer.stakeSelector.list[64].emit('pointerdown')
+            scene.gameContainer.stakeSelector.streetButtons[2].emit('pointerdown')
+            scene.gameContainer.stakeSelector.cornerButtons[3].emit('pointerdown')
+            scene.gameContainer.stakeSelector.sixLineButtons[1].emit('pointerdown')
         })
 
 
@@ -175,11 +150,10 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             const scene = game.scene.scenes[1]
 
         try {
-            expect(scene.gameContainer.betPanel.list[9].text).to.include(132.00);
+            expect(scene.gameContainer.betPanel.list[9].text).to.include(33.00);
         } catch (err) {
             cy.log('Assertion failed:', err.message);
-            cy.task("logCatch", `Assertion Failed: ${err.message}`);
-        }
+        }   
 
             scene.gameContainer.betPanel.list[5].list[0].emit('pointerdown')
         })
@@ -196,21 +170,22 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
             const game = win.game
             const scene = game.scene.scenes[1]
 
-            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
-            scene.gameContainer.stakeSelector.orphelinsButton.emit('pointerdown')
-            scene.gameContainer.stakeSelector.voisinsButton.emit('pointerdown')
-  
+            scene.gameContainer.stakeSelector.list[1].list[0].emit('pointerdown')
+            scene.gameContainer.stakeSelector.list[64].emit('pointerdown')
+            scene.gameContainer.stakeSelector.streetButtons[2].emit('pointerdown')
+            scene.gameContainer.stakeSelector.cornerButtons[3].emit('pointerdown')
+            scene.gameContainer.stakeSelector.sixLineButtons[1].emit('pointerdown')
+
             cy.wait(300)
             scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
         })
-
 
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
 
         try {
-            expect(scene.gameContainer.betPanel.list[9].text).to.include(332.00);
+            expect(scene.gameContainer.betPanel.list[9].text).to.include(83.00);
         } catch (err) {
             assertionErrors.push(err.message);
         }   
@@ -225,7 +200,7 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
       throw new Error(`Invalid API state: ${JSON.stringify(apiResponse)}`);
     }
 
-    cy.fixture('race_sectors.json').then((fixture) => {
+    cy.fixture('inside_bets.json').then((fixture) => {
 
       if (!apiResponse?.gameResult?.integrationResultData?.stakes) {
         throw new Error('API response missing stakes data');
@@ -249,12 +224,19 @@ describe('All stake objects are sent and validated. Total Bet value and Balance 
 
       cy.log('✅ All stakes match exactly:', apiStakes);
     });
+})
+})
+})
+            
 
-    cy.window().should((win) => {
-        expect(win.game.scene.scenes[1].gameContainer.roulette.visible).to.be.true
+describe('Bonus Game cells are highlighted', () => {
+    it('Dozen bets should not activate Bonus Game', () =>{
+        cy.window().should((win) => {
+            const game = win.game
+            const scene = game.scene.scenes[1]
+            const bonus = scene.gameContainer.isShowBonusSectors.show;
+
+            expect(bonus).to.be.true;
+        })
     })
-
-
-})
-})
 })

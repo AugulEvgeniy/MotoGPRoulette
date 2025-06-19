@@ -1,0 +1,286 @@
+{
+    "state": "COMPLETE",
+    "gameResult": {
+        "gameInstanceId": 999,
+        "stakePence": 8300,
+        "isWin": false,
+        "totalWinPence": 0,
+        "decimalOdds": 0.0,
+        "integrationResultData": {
+            "bonusList": [],
+            "bonusWin": 0,
+            "bonusStake": 0,
+            "stakes": [
+                {
+                    "type": "straight",
+                    "cells": [
+                        1
+                    ],
+                    "buttonId": 1,
+                    "amountsPence": 10
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        1,
+                        4
+                    ],
+                    "buttonId": 4,
+                    "amountsPence": 10
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        7,
+                        8,
+                        9
+                    ],
+                    "buttonId": 3,
+                    "amountsPence": 10
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        5,
+                        6,
+                        8,
+                        9
+                    ],
+                    "buttonId": 4,
+                    "amountsPence": 10
+                },
+                {
+                    "type": "six_line",
+                    "cells": [
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 10
+                },
+                {
+                    "type": "straight",
+                    "cells": [
+                        1
+                    ],
+                    "buttonId": 1,
+                    "amountsPence": 50
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        1,
+                        4
+                    ],
+                    "buttonId": 4,
+                    "amountsPence": 50
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        7,
+                        8,
+                        9
+                    ],
+                    "buttonId": 3,
+                    "amountsPence": 50
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        5,
+                        6,
+                        8,
+                        9
+                    ],
+                    "buttonId": 4,
+                    "amountsPence": 50
+                },
+                {
+                    "type": "six_line",
+                    "cells": [
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 50
+                },
+                {
+                    "type": "straight",
+                    "cells": [
+                        1
+                    ],
+                    "buttonId": 1,
+                    "amountsPence": 100
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        1,
+                        4
+                    ],
+                    "buttonId": 4,
+                    "amountsPence": 100
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        7,
+                        8,
+                        9
+                    ],
+                    "buttonId": 3,
+                    "amountsPence": 100
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        5,
+                        6,
+                        8,
+                        9
+                    ],
+                    "buttonId": 4,
+                    "amountsPence": 100
+                },
+                {
+                    "type": "six_line",
+                    "cells": [
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 100
+                },
+                {
+                    "type": "straight",
+                    "cells": [
+                        1
+                    ],
+                    "buttonId": 1,
+                    "amountsPence": 500
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        1,
+                        4
+                    ],
+                    "buttonId": 4,
+                    "amountsPence": 500
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        7,
+                        8,
+                        9
+                    ],
+                    "buttonId": 3,
+                    "amountsPence": 500
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        5,
+                        6,
+                        8,
+                        9
+                    ],
+                    "buttonId": 4,
+                    "amountsPence": 500
+                },
+                {
+                    "type": "six_line",
+                    "cells": [
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 500
+                },
+                {
+                    "type": "straight",
+                    "cells": [
+                        1
+                    ],
+                    "buttonId": 1,
+                    "amountsPence": 1000
+                },
+                {
+                    "type": "split",
+                    "cells": [
+                        1,
+                        4
+                    ],
+                    "buttonId": 4,
+                    "amountsPence": 1000
+                },
+                {
+                    "type": "street",
+                    "cells": [
+                        7,
+                        8,
+                        9
+                    ],
+                    "buttonId": 3,
+                    "amountsPence": 1000
+                },
+                {
+                    "type": "corner",
+                    "cells": [
+                        5,
+                        6,
+                        8,
+                        9
+                    ],
+                    "buttonId": 4,
+                    "amountsPence": 1000
+                },
+                {
+                    "type": "six_line",
+                    "cells": [
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                    ],
+                    "buttonId": 2,
+                    "amountsPence": 1000
+                }
+            ],
+            "winNumber": 20
+        }
+    },
+    "wagerNumber": 1117253,
+    "startTime": "0001-01-01T00:00:00",
+    "operationResult": 0,
+    "upstream": {
+        "txId": "1117253",
+        "processedTxId": "0aZEY2pZLR",
+        "createdAt": "2025-06-19T10:48:39Z",
+        "balance": 1000,
+        "alreadyProcessed": false,
+        "status": 0,
+        "errDesc": null
+    },
+    "referenceGuid": "bd090df6-283a-4cac-abcf-2c3e852f9b1f"
+}

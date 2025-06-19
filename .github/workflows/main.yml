@@ -11,7 +11,7 @@ jobs:
     env:
       NODE_VERSION: 22
       CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
-
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,22 +21,14 @@ jobs:
       - name: Init submodules
         run: git submodule update --init --recursive
 
-      - name: Get last commit message
-        id: get-commit
-        run: |
-          LAST_COMMIT_MSG=$(git log -1 --pretty=%B)
-          echo "last_commit_message<<EOF" >> $GITHUB_OUTPUT
-          echo "$LAST_COMMIT_MSG" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-      - name: Check for brackets in last commit
+      - name: Check for brackets in commit messages
         id: check-commits
         run: |
-          COMMIT_MSG="${{ steps.get-commit.outputs.last_commit_message }}"
-          if echo "$COMMIT_MSG" | grep -q "\[.*\]"; then
+          COMMIT_MESSAGES=$(git log --pretty=%B origin/${{ github.base_ref }}..HEAD)
+          if echo "$COMMIT_MESSAGES" | grep -q "\[.*\]"; then
             echo "has_brackets=true" >> $GITHUB_OUTPUT
             echo "commit_messages<<EOF" >> $GITHUB_OUTPUT
-            echo "$COMMIT_MSG" >> $GITHUB_OUTPUT
+            echo "$COMMIT_MESSAGES" >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
           else
             echo "has_brackets=false" >> $GITHUB_OUTPUT
@@ -47,21 +39,42 @@ jobs:
         if: steps.check-commits.outputs.has_brackets == 'true'
         id: test_specs
         run: |
-          MSG_LOWER=$(echo "${{ steps.check-commits.outputs.commit_messages }}" | tr '[:upper:]' '[:lower:]')
+          # Initialize spec list
           SPECS=""
+          
+          # Convert to lowercase for case-insensitive matching
+          MSG_LOWER=$(echo "${{ steps.check-commits.outputs.commit_messages }}" | tr '[:upper:]' '[:lower:]')
+          echo "Analyzing commit messages: $MSG_LOWER"
 
-          [[ "$MSG_LOWER" == *"[spins]"* ]] && SPECS+="cypress/e2e/MotoGPRoulette/Spins/Spins.cy.js,"
-          [[ "$MSG_LOWER" == *"[features]"* ]] && SPECS+="cypress/e2e/MotoGPRoulette/Features/Features.cy.js,"
-          [[ "$MSG_LOWER" == *"[bonus]"* ]] && SPECS+="cypress/e2e/MotoGPRoulette/Spins/bonus + autospin_stop_on_bonus_feature.cy.js,"
-          [[ "$MSG_LOWER" == *"[bets]"* ]] && SPECS+="cypress/e2e/MotoGPRoulette/Stakes/inside_bets.cy.js,"
-          [[ "$MSG_LOWER" == *"[bets]"* ]] && SPECS+="cypress/e2e/MotoGPRoulette/Stakes/outside_bets.cy.js,"
-          [[ "$MSG_LOWER" == *"[bets]"* ]] && SPECS+="cypress/e2e/MotoGPRoulette/Stakes/race_sectors_bets.cy.js,"
+          # Check for each tag and append corresponding specs
+          if [[ "$MSG_LOWER" == *"[spins]"* ]]; then
+            SPECS+="cypress/e2e/MotoGPRoulette/Spins/Spins.cy.js,"
+          fi
+          
+          if [[ "$MSG_LOWER" == *"[features]"* ]]; then
+            SPECS+="cypress/e2e/MotoGPRoulette/Features/Features.cy.js,"
+          fi
+          
+          if [[ "$MSG_LOWER" == *"[bonus]"* ]]; then
+            SPECS+="cypress/e2e/MotoGPRoulette/Spins/bonus + autospin_stop_on_bonus_feature.cy.js,"
+          fi
+          
+          if [[ "$MSG_LOWER" == *"[bets]"* ]]; then
+            SPECS+="cypress/e2e/MotoGPRoulette/Stakes/inside_bets.cy.js,"
+            SPECS+="cypress/e2e/MotoGPRoulette/Stakes/outside_bets.cy.js,"
+            SPECS+="cypress/e2e/MotoGPRoulette/Stakes/race_sectors_bets.cy.js,"
+          fi
 
-          # Remove trailing comma
+          # Remove trailing comma if exists
           SPECS=${SPECS%,}
-
+          
+          if [ -z "$SPECS" ]; then
+            echo "No matching tags found in commit messages"
+            exit 1
+          fi
+          
           echo "specs=$SPECS" >> $GITHUB_OUTPUT
-          echo "Matched specs: $SPECS"
+          echo "Combined test specs: $SPECS"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -109,7 +122,6 @@ jobs:
           curl -I http://localhost:8000 || (echo "Server not running!" && exit 1)
 
       - name: Show test specs
-        if: steps.check-commits.outputs.has_brackets == 'true'
         working-directory: external
         run: |
           echo "Test specs: ${{ steps.test_specs.outputs.specs }}"
@@ -136,7 +148,6 @@ jobs:
           done
 
       - name: List generated reports
-        if: steps.check-commits.outputs.has_brackets == 'true'
         working-directory: external
         run: |
           ls -l reports/chrome || echo "No reports directory found"

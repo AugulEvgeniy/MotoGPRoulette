@@ -18,7 +18,6 @@ jobs:
         with:
           fetch-depth: 0
           submodules: 'recursive'
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get last commit message
         id: last-commit
@@ -129,7 +128,7 @@ jobs:
           done
 
       - name: Run Cypress tests in Chrome
-        if: steps.check-commits.outputs.has_brackets == 'true'
+        if: steps.last-commit.outputs.has_brackets == 'true'
         working-directory: external
         env:
           TERM: xterm

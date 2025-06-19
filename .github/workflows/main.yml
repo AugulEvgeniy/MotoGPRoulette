@@ -1,4 +1,4 @@
-name: Cypress Tests (Last Commit Trigger)
+name: Cypress Tests (Fixed Specs Passing)
 
 on:
   pull_request:
@@ -18,6 +18,7 @@ jobs:
         with:
           fetch-depth: 0
           submodules: 'recursive'
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get last commit message
         id: last-commit
@@ -35,38 +36,52 @@ jobs:
       - name: Determine test specs
         if: steps.last-commit.outputs.has_brackets == 'true'
         id: test_specs
-        shell: bash
         run: |
           MSG_LOWER=$(echo "${{ steps.last-commit.outputs.commit_msg }}" | tr '[:upper:]' '[:lower:]')
-          SPECS=""
+          echo "Processing commit message: $MSG_LOWER"
           
-          if [[ "$MSG_LOWER" =~ \[([^]]+)\] ]]; then
-            TAGS_STR="${BASH_REMATCH[1]}"
-            IFS=',' read -ra TAGS <<< "$TAGS_STR"
-            
-            for tag in "${TAGS[@]}"; do
-              tag=$(echo "$tag" | xargs)
-              case "$tag" in
-                *spins*)
-                  SPECS+="cypress/e2e/MotoGPRoulette/Spins/Spins.cy.js," ;;
-                *features*)
-                  SPECS+="cypress/e2e/MotoGPRoulette/Features/Features.cy.js," ;;
-                *bonus*)
-                  SPECS+="cypress/e2e/MotoGPRoulette/Spins/bonus + autospin_stop_on_bonus_feature.cy.js," ;;
-                *bets*)
-                  SPECS+="cypress/e2e/MotoGPRoulette/Stakes/inside_bets.cy.js,"
-                  SPECS+="cypress/e2e/MotoGPRoulette/Stakes/outside_bets.cy.js,"
-                  SPECS+="cypress/e2e/MotoGPRoulette/Stakes/race_sectors_bets.cy.js," ;;
-              esac
-            done
+          # Initialize JSON array
+          SPECS_JSON="["
+          
+          # Check for each tag
+          if [[ "$MSG_LOWER" == *"[spins]"* ]]; then
+            SPECS_JSON+="\"cypress/e2e/MotoGPRoulette/Spins/Spins.cy.js\","
           fi
+          if [[ "$MSG_LOWER" == *"[features]"* ]]; then
+            SPECS_JSON+="\"cypress/e2e/MotoGPRoulette/Features/Features.cy.js\","
+          fi
+          if [[ "$MSG_LOWER" == *"[bonus]"* ]]; then
+            SPECS_JSON+="\"cypress/e2e/MotoGPRoulette/Spins/bonus + autospin_stop_on_bonus_feature.cy.js\","
+          fi
+          if [[ "$MSG_LOWER" == *"[bets]"* ]]; then
+            SPECS_JSON+="\"cypress/e2e/MotoGPRoulette/Stakes/inside_bets.cy.js\","
+            SPECS_JSON+="\"cypress/e2e/MotoGPRoulette/Stakes/outside_bets.cy.js\","
+            SPECS_JSON+="\"cypress/e2e/MotoGPRoulette/Stakes/race_sectors_bets.cy.js\","
+          fi
+          
+          # Remove trailing comma and close array
+          SPECS_JSON="${SPECS_JSON%,}]"
+          
+          if [ "$SPECS_JSON" == "]" ]; then
+            echo "No matching tags found"
+            exit 1
+          fi
+          
+          # Convert JSON array to comma-separated string
+          SPECS_STRING=$(echo "$SPECS_JSON" | jq -r '. | join(",")')
+          
+          echo "specs=$SPECS_STRING" >> $GITHUB_OUTPUT
+          echo "Test specs: $SPECS_STRING"
+          echo "Test specs JSON: $SPECS_JSON"
 
-          SPECS=${SPECS%,}
-          [ -z "$SPECS" ] && { echo "No valid tags found"; exit 1; }
-
-          echo "specs=$SPECS" >> $GITHUB_OUTPUT
-          echo "Test specs: $SPECS"
-
+      - name: Verify test specs output
+        if: steps.last-commit.outputs.has_brackets == 'true'
+        run: |
+          echo "Test specs output: ${{ steps.test_specs.outputs.specs }}"
+          if [ -z "${{ steps.test_specs.outputs.specs }}" ]; then
+            echo "Error: No test specs were generated"
+            exit 1
+          fi
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

@@ -3,7 +3,7 @@ name: Cypress Tests (Commit Message Triggers)
 on:
   pull_request:
     types: [opened, reopened, synchronize]
-    branches: [main, master]
+    branches: [master]
 
 jobs:
   cypress-run:

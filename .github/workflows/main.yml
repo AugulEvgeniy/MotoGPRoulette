@@ -24,7 +24,7 @@ jobs:
       - name: Check for brackets in commit messages
         id: check-commits
         run: |
-          COMMIT_MESSAGES=$(git log --pretty=%B origin/${{ github.base_ref }}..HEAD)
+          COMMIT_MESSAGES=$(git log -1 --pretty=%B)
           if echo "$COMMIT_MESSAGES" | grep -q "\[.*\]"; then
             echo "has_brackets=true" >> $GITHUB_OUTPUT
             echo "commit_messages<<EOF" >> $GITHUB_OUTPUT

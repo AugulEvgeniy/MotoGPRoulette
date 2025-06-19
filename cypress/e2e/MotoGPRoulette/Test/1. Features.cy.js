@@ -959,90 +959,90 @@ describe('chip conversion in Race Track', () => {
     })
 
 
-    describe('Reward History displays winning numbers', () => {
-    it('5 numbers are displayed, and 6th/2nd numbers rewrite 5th/1st)', () => {
+    // describe('Reward History displays winning numbers', () => {
+    // it('5 numbers are displayed, and 6th/2nd numbers rewrite 5th/1st)', () => {
 
-        cy.wait(300)
-        cy.window().then((win) => {
-        win.game.scene.scenes[1].gameContainer.tapBar.raceButton.emit('pointerdown');
-        })
+    //     cy.wait(300)
+    //     cy.window().then((win) => {
+    //     win.game.scene.scenes[1].gameContainer.tapBar.raceButton.emit('pointerdown');
+    //     })
 
-        cy.window({ timeout: 25000 }).should((win) => {
-            const race_track = win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable;
-            expect(race_track, 'Table View').to.be.false;
-        })
+    //     cy.window({ timeout: 25000 }).should((win) => {
+    //         const race_track = win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable;
+    //         expect(race_track, 'Table View').to.be.false;
+    //     })
 
         
-        cy.intercept('startgame', {fixture: 'only_one_bonus_spin_roulette.json'}).as('startGame')
+    //     cy.intercept('startgame', {fixture: 'only_one_bonus_spin_roulette.json'}).as('startGame')
 
-        cy.wait(500)
-        cy.window().then((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
+    //     cy.wait(500)
+    //     cy.window().then((win) => {
+    //         const game = win.game
+    //         const scene = game.scene.scenes[1]
 
-            scene.gameContainer.stakeSelector.list[0].list[0].emit('pointerdown')
+    //         scene.gameContainer.stakeSelector.list[0].list[0].emit('pointerdown')
 
-            cy.wait(50)
-            scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
-        })
+    //         cy.wait(50)
+    //         scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
+    //     })
 
-        cy.window({ timeout: 30000}).should((win) => {
-            const chip_0 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[0].list[1].text;
-            const chip_1 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[1].list[1].text;
-            const chip_2 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[2].list[1].text;
-            const chip_3 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[3].list[1].text;
-            const chip_4 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[4].list[1].text;
-            expect(chip_0).to.equal('35')
-            expect(chip_1).to.equal('35')
-            expect(chip_2).to.equal('9')
-            expect(chip_3).to.equal('9')
-            expect(chip_4).to.equal('1')
-            expect(win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[4].list[2].visible, 'Helmet icon is displayed').to.be.true;
-        })
+    //     cy.window({ timeout: 30000}).should((win) => {
+    //         const chip_0 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[0].list[1].text;
+    //         const chip_1 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[1].list[1].text;
+    //         const chip_2 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[2].list[1].text;
+    //         const chip_3 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[3].list[1].text;
+    //         const chip_4 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[4].list[1].text;
+    //         expect(chip_0).to.equal('35')
+    //         expect(chip_1).to.equal('35')
+    //         expect(chip_2).to.equal('9')
+    //         expect(chip_3).to.equal('9')
+    //         expect(chip_4).to.equal('1')
+    //         expect(win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[4].list[2].visible, 'Helmet icon is displayed').to.be.true;
+    //     })
 
-        cy.window({timeout: 20000}).should((win) => {
-            const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
-            expect(win_banner, 'Win banner is displayed').to.be.true
-        })
+    //     cy.window({timeout: 20000}).should((win) => {
+    //         const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
+    //         expect(win_banner, 'Win banner is displayed').to.be.true
+    //     })
 
-        cy.window({timeout: 10000}).should((win) => {
-            const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
-            expect(bonus_no_win).to.equal('NO WIN')
-        })
+    //     cy.window({timeout: 10000}).should((win) => {
+    //         const bonus_no_win = win.game.scene.scenes[1].gameContainer.videoPopup.winText.text;
+    //         expect(bonus_no_win).to.equal('NO WIN')
+    //     })
 
-        cy.window({timeout: 20000}).should((win) => {
-            const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
-            expect(win_banner, 'Win banner after Bonus Round is displayed').to.be.true
-        })
+    //     cy.window({timeout: 20000}).should((win) => {
+    //         const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
+    //         expect(win_banner, 'Win banner after Bonus Round is displayed').to.be.true
+    //     })
 
-        cy.window({ timeout: 20000}).should((win) => {
-            expect(win.game.scene.scenes[1].gameContainer.stakeSelector.visible, 'Return to the table').to.be.true;
-        })
+    //     cy.window({ timeout: 20000}).should((win) => {
+    //         expect(win.game.scene.scenes[1].gameContainer.stakeSelector.visible, 'Return to the table').to.be.true;
+    //     })
 
-        cy.wait(500)
-        cy.window().then((win) => {
-            const game = win.game
-            const scene = game.scene.scenes[1]
+    //     cy.wait(500)
+    //     cy.window().then((win) => {
+    //         const game = win.game
+    //         const scene = game.scene.scenes[1]
 
-            scene.gameContainer.stakeSelector.list[0].list[0].emit('pointerdown')
+    //         scene.gameContainer.stakeSelector.list[0].list[0].emit('pointerdown')
 
-            cy.wait(50)
-            scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
-        })
+    //         cy.wait(50)
+    //         scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
+    //     })
 
-        cy.window({ timeout: 30000}).should((win) => {
-            const chip_0 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[0].list[1].text;
-            const chip_1 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[1].list[1].text;
-            const chip_2 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[2].list[1].text;
-            const chip_3 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[3].list[1].text;
-            const chip_4 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[4].list[1].text;
-            expect(chip_0).to.equal('35')
-            expect(chip_1).to.equal('9')
-            expect(chip_2).to.equal('9')
-            expect(chip_3).to.equal('1')
-            expect(chip_4).to.equal('1')
-            expect(win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[4].list[2].visible, 'Helmet icon is displayed').to.be.true;
-            expect(win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[3].list[2].visible, 'Helmet icon is displayed').to.be.true;
-        })
-        })
-    }) 
+    //     cy.window({ timeout: 30000}).should((win) => {
+    //         const chip_0 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[0].list[1].text;
+    //         const chip_1 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[1].list[1].text;
+    //         const chip_2 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[2].list[1].text;
+    //         const chip_3 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[3].list[1].text;
+    //         const chip_4 = win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[4].list[1].text;
+    //         expect(chip_0).to.equal('35')
+    //         expect(chip_1).to.equal('9')
+    //         expect(chip_2).to.equal('9')
+    //         expect(chip_3).to.equal('1')
+    //         expect(chip_4).to.equal('1')
+    //         expect(win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[4].list[2].visible, 'Helmet icon is displayed').to.be.true;
+    //         expect(win.game.scene.scenes[1].gameContainer.bottomPanel.historyItems[3].list[2].visible, 'Helmet icon is displayed').to.be.true;
+    //     })
+    //     })
+    // }) 

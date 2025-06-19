@@ -62,7 +62,7 @@ jobs:
           if [[ "$MSG_LOWER" == *"[bets]"* ]]; then
             SPECS+="cypress/e2e/MotoGPRoulette/Stakes/inside_bets.cy.js,"
             SPECS+="cypress/e2e/MotoGPRoulette/Stakes/outside_bets.cy.js,"
-            SPECS+="cypress/e2e/MotoGPRoulette/Stakes/race_sector_bets.cy.js,"
+            SPECS+="cypress/e2e/MotoGPRoulette/Stakes/race_sectors_bets.cy.js,"
           fi
 
           # Remove trailing comma if exists

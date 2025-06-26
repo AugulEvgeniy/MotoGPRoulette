@@ -1,10 +1,10 @@
 describe('Autospin stops on Bonus Feature and Bonus Round is played without issues with extra spins', () => {
     it('Should check that "Spins Left" counter updates correctly, correct multipliers are displayed, total winnings updates correctly, autospin does not continue after Bonus Round', () => {
 
-        cy.visitTestEnvironment()
+        // cy.visitTestEnvironment()
         cy.intercept('startgame', { fixture: 'extra_spins_roulette.json'}).as('startGame')
-        // const testUrl = 'http://localhost:8000/?productId=riwo-extern-1pt&lang=EN&currency=GBP&go=staging&serverAddress=https%3A%2F%2Friw-dev.olsworth.com&home=https://google.com'
-        // cy.visit(testUrl, { timeout: 100000 })
+        const testUrl = 'http://localhost:8000/?productId=riwo-extern-1pt&lang=EN&currency=GBP&go=staging&serverAddress=https%3A%2F%2Friw-dev.olsworth.com&home=https://google.com'
+        cy.visit(testUrl, { timeout: 100000 })
 
 
         cy.window({ timeout: 50000 }).should((win) => {

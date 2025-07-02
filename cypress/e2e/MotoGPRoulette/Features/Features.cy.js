@@ -1,10 +1,10 @@
 describe('Rebet and reset bet are working correctly', () => {
     it('Should check that all of types of bets are displayed after rebetting', () => {
 
-        cy.visitTestEnvironment()
+        // cy.visitTestEnvironment()
         cy.interceptStartGame()
-        // const testUrl = 'http://localhost:8000/?productId=riwo-extern-1pt&lang=EN&currency=GBP&go=staging&serverAddress=https%3A%2F%2Friw-dev.olsworth.com&home=https://google.com'
-        // cy.visit(testUrl, { timeout: 100000 })
+        const testUrl = 'http://localhost:8000/?productId=riwo-extern-1pt&lang=EN&currency=GBP&go=staging&serverAddress=https%3A%2F%2Friw-dev.olsworth.com&home=https://google.com'
+        cy.visit(testUrl, { timeout: 100000 })
 
         cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game

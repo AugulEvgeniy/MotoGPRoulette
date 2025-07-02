@@ -78,8 +78,6 @@ View test videos if any failures occurred
 
 Note: The pipeline will only execute when commit messages contain at least one valid tag in square brackets.
 
-text
-
 ### Key Formatting Features:
 1. **Emoji Headers** for better visual scanning
 2. **Bold Markdown** (`**text**`) for important elements

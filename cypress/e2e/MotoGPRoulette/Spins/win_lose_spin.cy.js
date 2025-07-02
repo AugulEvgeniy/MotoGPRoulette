@@ -12,6 +12,8 @@ describe('Spins are played without issues', () => {
             expect(start_button, 'Game is loaded').to.be.true
         })
 
+        // a
+
         cy.get('#open_button').click()
         cy.get('#chip').select(2)
         cy.get('#open_button').click({force: true})

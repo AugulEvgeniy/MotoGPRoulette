@@ -30,7 +30,8 @@ jobs:
             echo "EOF" >> $GITHUB_OUTPUT
           else
             echo "has_brackets=false" >> $GITHUB_OUTPUT
-            echo "No commit messages with square brackets found"
+            echo "⏭️ No square brackets found. Skipping tests."
+            exit 78  # GitHub-specific "neutral exit" to skip remaining steps
           fi
       - name: Determine combined test specs
         if: steps.check-commits.outputs.has_brackets == 'true'

@@ -1,11 +1,11 @@
 describe("limits can't be exceded through multiply", () => {
     it('should display limit pop-up on multiplying 10 chip on a straight bet 3 times', () => {
 
-        // cy.visitTestEnvironment();
+        cy.visitTestEnvironment();
         cy.interceptStartGame();
         cy.interceptBalance();
-        const testUrl = 'http://localhost:8000/?productId=riwo-extern-1pt&lang=EN&currency=GBP&go=staging&serverAddress=https%3A%2F%2Friw-dev.olsworth.com&home=https://google.com'
-        cy.visit(testUrl, { timeout: 100000 })
+        // const testUrl = 'http://localhost:8000/?productId=riwo-extern-1pt&lang=EN&currency=GBP&go=staging&serverAddress=https%3A%2F%2Friw-dev.olsworth.com&home=https://google.com'
+        // cy.visit(testUrl, { timeout: 100000 })
 
         cy.window({ timeout: 50000 }).should((win) => {
             const game = win.game
@@ -75,4 +75,140 @@ describe("limits can't be exceded through multiply", () => {
     })
 
 
+describe('Tiers/voisins/orphelins limits', () => {
+    it('Max bet on Tiers is 600', () => {
 
+        cy.window().then((win) => {
+            const game = win.game
+            const scene = game.scene.scenes[1]
+            scene.gameContainer.tapBar.raceButton.emit('pointerdown')
+        })
+
+            cy.wait(100)
+
+            cy.window({ timeout: 20000 }).should((win) => {
+            const game = win.game
+            const scene = game.scene.scenes[1]
+            const race_track = scene.gameContainer.stakeSelector.isRaceTable;
+
+            expect(race_track, 'Race Track is entered').to.be.true;
+        })
+
+        cy.wait(350)
+        cy.window().then((win) => {
+            const game = win.game
+            const scene = game.scene.scenes[1]
+
+            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
+        })
+
+        cy.window({timeout: 5000}).should((win) => {
+            expect(win.game.scene.scenes[1].gameContainer.betPanel.list[9].text, "10 chips with value 10 were placed").to.include(600);
+        })
+
+        cy.window().then((win) => {
+            const game = win.game
+            const scene = game.scene.scenes[1]
+
+            scene.gameContainer.stakeSelector.tiersButton.emit('pointerdown')
+        })
+
+        cy.window({ timeout: 5000 }).should((win) => {
+            const limit = win.game.scene.scenes[1].gameContainer.limitPopup.visible;
+            expect (limit, 'limit pop-up is displayed').to.be.true;
+        })
+        })
+        })
+    
+
+describe('Tiers/voisins/orphelins limits', () => {
+    it('Max bet on Orphelins is 250', () => {
+
+
+        cy.window().then((win) => {
+            const game = win.game
+            const scene = game.scene.scenes[1]
+            scene.gameContainer.startGroupButtons.resetButton.emit('pointerdown')
+        })
+
+        cy.wait(350)
+        cy.window().then((win) => {
+            const game = win.game
+            const scene = game.scene.scenes[1]
+
+            scene.gameContainer.stakeSelector.orphelinsButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.orphelinsButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.orphelinsButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.orphelinsButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.orphelinsButton.emit('pointerdown')
+        })
+
+        cy.window({timeout: 5000}).should((win) => {
+            expect(win.game.scene.scenes[1].gameContainer.betPanel.list[9].text, "5 chips with value 10 were placed").to.include(250);
+        })
+
+        cy.window().then((win) => {
+            const game = win.game
+            const scene = game.scene.scenes[1]
+
+            scene.gameContainer.stakeSelector.orphelinsButton.emit('pointerdown')
+        })
+
+        cy.window({ timeout: 5000 }).should((win) => {
+            const limit = win.game.scene.scenes[1].gameContainer.limitPopup.visible;
+            expect (limit, 'limit pop-up is displayed').to.be.true;
+        })
+        })
+        })
+
+
+describe('Tiers/voisins/orphelins limits', () => {
+    it('Max bet on Voisins is 630', () => {
+
+
+        cy.window().then((win) => {
+            const game = win.game
+            const scene = game.scene.scenes[1]
+            scene.gameContainer.startGroupButtons.resetButton.emit('pointerdown')
+        })
+
+        cy.wait(350)
+        cy.window().then((win) => {
+            const game = win.game
+            const scene = game.scene.scenes[1]
+
+            scene.gameContainer.stakeSelector.voisinsButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.voisinsButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.voisinsButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.voisinsButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.voisinsButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.voisinsButton.emit('pointerdown')
+            scene.gameContainer.stakeSelector.voisinsButton.emit('pointerdown')
+        })
+
+        cy.window({timeout: 5000}).should((win) => {
+            expect(win.game.scene.scenes[1].gameContainer.betPanel.list[9].text, "7 chips with value 10 were placed").to.include(630);
+        })
+
+        cy.window().then((win) => {
+            const game = win.game
+            const scene = game.scene.scenes[1]
+
+            scene.gameContainer.stakeSelector.orphelinsButton.emit('pointerdown')
+        })
+
+        cy.window({ timeout: 5000 }).should((win) => {
+            const limit = win.game.scene.scenes[1].gameContainer.limitPopup.visible;
+            expect (limit, 'limit pop-up is displayed').to.be.true;
+        })
+        })
+        })

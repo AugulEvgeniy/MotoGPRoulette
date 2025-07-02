@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Init submodules
-        run: git submodule update --init --recursive
+        run: git submodule update --init --recursive --remote
       - name: Check for brackets in commit messages
         id: check-commits
         run: |
@@ -62,7 +62,7 @@ jobs:
                 ;;
               limits)
                 echo "Matched tag: limits"
-                SPECS+="cypress/e2e/MotoGPRoulette/Spins/limit_multiply.cy.js,"
+                SPECS+="cypress/e2e/MotoGPRoulette/Limits/limit_multiply.cy.js,"
                 ;;
               bets)
                 echo "Matched tag: bets"

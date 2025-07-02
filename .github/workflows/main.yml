@@ -60,6 +60,10 @@ jobs:
                 echo "Matched tag: bonus"
                 SPECS+="cypress/e2e/MotoGPRoulette/Spins/bonus_and_autospin_stop_on_bonus_feature.cy.js,"
                 ;;
+              limits)
+                echo "Matched tag: limits"
+                SPECS+="cypress/e2e/MotoGPRoulette/Spins/limit_multiply.cy.js,"
+                ;;
               bets)
                 echo "Matched tag: bets"
                 SPECS+="cypress/e2e/MotoGPRoulette/Stakes/inside_bets.cy.js,"

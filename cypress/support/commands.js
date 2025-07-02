@@ -23,7 +23,10 @@ Cypress.Commands.add('interceptStartGameLose', () => {
   cy.intercept('startgame', { fixture: "request_for_lose_spin_roulette.json" }).as('startGame')
 })
 
-
+Cypress.Commands.add('interceptBalance', () => {
+  cy.intercept('https://riw-dev.olsworth.com/api/launch?go=dev&serverAddress=https://riw-dev.olsworth.com&productId=riwo-extern-1pt&token=123456&currency=GBP&lang=en&testConfig=local&forceDevice=tablet&hideCurrency=false'
+  , { fixture: "balance_10000.json" }).as('balance')
+})
 
 Cypress.Commands.add('retryChain', (action, verification, options = {}) => {
   const { retries = 3, delay = 500 } = options;

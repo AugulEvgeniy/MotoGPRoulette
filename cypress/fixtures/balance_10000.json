@@ -1,0 +1,14 @@
+{
+    "provider": "dummy",
+    "product": "riwo-extern-1pt",
+    "preview": "false",
+    "language": "en",
+    "playerId": "Dummy Player",
+    "custRef": "BDRO26BC",
+    "balance": 1010000,
+    "currency": "GBP",
+    "country": "GB",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTQwNDkxMzMsImlzcyI6IkJHUUwiLCJzaWQiOiI5MzFiZmFlMC02OTE2LTRkNzUtYTI4Ni0zNzNjNmY3NTc1MTQiLCJ0eXAiOiJITEciLCJpYXQiOjE3NTE0NTcxMzN9.gq9KjapHzBAUHXYub3IzYqML5KFQ7V7w4SG7L0e5kc8",
+    "operationResult": 0,
+    "referenceGuid": "f1a46b62-cde7-42d3-a36c-0343c8c91493"
+}

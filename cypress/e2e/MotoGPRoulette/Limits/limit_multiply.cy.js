@@ -1,7 +1,7 @@
 describe("limits can't be exceded through multiply", () => {
     it('should display limit pop-up on multiplying 10 chip on a straight bet 3 times', () => {
 
-        // cy.visitTestEnvironment();
+        // cy.visitTestEnvironment()
         cy.interceptStartGame();
         cy.interceptBalance();
         const testUrl = 'http://localhost:8000/?productId=riwo-extern-1pt&lang=EN&currency=GBP&go=staging&serverAddress=https%3A%2F%2Friw-dev.olsworth.com&home=https://google.com'

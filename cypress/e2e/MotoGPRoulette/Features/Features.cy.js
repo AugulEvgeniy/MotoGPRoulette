@@ -50,12 +50,20 @@ describe('Rebet and reset bet are working correctly', () => {
             scene.gameContainer.stakeSelector.columnButtons[0].list[0].emit('pointerdown') // column 1
             scene.gameContainer.stakeSelector.columnButtons[1].list[0].emit('pointerdown') // column 2
             scene.gameContainer.stakeSelector.columnButtons[2].list[0].emit('pointerdown') // column 3
-
-            cy.wait(50)
-            scene.gameContainer.startGroupButtons.list[0].emit('pointerdown')
         })
 
-        cy.window({timeout: 30000}).should((win) => {
+        cy.window({timeout: 20000}).should((win) => {
+            const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips.length;
+            expect(chip, 'Chips are placed on the table').to.not.equal(0)
+        })
+        
+        cy.wait(200)
+        cy.window().then((win) => {
+            win.game.scene.scenes[1].gameContainer.startGroupButtons.list[0].emit('pointerdown')
+        })
+       
+
+        cy.window({timeout: 35000}).should((win) => {
             const win_banner = win.game.scene.scenes[1].gameContainer.winBanner.visible;
             const no_win_banner = win.game.scene.scenes[1].gameContainer.noWinBanner.visible;
 
@@ -66,12 +74,11 @@ describe('Rebet and reset bet are working correctly', () => {
 
         cy.window().should((win) => {
             const rebet = win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.list[2].visible;
-
-            expect(rebet).to.be.true;
+            expect(rebet, 'rebet button is visible').to.be.true;
         })
 
         cy.window().then((win) => {
-        win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.emit('pointerdown');
+            win.game.scene.scenes[1].gameContainer.tapBar.reBetButton.emit('pointerdown');
         })
 
         cy.window({ timeout: 10000 }).should((win) => {
@@ -342,9 +349,17 @@ describe('Rebet and reset bet are working correctly', () => {
         
         cy.window().then((win) => {
         win.game.scene.scenes[1].gameContainer.stakeSelector.raceButtons[2].emit('pointerdown')
-        cy.wait(50)
-        win.game.scene.scenes[1].gameContainer.startGroupButtons.list[0].emit('pointerdown')
     })
+
+        cy.window({timeout: 20000}).should((win) => {
+            const chip = win.game.scene.scenes[1].gameContainer.stakeSelector.chips.length;
+            expect(chip, 'Chips are placed on the table').to.not.equal(0)
+        })
+        
+        cy.wait(200)
+        cy.window().then((win) => {
+            win.game.scene.scenes[1].gameContainer.startGroupButtons.list[0].emit('pointerdown')
+        })
 
         cy.wait(500)
         cy.window().then((win) => {

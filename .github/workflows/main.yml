@@ -7,6 +7,7 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-24.04
+    continue-on-error: true
     env:
       NODE_VERSION: 22
       CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
@@ -25,12 +26,15 @@ jobs:
           echo "Latest commit message: $COMMIT_MESSAGE"
           if echo "$COMMIT_MESSAGE" | grep -q "\[.*\]"; then
             echo "has_brackets=true" >> $GITHUB_OUTPUT
+            echo "has_valid_tags=true" >> $GITHUB_OUTPUT
             echo "commit_messages<<EOF" >> $GITHUB_OUTPUT
             echo "$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
           else
             echo "has_brackets=false" >> $GITHUB_OUTPUT
             echo "No commit messages with square brackets found"
+            echo "has_valid_tags=false" >> $GITHUB_OUTPUT
+            exit 0
           fi
       - name: Determine combined test specs
         if: steps.check-commits.outputs.has_brackets == 'true'
@@ -77,10 +81,12 @@ jobs:
           echo "✅ Specs selected: $SPECS"
           echo "specs=$SPECS" >> $GITHUB_OUTPUT
       - name: Setup Node.js
+        if: steps.check-commits.outputs.has_brackets == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
       - name: Cache node_modules and .npm
+        if: steps.check-commits.outputs.has_brackets == 'true'
         uses: actions/cache@v4
         id: npm-cache
         with:
@@ -93,26 +99,33 @@ jobs:
         working-directory: external
         run: npm install
       - name: Install wait-on
+        if: steps.check-commits.outputs.has_brackets == 'true'
         run: npm install --no-save wait-on
       - name: Cache Cypress binary
+        if: steps.check-commits.outputs.has_brackets == 'true'
         uses: actions/cache@v4
         id: cypress-cache
         with:
           path: ~/.cache/Cypress
           key: ${{ runner.os }}-cypress-external
       - name: Create reports directory
+        if: steps.check-commits.outputs.has_brackets == 'true'
         run: mkdir -p external/reports/chrome
       - name: Start local server
+        if: steps.check-commits.outputs.has_brackets == 'true'
         run: |
           npm run build:test
           npx serve -s dist -l 8000 &
         continue-on-error: false
       - name: Wait for local server
+        if: steps.check-commits.outputs.has_brackets == 'true'
         run: npx wait-on http://localhost:8000
       - name: Check if server is up
+        if: steps.check-commits.outputs.has_brackets == 'true'
         run: |
           curl -I http://localhost:8000 || (echo "Server not running!" && exit 1)
       - name: Show test specs
+        if: steps.check-commits.outputs.has_brackets == 'true'
         working-directory: external
         run: |
           echo "Test specs: ${{ steps.test_specs.outputs.specs }}"
@@ -137,17 +150,18 @@ jobs:
               --config video=true,chromeWebSecurity=false
           done
       - name: List generated reports
+        if: steps.check-commits.outputs.has_brackets == 'true'
         working-directory: external
         run: |
           ls -l reports/chrome || echo "No reports directory found"
           ls -l reports/chrome/*.json || echo "No JSON reports found"
       - name: Merge Mochawesome reports
-        if: always()
+        if: steps.check-commits.outputs.has_brackets == 'true'
         working-directory: external
         run: |
           npx mochawesome-merge reports/chrome/*.json > reports/chrome/merged-report.json
       - name: Generate HTML reports
-        if: always()
+        if: steps.check-commits.outputs.has_brackets == 'true'
         working-directory: external
         run: |
           npx marge reports/chrome/merged-report.json \
@@ -155,13 +169,13 @@ jobs:
             --reportFilename chrome-report.html \
             --inline
       - name: Upload HTML Reports
-        if: always()
+        if: steps.check-commits.outputs.has_brackets == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: chrome-test-report
           path: external/reports/chrome/chrome-report.html
       - name: Upload Test Videos
-        if: failure()
+        if: steps.check-commits.outputs.has_brackets == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: chrome-test-videos

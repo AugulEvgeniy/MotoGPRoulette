@@ -69,9 +69,21 @@ chore: [limits][bonus] Update test cases
 plaintext
 docs: Update README
 fix: broken component
-Artifacts
+📦 Artifacts
 After pipeline runs:
 
 Download chrome-test-report.html from Actions tab
 
 View test videos if any failures occurred
+
+Note: The pipeline will only execute when commit messages contain at least one valid tag in square brackets.
+
+text
+
+### Key Formatting Features:
+1. **Emoji Headers** for better visual scanning
+2. **Bold Markdown** (`**text**`) for important elements
+3. **Code Blocks** for commit message examples
+4. **Table Formatting** for tag mapping
+5. **Status Indicators** (✅/❌) for valid/invalid examples
+6. **Note Box** for important caveat

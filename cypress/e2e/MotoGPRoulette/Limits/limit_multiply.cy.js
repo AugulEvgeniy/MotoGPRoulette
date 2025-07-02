@@ -84,7 +84,7 @@ describe('Tiers/voisins/orphelins limits', () => {
             scene.gameContainer.tapBar.raceButton.emit('pointerdown')
         })
 
-            cy.wait(100)
+            cy.wait(500)
 
             cy.window({ timeout: 20000 }).should((win) => {
             const game = win.game
@@ -94,7 +94,7 @@ describe('Tiers/voisins/orphelins limits', () => {
             expect(race_track, 'Race Track is entered').to.be.true;
         })
 
-        cy.wait(350)
+        cy.wait(400)
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]

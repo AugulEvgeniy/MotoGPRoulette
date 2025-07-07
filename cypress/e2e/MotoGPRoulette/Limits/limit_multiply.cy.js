@@ -67,9 +67,23 @@ describe("limits can't be exceded through multiply", () => {
             expect (limit, 'limit pop-up is displayed').to.be.true;
         })
 
+        cy.window().then((win) => {
+            const limit = win.game.scene.scenes[1].gameContainer.limitPopup.visible;
+            cy.task("logCatch", {
+            message: `Limit pop-up is displayed: ${limit}`,
+        });
+        })
+
         cy.window({ timeout: 10000 }).should((win) => {
             const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
             expect (total_bet).to.include('40.00')
+        })
+
+        cy.window().then((win) => {
+            const total_bet = win.game.scene.scenes[1].gameContainer.betPanel.list[9].text;
+            cy.task("logCatch", {
+            message: `Bet is not increased (should be 40.00): ${total_bet}`,
+        });
         })
     })
     })
@@ -92,6 +106,13 @@ describe('Tiers/voisins/orphelins limits', () => {
             const race_track = scene.gameContainer.stakeSelector.isRaceTable;
 
             expect(race_track, 'Race Track is entered').to.be.true;
+        })
+
+            cy.window().then((win) => {
+            const race_track = win.game.scene.scenes[1].gameContainer.stakeSelector.isRaceTable;
+            cy.task("logCatch", {
+            message: `Race Track is entered: ${race_track}`,
+        });
         })
 
         cy.wait(400)
@@ -126,6 +147,13 @@ describe('Tiers/voisins/orphelins limits', () => {
             const limit = win.game.scene.scenes[1].gameContainer.limitPopup.visible;
             expect (limit, 'limit pop-up is displayed').to.be.true;
         })
+
+        cy.window().then((win) => {
+            const limit = win.game.scene.scenes[1].gameContainer.limitPopup.visible;
+            cy.task("logCatch", {
+            message: `Limit pop-up is displayed: ${limit}`,
+        });
+        })
         })
         })
     
@@ -133,7 +161,12 @@ describe('Tiers/voisins/orphelins limits', () => {
 describe('Tiers/voisins/orphelins limits', () => {
     it('Max bet on Orphelins is 250', () => {
 
+        cy.window({ timeout: 10000 }).should((win) => {
+            const limit = win.game.scene.scenes[1].gameContainer.limitPopup.visible;
+            expect (limit, 'limit pop-up is not displayed').to.be.false;
+        })
 
+        cy.wait(300)
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
@@ -167,6 +200,13 @@ describe('Tiers/voisins/orphelins limits', () => {
             const limit = win.game.scene.scenes[1].gameContainer.limitPopup.visible;
             expect (limit, 'limit pop-up is displayed').to.be.true;
         })
+
+        cy.window().then((win) => {
+            const limit = win.game.scene.scenes[1].gameContainer.limitPopup.visible;
+            cy.task("logCatch", {
+            message: `Limit pop-up is displayed: ${limit}`,
+        });
+        })
         })
         })
 
@@ -174,7 +214,12 @@ describe('Tiers/voisins/orphelins limits', () => {
 describe('Tiers/voisins/orphelins limits', () => {
     it('Max bet on Voisins is 630', () => {
 
+        cy.window({ timeout: 10000 }).should((win) => {
+            const limit = win.game.scene.scenes[1].gameContainer.limitPopup.visible;
+            expect (limit, 'limit pop-up is not displayed').to.be.false;
+        })
 
+        cy.wait(300)
         cy.window().then((win) => {
             const game = win.game
             const scene = game.scene.scenes[1]
@@ -209,6 +254,13 @@ describe('Tiers/voisins/orphelins limits', () => {
         cy.window({ timeout: 5000 }).should((win) => {
             const limit = win.game.scene.scenes[1].gameContainer.limitPopup.visible;
             expect (limit, 'limit pop-up is displayed').to.be.true;
+        })
+        
+        cy.window().then((win) => {
+            const limit = win.game.scene.scenes[1].gameContainer.limitPopup.visible;
+            cy.task("logCatch", {
+            message: `Limit pop-up is displayed: ${limit}`,
+        });
         })
         })
         })

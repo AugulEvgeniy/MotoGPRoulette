@@ -173,13 +173,11 @@ jobs:
             --reportFilename chrome-report.html \
             --inline
       - name: Upload HTML Reports
-        if: steps.check-commits.outputs.has_brackets == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: chrome-test-report
           path: external/reports/chrome/chrome-report.html
       - name: Upload Test Videos
-        if: steps.check-commits.outputs.has_brackets == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: chrome-test-videos
